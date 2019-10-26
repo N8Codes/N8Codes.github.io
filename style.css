@@ -1,0 +1,117 @@
+/* Styles go here */
+
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  background-color: BLACK;
+  font-family: "Arial", sans-serif;
+  display: inline-block;
+}
+
+.header-button-container {
+  padding: 2em;
+}
+
+.header a {
+  width: 30%;
+  color: WHITE;
+  padding: 0.5em;
+  text-decoration: none;
+  font-size: 2em;
+  border-radius: 1em;
+}
+
+.header .logo {
+  border-radius: 1em;
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.header a:hover {
+  background-color: WHITE;
+  color: BLACK;
+}
+
+.footer {
+  text-align: center;
+  padding: 1em;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: BLACK;
+  color: WHITE;
+  font-family: "Arial", sans-serif;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Character Functions */
+
+.character-functions {
+  margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.character-functions-hidden {
+  visibility: hidden
+}
+
+.character-functions input {
+  width: 50%;
+  height: 20%;
+}
+
+.save-character {
+  width: 12%;
+  height: 22%;
+}
+
+@media screen and (max-width: 500px) {
+
+  .character-functions {
+    max-width: 100%;
+    display: inline-block;
+    float: none;
+  }
+
+  .character-functions input {
+    float: none;
+    width: 80%;
+    margin: 1em;
+  }
+
+  .save-character {
+    width: 15%;
+    display: block;
+  }
+
+  .load-demo {
+    width: 80%;
+    font-size: 0.75em;
+    text-align: center;
+    display: block;
+    margin: 1em;
+  }
+
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
+  .header-right {
+    float: none;
+  }
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="dungeonlore.script.js"></script>
+  </head>
+
+  <body>
+    <div class="header">
+      <div class="header-button-container">
+        <a href="#default" class="logo" onclick="loadHomePage(this)">NWH</a>
+      </div>
+    </div>
+    <div class="header">
+      <div class="header-button-container">
+        <a href="#dungeonlore" onclick="loadDungeonLorePage(this)">Dungeon Lore</a>
+        <a href="#dungeonlorerules" onclick="loadDungeonLoreRulesPage(this)">Dungeon Lore Rules</a>
+      </div>
+    </div>
+    <div id="content"></div>
+    <div class="footer">
+      <div id="character-functions" class="character-functions-hidden">
+        <input type="file" id="load-character" onchange="loadCharacterSheet(this)" />
+	<button class="save-character" id="save-character" onclick="saveCharacterSheet(this)">Save Character</button>
+      </div>
+    </div>
+  </body>
+</html>

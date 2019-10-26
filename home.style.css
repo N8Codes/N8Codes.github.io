@@ -1,0 +1,38 @@
+
+.home-page {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  font-family: "Arial", sans-serif;
+}
+
+.company-logo {
+  width: 70%;
+  height: 70%;
+  margin: 2em;
+}
+
+.company-about-container {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  text-align: center;
+  margin: 1em;
+  vertical-align: top;
+  margin-bottom: 20%;
+}
+
+@media screen and (max-width: 65em) {
+  .company-about-container {
+    width: 60%;
+    display: block;
+    margin: auto;
+    margin-bottom: 20%;
+  }
+
+  .company-logo-container {
+    width: 80%;
+    display: block;
+    margin: auto;
+  }
+}
