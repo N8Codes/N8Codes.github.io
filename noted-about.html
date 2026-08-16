@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Noted</title>
+    <meta name="description" content="About Noted: a privacy-first, local-only note-taking app built around encryption and zero data collection.">
+    <link rel="icon" type="image/png" href="images/noted.png">
+    <link rel="apple-touch-icon" href="images/noted.png">
+    <meta name="theme-color" content="#15803d">
+    <link rel="canonical" href="https://n8codes.github.io/noted-about.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="N8Codes">
+    <meta property="og:title" content="About Noted">
+    <meta property="og:description" content="About Noted: a privacy-first, local-only note-taking app built around encryption and zero data collection.">
+    <meta property="og:url" content="https://n8codes.github.io/noted-about.html">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="container">
+        <nav class="nav">
+            <a class="brand" href="index.html">N8Codes</a>
+            <div class="links">
+                <a href="noted.html">Noted</a>
+                <a href="noted.html#download">Download</a>
+                <a href="https://n8codes.github.io/noted-site/">Privacy</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container prose">
+            <section>
+                <h1>About Noted</h1>
+                <p>Noted is a local-only note-taking app, developed by Nathanial W. Heard — no account, no data collection, just a digital notebook. Everything you create is stored encrypted on your own device.</p>
+
+                <h2>How it works</h2>
+                <p>Noted has no way to send your notes anywhere on its own. They stay on your device until you choose to export or share them. Exports can be locked with a password, so a backup stays encrypted and re-imports only with that same password.</p>
+
+                <h2>What you can do</h2>
+                <ul>
+                    <li><strong>Write in markdown</strong> — CommonMark plus GitHub-flavored tables, task lists, code blocks, blockquotes, and links, with a formatting toolbar and live preview.</li>
+                    <li><strong>Organize freely</strong> — group entries into collections with cover images, pin important notes, and switch between list and grid views.</li>
+                    <li><strong>Draw inline</strong> — sketch directly inside an entry with multiple brush styles, fill, on-canvas text, undo / redo, and a full-screen canvas.</li>
+                    <li><strong>Record audio</strong> — capture voice memos attached to any entry.</li>
+                    <li><strong>Attach images</strong> — add photos and pictures alongside your text.</li>
+                    <li><strong>Search instantly</strong> — find anything across your notes with match highlighting.</li>
+                    <li><strong>Export &amp; import</strong> — back up to an encrypted or plain archive, or round-trip individual entries as markdown.</li>
+                </ul>
+
+                <h2>How your data is protected</h2>
+                <p>Noted encrypts everything at rest. Your notes and collections are stored in a local database on your device, fully encrypted with AES-256 (via SQLCipher). Images, drawings, and voice recordings are saved as separate files, each individually encrypted with AES-256-GCM. The encryption keys are held in the operating system's secure key storage, and you can lock the app behind a PIN or password.</p>
+                <p><strong>Enhanced Security (optional).</strong> For the strongest protection, Noted can tie the database's encryption key directly to your PIN or password and biometric unlock, removing the standard key fallback — so your notes can't be decrypted without your secret, even on a rooted device. The trade-off is that there's no recovery: if you forget your PIN or password, the data is permanently lost. To enable it, first set an app lock, then open the <strong>&#8942; menu</strong> on the main screen and tap <strong>Enable enhanced security</strong>.</p>
+                <p>Just as important is what Noted <em>doesn't</em> do: no analytics, no telemetry, no crash reporting, no advertising identifiers, no tracking of any kind.</p>
+
+                <h2>Platforms</h2>
+                <ul>
+                    <li>Android — available now</li>
+                </ul>
+
+                <div class="downloads" style="justify-content:flex-start;">
+                    <a class="btn" href="https://play.google.com/store/apps/details?id=com.nwh.noted" target="_blank" rel="noopener">Download Noted on mobile</a>
+                    <a class="btn secondary" href="https://n8codes.github.io/noted-site/">Read the privacy policy</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <span>© 2026 Nathanial W. Heard</span>
+        </div>
+    </footer>
+</body>
+</html>

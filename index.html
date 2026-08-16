@@ -1,30 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N8Codes — games and apps, no ads, no tracking</title>
+    <meta name="description" content="Games and apps by N8Codes, built privacy-first: no ads, no tracking, no accounts. Featuring NutCracker, a cozy pixel-art match-3, and Noted, a local-only notes app.">
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="theme-color" content="#15803d">
+    <link rel="canonical" href="https://n8codes.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="N8Codes">
+    <meta property="og:title" content="N8Codes — games and apps, no ads, no tracking">
+    <meta property="og:description" content="Games and apps by N8Codes, built privacy-first: no ads, no tracking, no accounts. Featuring NutCracker, a cozy pixel-art match-3, and Noted, a local-only notes app.">
+    <meta property="og:url" content="https://n8codes.github.io/">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="container">
+        <nav class="nav">
+            <a class="brand" href="index.html">N8Codes</a>
+            <div class="links">
+                <a href="#games">Games</a>
+                <a href="#apps">Apps</a>
+                <a href="#ttrpg">TTRPG</a>
+                <a href="privacy.html">Privacy</a>
+            </div>
+        </nav>
+    </header>
 
-  <head>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <script src="dungeonlore.script.js"></script>
-  </head>
+    <main>
+        <section class="alt" id="games">
+            <div class="container">
+                <div class="center">
+                    <h2>Games</h2>
+                    <p class="section-intro">Tap a game to learn more about it.</p>
+                </div>
+                <div class="games">
+                    <div class="game-card">
+                        <a href="nutcracker.html"><img src="images/nutcracker.png" alt="NutCracker app icon"></a>
+                        <div>
+                            <h3><a href="nutcracker.html">NutCracker</a></h3>
+                            <p>A cozy pixel-art match-3 puzzle. Crack nuts across 50 levels and 10 themed worlds while Nutkin, a sneaky squirrel, meddles with your board. Chapters 1&ndash;5 are free; one purchase unlocks the rest forever.</p>
+                            <span class="tags"><span class="status">Coming soon on Android</span><span class="status">No ads</span><span class="status">No tracking</span><span class="status">Offline</span></span>
+                            <a class="more-link" href="nutcracker.html">Learn more &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+                <p class="note-line">More games are in development.</p>
+            </div>
+        </section>
 
-  <body>
-    <div class="header">
-      <div class="header-button-container">
-        <a href="#default" class="logo" onclick="loadHomePage(this)">NWH</a>
-      </div>
-    </div>
-    <div class="header">
-      <div class="header-button-container">
-        <a href="#dungeonlore" onclick="loadDungeonLorePage(this)">Dungeon Lore</a>
-        <a href="#dungeonlorerules" onclick="loadDungeonLoreRulesPage(this)">Dungeon Lore Rules</a>
-      </div>
-    </div>
-    <div id="content"></div>
-    <div class="footer">
-      <div id="character-functions" class="character-functions-hidden">
-        <input type="file" id="load-character" onchange="loadCharacterSheet(this)" />
-	<button class="save-character" id="save-character" onclick="saveCharacterSheet(this)">Save Character</button>
-      </div>
-    </div>
-  </body>
+        <section id="apps">
+            <div class="container">
+                <div class="center">
+                    <h2>Apps</h2>
+                    <p class="section-intro">Tools built with the same rules: your data stays yours.</p>
+                </div>
+                <div class="games">
+                    <div class="game-card">
+                        <a href="https://n8codes.github.io/noted-site/home.html"><img src="images/noted.png" alt="Noted app icon"></a>
+                        <div>
+                            <h3><a href="https://n8codes.github.io/noted-site/home.html">Noted</a></h3>
+                            <p>A privacy-first, local-only note-taking app. Write in markdown, sketch inline, record voice memos, and organize it all into collections — everything encrypted on your device, nothing ever uploaded.</p>
+                            <span class="tags"><span class="status">Available on Android</span><span class="status">No tracking</span><span class="status">Encrypted</span><span class="status">Local-only</span></span>
+                            <a class="more-link" href="https://n8codes.github.io/noted-site/home.html">Learn more &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="game-card">
+                        <a href="https://github.com/N8Codes/DragonWatch" target="_blank" rel="noopener"><img src="images/dragonwatch.png" alt="DragonWatch app icon"></a>
+                        <div>
+                            <h3><a href="https://github.com/N8Codes/DragonWatch" target="_blank" rel="noopener">DragonWatch</a></h3>
+                            <p>A lightweight macOS process trust monitor that lives in your menu bar. See every running app with a trust badge built from macOS's own security signals — read-only, no elevated privileges, and it sends no data about your machine unless you opt in to threat-intel feeds.</p>
+                            <span class="tags"><span class="status">macOS beta</span><span class="status">Open source</span><span class="status">Read-only</span><span class="status">No tracking</span></span>
+                            <a class="more-link" href="https://github.com/N8Codes/DragonWatch" target="_blank" rel="noopener">View on GitHub &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="alt" id="ttrpg">
+            <div class="container">
+                <div class="center">
+                    <h2>TTRPG</h2>
+                    <p class="section-intro">Tabletop tools from the archive — free to use at your table.</p>
+                </div>
+                <div class="games">
+                    <div class="game-card">
+                        <div>
+                            <h3><a href="ttrpg.html">Dungeon Lore</a></h3>
+                            <p>Interactive character &amp; equipment sheets and a game-master rules page for the Dungeon Lore tabletop RPG. Fill out a sheet in the browser, save it to a file, and load it back next session — plus a dice emulator in the rules page.</p>
+                            <span class="tags"><span class="status">Free</span><span class="status">In-browser</span><span class="status">No tracking</span></span>
+                            <a class="more-link" href="ttrpg.html">Open the tools &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container center">
+                <h2>Privacy, plainly</h2>
+                <p class="section-intro">Every title has its own privacy policy, so each one tells you exactly what that game or app does — and none of them collect your data.</p>
+                <a class="btn secondary" href="privacy.html">Browse the privacy policies</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <span>© 2026 Nathanial W. Heard</span>
+            <a href="privacy.html">Privacy Policy</a>
+        </div>
+    </footer>
+</body>
 </html>
