@@ -60,6 +60,11 @@ internal components from being triggered by other apps; it grants no access
 to your data or to any device feature. No location, camera, microphone,
 contacts, or storage permissions are requested or used.
 
+## Contact
+
+Questions about this policy or your data can be sent to N8Codes at
+[n8codesandcreates@gmail.com](mailto:n8codesandcreates@gmail.com).
+
 ## Changes
 
 If this policy changes, the updated version will be posted at this URL with a
