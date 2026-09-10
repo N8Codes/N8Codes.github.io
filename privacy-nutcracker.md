@@ -23,10 +23,19 @@ storage. Uninstalling the game deletes this local data.
 
 ## Backups
 
-Game progress may be included in Android's standard system backup and
+Game progress may be included in the standard Android system backup and
 device-to-device transfer, so your progress can be restored when you move to a
 new phone. This backup is operated by Android and your Google account, not by
 the developer, and is covered by Google's own privacy policy.
+
+## Security
+
+There is no server, account, or database to breach: nothing is collected, so
+there is nothing held anywhere for an attacker to reach. On your device,
+progress is written to the game's private app storage, which the Android
+application sandbox keeps readable only by NutCracker itself. Purchase
+verification happens inside Google Play, so payment details never reach the
+game at all.
 
 ## In-App Purchases
 
