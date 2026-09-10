@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**NutCracker** — Last updated: August 2026
+**NutCracker** — Last updated: September 2026
 
 ## Summary
 
@@ -31,7 +31,7 @@ the developer, and is covered by Google's own privacy policy.
 ## In-App Purchases
 
 NutCracker offers a single, optional one-time purchase that unlocks chapters
-6–10. It is processed **entirely by Google Play**:
+8–14. It is processed **entirely by Google Play**:
 
 - The developer never sees, collects, or stores your payment details — no card
   numbers, billing address, or real name.
