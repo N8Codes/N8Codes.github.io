@@ -22,6 +22,8 @@ device.
 | `privacy.html`          | Privacy hub — lists every title with a link to its policy.  |
 | `privacy-nutcracker.html` | NutCracker's privacy policy (its Play Console URL).       |
 | `privacy-nutcracker.md` | Markdown source of the NutCracker policy (keep in sync).    |
+| `privacy-dragonwatch.html` | DragonWatch's privacy policy.                            |
+| `privacy-dragonwatch.md` | Markdown source of the DragonWatch policy (keep in sync). |
 | `styles.css`            | Shared styles for the main site pages.                      |
 | `icon.png`              | Site favicon (currently the NutCracker icon).               |
 | `images/`               | Per-title icons and feature graphics.                       |
