@@ -224,6 +224,11 @@ h2 {
     border-radius: 16px;
     flex: none;
 }
+/* a round icon (the Namtar porthole) keeps its circle: no rounded-square clip or shadow behind it */
+.game-card img.round,
+.hero .app-icon.round {
+    border-radius: 50%;
+}
 .game-card h3 {
     margin: 0 0 4px;
     font-size: 1.2rem;
