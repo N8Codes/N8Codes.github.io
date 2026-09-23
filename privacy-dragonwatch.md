@@ -4,11 +4,12 @@
 
 ## Summary
 
-DragonWatch inspects your Mac to tell you what is running on it. Everything it
-learns stays on your Mac. There is no account, no server, and no analytics.
-Threat-intel providers are the only features that use the network, and every
-one of them is off until you turn it on. Only one sends anything about your
-machine: VirusTotal, which is told a file's hash.
+DragonWatch inspects your Mac to tell you what is running on it, and checks
+files you choose to see whether their contents match what they claim to be.
+Everything it learns stays on your Mac. There is no account, no server, and
+no analytics. Nothing about your Mac, your processes, or your files is ever
+sent anywhere. The one feature that uses the network downloads a public
+vulnerability catalog, and it is off until you turn it on.
 
 ## Data Collection
 
@@ -28,6 +29,10 @@ To do its job the app reads, locally:
   SHA-256 hash.
 - Install provenance from Homebrew receipts and from LaunchAgent and
   LaunchDaemon files.
+- Files you choose to inspect, and only those: the first and last 64 KB of
+  each, the whole file (up to 2 GB) to compute its SHA-256 hash, and the macOS
+  quarantine and "where from" attributes, which can hold the URL a download
+  came from. Nothing inspected is executed, decoded, or extracted.
 
 This reading is what the app is for. It is read-only. DragonWatch never stops,
 kills, quarantines, or modifies a process or a file.
@@ -35,44 +40,45 @@ kills, quarantines, or modifies a process or a file.
 ## Data Storage
 
 DragonWatch keeps its records in its own folder inside your Library's
-Application Support directory:
+Application Support directory, readable only by your user account:
 
 - `baseline.json`, the ledger of what it has seen before. It holds first-seen
   dates, hashes, and signature details, so a changed binary can be recognised.
-- The alert history, recording what was flagged and when. You choose how long
-  it is kept (30, 90, or 365 days).
-- Cached copies of the public feeds (the CISA catalog, NVD version ranges, and
-  the MalwareBazaar hash list), kept only when those providers are enabled.
+- `observations.json`, the alert history: what was flagged, when, and what
+  launched it, plus the SHA-256 of executables it has hashed. You choose how
+  long alerts are kept (30, 90, or 365 days).
+- In the same file, for each file format the inspector did not recognise, its
+  first sixteen bytes and extension, and any name you give it. No other file
+  contents are stored.
+- A cached copy of the public vulnerability catalog, once you have enabled
+  that feature.
 
 Settings live in macOS user defaults. Deleting the app's Application Support
-folder erases its records. You can export the history to a JSON file yourself.
-Nothing is exported unless you ask for it.
+folder erases its records. You can export the alert history, or a file
+inspection report, to a file yourself, and it is written readable only by
+your account wherever you save it. Nothing is exported unless you ask for it.
 
 ## Network Access
 
-Threat intel ships turned off. In that state the only network request
-DragonWatch makes is a latency measurement against Apple's captive-portal
-address (`captive.apple.com`), and only while its window is open. It sends
-nothing about your Mac. Its only purpose is to time the round trip.
+With the vulnerability catalog off, which is the default, the only network
+request DragonWatch makes is a latency measurement against Apple's
+captive-portal address (`captive.apple.com`), and only while its window is
+open. It sends nothing about your Mac. Its only purpose is to time the round
+trip.
 
-## Threat Intel Providers
+## Vulnerability Catalog
 
-Every provider is **off by default**, and each states what it sends before you
-enable it.
+The **CISA KEV and NVD** feature is **off by default** and states what it
+does before you enable it. When you enable it and run a check, it downloads
+CISA's public catalog of known exploited vulnerabilities and NVD version data
+for every entry in it, at most once a day, then matches against your
+processes locally. Version data is fetched for every catalog entry rather
+than only the ones relevant to you, precisely so the request pattern reveals
+nothing about what you run. Nothing about your Mac is sent.
 
-- **CISA KEV and NVD** download the public known-exploited-vulnerabilities
-  catalog and its version data, then match locally. Version data is fetched
-  for every catalog entry rather than only the ones relevant to you, precisely
-  so the request pattern reveals nothing about what you run.
-- **MalwareBazaar** downloads abuse.ch's public malware-hash list and matches
-  it on your Mac. Nothing about your machine is sent.
-- **VirusTotal** is the one that sends data. When you ask for a check on a
-  specific process, the executable's SHA-256 hash is sent to VirusTotal, which
-  reveals to a third party what you run. It requires your own VirusTotal API
-  key, it runs only when you press the button, and its responses are never
-  written to disk. Your key is stored in macOS user defaults on your Mac.
-  VirusTotal's handling of what it receives is covered by
-  [their privacy policy](https://docs.virustotal.com/docs/privacy-policy).
+DragonWatch deliberately has no cloud reputation lookup, no malware-hash
+list, and no feature that uploads a hash, a path, a name, or a file. It is
+not an antivirus and does not claim to be.
 
 ## Security
 
