@@ -1,13 +1,13 @@
 # Privacy Policy
 
-**BitBoard** — Last updated: September 2026
+**BitBoard** — Last updated: October 2026
 
 ## Summary
 
 BitBoard does not collect, transmit, or share any data. The app has no
 internet permission, so it cannot send anything anywhere. Your games, boards,
-photos, and settings stay on your device, and in the standard Android system
-backup if you use it.
+photos, settings, and what the computer opponent has learned stay on your
+device, and in the standard Android system backup if you use it.
 
 ## Data Collection
 
@@ -20,8 +20,11 @@ operated by the developer.
 
 The app keeps the following in its private storage on your device: your games
 in progress and your game history, your Bit Board boards and the photos you
-chose for them, your appearance and display settings, and a random number made
-on your device that is used only to help shuffle dice rolls.
+chose for them, your appearance and display settings, what the computer
+opponent has learned from your games against it, and a random number made on
+your device that is used only to help shuffle dice rolls. The app never sends
+the computer's learning anywhere, and "Reset computer's memory" in a game's
+menu deletes it.
 
 Deleting a board removes it at once. Photos that only that board used are
 removed the next time the board list is opened. Uninstalling the app deletes
@@ -40,9 +43,10 @@ uploads it anywhere.
 
 ## Backups
 
-Your games, game history, boards, the photos you chose, and your settings may
-be included in the standard Android system backup and device-to-device
-transfer, so they can be restored on a new phone. The dice number is left out.
+Your games, game history, boards, the photos you chose, your settings, and what
+the computer opponent has learned may be included in the standard Android
+system backup and device-to-device transfer, so they can be restored on a new
+phone. The dice number is left out.
 This backup is operated by Android and your Google account, not by the
 developer, and is covered by Google's own privacy policy.
 
