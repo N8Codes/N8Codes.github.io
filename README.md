@@ -9,9 +9,8 @@ interactive TTRPG character sheets and rules. Served via **GitHub Pages** at
 the domain root).
 
 Everything listed here follows the same philosophy: privacy-first, no ads, no
-tracking, no accounts. Games are fully offline with at most a single optional
-one-time in-app purchase handled by Google Play; apps keep your data on your
-device.
+tracking, no accounts. Games play offline, and any in-app purchase is a
+one-time unlock handled by Google Play. Apps keep your data on your device.
 
 ## Structure
 
