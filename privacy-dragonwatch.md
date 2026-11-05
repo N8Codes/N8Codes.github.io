@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**DragonWatch** — Last updated: September 2026
+**DragonWatch** — Last updated: November 2026
 
 ## Summary
 
@@ -23,14 +23,15 @@ sent to the developer.
 To do its job the app reads, locally:
 
 - The processes running on your Mac, including each one's name, path, process
-  id, CPU use, and the parent process and start time that say what launched
-  it.
+  id, CPU and memory use, and the parent processes and start time that say
+  what launched it.
 - Executables on disk, to check their code signature and compute their
   SHA-256 hash.
 - Install provenance from Homebrew receipts and from LaunchAgent and
   LaunchDaemon files.
-- Files you choose to inspect, and only those: the first and last 64 KB of
-  each, the whole file (up to 2 GB) to compute its SHA-256 hash, and the macOS
+- Files you choose to inspect, and only those, whether you pick one file or a
+  folder of them: the first and last 64 KB of each, the whole file (up to
+  2 GB) to compute its SHA-256 hash, and the macOS
   quarantine and "where from" attributes, which can hold the URL a download
   came from. Nothing inspected is executed, decoded, or extracted.
 
@@ -42,16 +43,25 @@ kills, quarantines, or modifies a process or a file.
 DragonWatch keeps its records in its own folder inside your Library's
 Application Support directory, readable only by your user account:
 
-- `baseline.json`, the ledger of what it has seen before. It holds first-seen
-  dates, hashes, and signature details, so a changed binary can be recognised.
-- `observations.json`, the alert history: what was flagged, when, and what
-  launched it, plus the SHA-256 of executables it has hashed. You choose how
-  long alerts are kept (30, 90, or 365 days).
+- `baseline.json`, the ledger of what it has seen before. For each program it
+  holds when it was first seen, its signature tier and the verdict you gave
+  it, plus the launch items it has seen, so a change can be recognised.
+- `observations.json`, the alert history: what was flagged, when, and the
+  chain of processes that launched it. For each executable it has hashed, the
+  same file keeps the SHA-256, the file's size and date when the hash was
+  taken, and any change in its signature tier. You choose how long alerts are
+  kept (30, 90, or 365 days). The record kept for each executable stays until
+  you press Reset under Baseline in the app's settings.
 - In the same file, for each file format the inspector did not recognise, its
   first sixteen bytes and extension, and any name you give it. No other file
   contents are stored.
-- A cached copy of the public vulnerability catalog, once you have enabled
-  that feature.
+- `seal-verifications.json`, the app bundles whose seals it has checked, with
+  a fingerprint of each binary inside them, so an unchanged binary need not be
+  checked again.
+- A cached copy of the public vulnerability catalog, and the version data
+  fetched for it in `nvd-ranges.json`, once you have enabled that feature.
+- If a ledger is found corrupt, it is set aside as a `.bak` copy in the same
+  folder and a fresh one is started.
 
 Settings live in macOS user defaults. Deleting the app's Application Support
 folder erases its records. You can export the alert history, or a file
@@ -70,9 +80,11 @@ trip.
 
 The **CISA KEV and NVD** feature is **off by default** and states what it
 does before you enable it. When you enable it and run a check, it downloads
-CISA's public catalog of known exploited vulnerabilities and NVD version data
-for every entry in it, at most once a day, then matches against your
-processes locally. Version data is fetched for every catalog entry rather
+CISA's public catalog of known exploited vulnerabilities, refreshed at most
+once a day, and NVD version data for every entry in it. Each entry's version
+data is fetched once and kept, and a fetch that fails is tried again after
+six hours. It then matches against your processes locally. Version data is
+fetched for every catalog entry rather
 than only the ones relevant to you, precisely so the request pattern reveals
 nothing about what you run. Nothing about your Mac is sent.
 
