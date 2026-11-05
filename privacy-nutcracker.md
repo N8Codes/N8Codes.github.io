@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**NutCracker** — Last updated: September 2026
+**NutCracker** — Last updated: November 2026
 
 ## Summary
 
@@ -56,16 +56,16 @@ There are no ads, no subscriptions, and no consumable currencies.
 
 ## Network Access and Permissions
 
-NutCracker itself makes no network requests. It includes Google's Play Billing
-library, which automatically adds the `INTERNET`, `ACCESS_NETWORK_STATE`, and
-`com.android.vending.BILLING` permissions — these are used solely to
-communicate with Google Play about the purchase. No gameplay data, progress,
-or device information is ever transmitted.
+NutCracker itself makes no network requests and sends nothing. It includes
+Google's Play Billing library, which automatically adds the `INTERNET`,
+`ACCESS_NETWORK_STATE`, and `com.android.vending.BILLING` permissions. That
+library communicates only with Google, to handle the purchase, under
+Google's privacy policy. The game never sends your progress anywhere.
 
 The only other permission requested is **Vibration** (`VIBRATE`), used for
 haptic feedback during gameplay. The one remaining manifest entry is a private
 signature permission Android adds automatically to keep the game's own
-internal components from being triggered by other apps; it grants no access
+internal components from being triggered by other apps. It grants no access
 to your data or to any device feature. No location, camera, microphone,
 contacts, or storage permissions are requested or used.
 

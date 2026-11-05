@@ -11,7 +11,7 @@ them. If you don't agree, please uninstall the game.
 We give you a personal, non-exclusive, non-transferable licence to install and
 play NutCracker on devices you own or control, for your own non-commercial
 use. You may not copy, sell, rent, or redistribute the game, or extract its
-art, music, or code, except where the law lets you do so anyway.
+art or code, except where the law lets you do so anyway.
 
 ## In-App Purchase
 
@@ -65,7 +65,9 @@ To the extent the law allows, we aren't liable for indirect or consequential
 loss from using the game, and our total liability is limited to what you paid
 for it. Nothing in these terms limits liability that can't be limited by law,
 such as for death or personal injury caused by negligence, for gross
-negligence or intent, or for fraud.
+negligence or intent, or for fraud. Nothing in them limits your statutory
+rights if the game is faulty, not as described, or damages your device or
+other digital content.
 
 ## Your Rights as a Consumer
 
@@ -75,7 +77,11 @@ you. Nothing in these terms takes them away.
 ## Changes to These Terms
 
 If these terms change, the updated version will be posted at this URL with a
-new date. A change will never take away anything you have already bought.
+new date. A change applies to versions of the game released after that date,
+and is made only to reflect a change in the game, in the law, or in how
+Google Play works. If you don't agree with a change, stop playing and
+uninstall the game. A change will never take away anything you have already
+bought.
 
 ## Contact
 
