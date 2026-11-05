@@ -59,7 +59,7 @@
                 <p>There are <strong>no ads</strong> and no subscriptions.</p>
 
                 <h2>Network Access and Permissions</h2>
-                <p>The game itself makes no network requests. It includes Google's Play Billing library, which automatically adds the <code>INTERNET</code>, <code>ACCESS_NETWORK_STATE</code>, and <code>com.android.vending.BILLING</code> permissions. These are used solely to communicate with Google Play about the purchase. No gameplay data, saves, or device information is ever transmitted.</p>
+                <p>The game itself makes no network requests and sends nothing. It includes Google's Play Billing library, which automatically adds the <code>INTERNET</code>, <code>ACCESS_NETWORK_STATE</code>, and <code>com.android.vending.BILLING</code> permissions. That library communicates only with Google, to handle the purchase, under Google's privacy policy. The game never sends your saves anywhere.</p>
                 <p>The only other permission requested is <strong>Vibration</strong> (<code>VIBRATE</code>), used for haptic feedback in play. The one remaining manifest entry is a private signature permission Android adds automatically to keep the game's own internal components from being triggered by other apps. It grants no access to your data or to any device feature. No location, camera, microphone, contacts, or storage permissions are requested or used.</p>
 
                 <h2>Contact</h2>
