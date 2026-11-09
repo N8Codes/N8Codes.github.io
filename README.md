@@ -24,7 +24,7 @@ one-time unlock handled by Google Play. Apps keep your data on your device.
 | `privacy-dragonwatch.html` | DragonWatch's privacy policy.                            |
 | `privacy-dragonwatch.md` | Markdown source of the DragonWatch policy (keep in sync). |
 | `styles.css`            | Shared styles for the main site pages.                      |
-| `icon.png`              | Site favicon (currently the NutCracker icon).               |
+| `icon.png`              | Site favicon (the N8Codes "N8" monogram).                   |
 | `images/`               | Per-title icons and feature graphics.                       |
 | `ttrpg.html`            | Dungeon Lore TTRPG tools (legacy single-page app shell).    |
 | `noted.html`, `noted-about.html` | Staged Noted pages for the future switch-over from noted-site. |
