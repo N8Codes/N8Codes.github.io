@@ -1,506 +1,741 @@
-/* Dungeon Lore Script contains all rule logic for the character sheet */
+/* Dungeon Lore Script contains all rule logic for the character sheet.
+ *
+ * Every derived number on the sheet is recomputed from the inputs by
+ * recalcAll(), so nothing drifts out of step. The rules it implements
+ * (see the Character Setup and Trait Rules in dungeonlorerules.html):
+ *   - 7 attributes start at 5 with 35 free points to spread. Free points
+ *     can't raise an attribute past 15; points bought with EXP can.
+ *   - Skill points = INT, plus skill points bought with EXP.
+ *   - Attribute and skill points cost 10 EXP each.
+ *   - Derived traits use attribute + mod, rounded down:
+ *       Health = STR             Knowledge = INT / 5
+ *       Weight Capacity = STR*20 Body Weight = STR*10 + 30
+ *       Speed = AGI / 4          Action Points = 1 + AGI / 20
+ *       Quick Action Points = 1 + AGI / 15
+ *       Survival Points = WILL / 3   Stress = WILL * 2
+ */
 
-function addAttributePoints(element) {
-  var remainingPts = document.getElementById("remaining_pts").innerHTML;
-  var level = document.getElementById("remaining_pts").innerHTML;
-  var difference = (element.value - element.defaultValue);
+var FREE_ATTRIBUTE_POINTS = 35;
+var ATTRIBUTE_MIN = 5;
+var ATTRIBUTE_CREATION_MAX = 15;
+var EXP_PER_POINT = 10;
 
-  if (element.defaultValue < element.value) {
-    var attributePts = parseInt(remainingPts) + (difference * 4);
-    if (level >= 20) {
-      attributePts = parseInt(remainingPts) + (difference * 3);
-    } else if (level >= 50) {
-      attributePts = parseInt(remainingPts) + (difference * 2);
-    }
-    element.defaultValue = element.value;
-    document.getElementById("remaining_pts").innerHTML = attributePts;
-  } else if (element.defaultValue >= element.value) {
-    element.value = element.defaultValue;
+var ATTRIBUTES = ["acc", "agi", "chr", "int", "per", "str", "will"];
+
+var SKILLS = [
+  "acrobatics", "alchemy", "arcane-sorcery", "archery", "art", "atheltics",
+  "blade", "blunt", "brawl", "carpentry", "catalyst", "communing-arts",
+  "cryokinesis", "culinary-arts", "deception", "discipline", "duel-wield",
+  "enchantment", "grapple", "handle-animal", "herbalism", "lore",
+  "magnemancy", "masonry", "medicine", "mechanics", "necromancy",
+  "persuasion", "psionics", "pyromancy", "resilience", "ride", "sewing",
+  "shamanism", "slight-of-hand", "smithing", "staff", "spellcraft", "sneak",
+  "throw", "vigilance", "void-sorcery", "whip"
+];
+
+/* Tables whose rows the player can add and remove, with the function that
+   adds one row to each. Used when loading a saved sheet. */
+var SHEET_TABLES = [
+  { id: "languages-table", add: function () { addEntry(null, "languages-table", "language"); } },
+  { id: "class-history-table", add: function () { addEntry(null, "class-history-table", "class"); } },
+  { id: "character-abilities-table", add: function () { addAbilityEntry(null, "character-abilities-table", "ability"); } },
+  { id: "character-talents-table", add: function () { addTalentEntry(null, "character-talents-table", "talent"); } },
+  { id: "techniques-table", add: function () { addTechniqueEntry(null, "techniques-table", "techniques"); } },
+  { id: "afflictions-table", add: function () { addAfflictionEntry(null, "afflictions-table", "affliction"); } },
+  { id: "spells-table", add: function () { addSpellEntry(null, "spells-table", "spells"); } },
+  { id: "inventory", add: function () { addInventoryItem(null); } },
+  { id: "mounts-table", add: function () { addMountOrChampionEntry(null, "mounts-table", "mounts"); } },
+  { id: "champions-table", add: function () { addMountOrChampionEntry(null, "champions-table", "champions"); } }
+];
+
+/* Helpers */
+
+function byId(id) {
+  return document.getElementById(id);
+}
+
+function isWholeNumber(text) {
+  return /^\s*-?\d+\s*$/.test(text);
+}
+
+function readInt(id) {
+  var value = parseInt(byId(id).value, 10);
+  return isNaN(value) ? 0 : value;
+}
+
+function readIntText(id) {
+  var value = parseInt(byId(id).textContent, 10);
+  return isNaN(value) ? 0 : value;
+}
+
+/* Reads the number out of a "/ 12" style max label. */
+function readMaxLabel(id) {
+  var match = byId(id).textContent.match(/-?\d+(\.\d+)?/);
+  return match ? parseFloat(match[0]) : NaN;
+}
+
+function effectiveAttribute(attribute) {
+  return readInt(attribute) + readInt(attribute + "-mod");
+}
+
+function atLeastZero(value) {
+  return Math.max(0, value);
+}
+
+function markDirty() {
+  if (typeof setSheetDirty === "function") {
+    setSheetDirty(true);
   }
+}
+
+/* Messages: each section has one status line (attr-msg, skills-msg,
+   traits-msg) saying why a value was refused or corrected. The status line is
+   announced as it changes, and the field points at it with aria-describedby.
+   No aria-invalid: by the time the message shows, the field already holds a
+   valid value again (the previous one, or the corrected one). */
+
+var flaggedField = {};
+
+function sheetMessage(areaId, element, text) {
+  var previous = flaggedField[areaId];
+  if (previous) {
+    previous.removeAttribute("aria-describedby");
+  }
+  flaggedField[areaId] = text && element ? element : null;
+  if (text && element) {
+    element.setAttribute("aria-describedby", areaId);
+  }
+  byId(areaId).textContent = text;
+}
+
+/* Attributes */
+
+function attributePointsBudget() {
+  var bought = readIntText("attr-pts-bought");
+  var spentUnderCap = 0;
+  var spentOverCap = 0;
+  ATTRIBUTES.forEach(function (attribute) {
+    var value = readInt(attribute);
+    spentUnderCap += Math.min(value, ATTRIBUTE_CREATION_MAX) - ATTRIBUTE_MIN;
+    spentOverCap += Math.max(value - ATTRIBUTE_CREATION_MAX, 0);
+  });
+  return {
+    remaining: FREE_ATTRIBUTE_POINTS + bought - spentUnderCap - spentOverCap,
+    // Only points bought with EXP may raise an attribute past 15.
+    overCapCovered: spentOverCap <= bought
+  };
+}
+
+function skillPointsTotal() {
+  return readInt("int") + readIntText("skill-pts-bought");
+}
+
+function skillPointsAssigned() {
+  var assigned = 0;
+  SKILLS.forEach(function (skill) {
+    assigned += readInt(skill);
+  });
+  return assigned;
 }
 
 function checkAttributeLimit(element) {
-  var difference = element.value - element.defaultValue;
-  var remainingPts = document.getElementById("remaining_pts").innerHTML;
-
-  if (element.value < 5 | difference > remainingPts ) {
+  if (!isWholeNumber(element.value) || parseInt(element.value, 10) < ATTRIBUTE_MIN) {
     element.value = element.defaultValue;
-  } else if (difference <= remainingPts) {
-    remainingPts = (parseInt(remainingPts) - difference);
-    document.getElementById("remaining_pts").innerHTML = remainingPts;
+    recalcAll();
+    sheetMessage("attr-msg", element, "Attributes must be whole numbers of " + ATTRIBUTE_MIN + " or more.");
+    return;
+  }
+  var value = parseInt(element.value, 10);
+  var previous = parseInt(element.defaultValue, 10);
+  element.value = value;
+
+  // Lowering an attribute only gives points back, so it is always allowed;
+  // that is also how a sheet already over budget (an old save) gets fixed.
+  var budget = attributePointsBudget();
+  var message = "";
+  if (value > previous && budget.remaining < 0) {
+    message = "Not enough attribute points.";
+  } else if (value > previous && !budget.overCapCovered) {
+    message = "Free points raise an attribute to " + ATTRIBUTE_CREATION_MAX +
+      " at most; buy attribute points with EXP to go higher.";
+  } else if (skillPointsTotal() < skillPointsAssigned()) {
+    message = "That would leave fewer skill points than are assigned; lower a skill first.";
+  }
+
+  if (message) {
+    element.value = element.defaultValue;
+  } else {
     element.defaultValue = element.value;
   }
-
-  updateTraits(element);
-}
-
-function updateTraits(element) {
-  if (element.id == "int-mod" || element.id == "int") {
-    updateKnowledge(element);
-  } else if (element.id == "str-mod" || element.id == "str") {
-    updateBodyWeightAndCapcity(element);
-    updateHealth(element);
-  } else if (element.id == "agi-mod" || element.id == "agi") {
-    updateSpeed(element);
-  } else if (element.id == "will-mod" || element.id == "will") {
-    updateSurvivalPoints(element);
-    updateStressPoints(element);
+  recalcAll();
+  if (message === "Not enough attribute points.") {
+    message = "Not enough attribute points: " + attributePointsBudget().remaining + " left.";
   }
+  sheetMessage("attr-msg", element, message);
 }
 
-/* Character Abilities */
-
-function addAbilityEntry(element, tableId, entryName) {
-  var classHistory = document.getElementById(tableId);
-
-  var rowCount = document.getElementById(tableId).getElementsByTagName("tr").length;
-  var row = classHistory.insertRow(rowCount);
-
-  var cellOne = row.insertCell(0);
-  cellOne.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "\" type=\"text\" oninput=\"saveValue(this)\" />"
-  var cellTwo = row.insertCell(1);
-  cellTwo.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "_effect\" type=\"text\" oninput=\"saveValue(this)\" />"
+function updateModifier(element) {
+  var message = "";
+  if (element.value.trim() === "") {
+    element.value = 0;
+  }
+  if (!isWholeNumber(element.value)) {
+    element.value = element.defaultValue;
+    message = "Modifiers must be whole numbers.";
+  } else {
+    element.value = parseInt(element.value, 10);
+    element.defaultValue = element.value;
+  }
+  recalcAll();
+  sheetMessage("attr-msg", element, message);
 }
 
+/* Skills */
 
-/* Character Talents */
-
-function addTalentEntry(element, tableId, entryName) {
-  var classHistory = document.getElementById(tableId);
-
-  var rowCount = document.getElementById(tableId).getElementsByTagName("tr").length;
-  var row = classHistory.insertRow(rowCount);
-
-  var cellOne = row.insertCell(0);
-  cellOne.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "\" type=\"text\" oninput=\"saveValue(this)\" />"
-  var cellTwo = row.insertCell(1);
-  cellTwo.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "_effect\" type=\"text\" oninput=\"saveValue(this)\" />"
+function updateSkillPoints(skill) {
+  var message = "";
+  if (!isWholeNumber(skill.value) || parseInt(skill.value, 10) < 0) {
+    skill.value = skill.defaultValue;
+    message = "Skill points must be whole numbers of 0 or more.";
+  } else {
+    skill.value = parseInt(skill.value, 10);
+    if (skillPointsAssigned() > skillPointsTotal()) {
+      skill.value = skill.defaultValue;
+      message = "Not enough skill points.";
+    } else {
+      skill.defaultValue = skill.value;
+    }
+  }
+  recalcAll();
+  if (message === "Not enough skill points.") {
+    message = "Not enough skill points: " + (skillPointsTotal() - skillPointsAssigned()) + " left.";
+  }
+  sheetMessage("skills-msg", skill, message);
 }
 
-/* Character Techniques & Feats */
-
-function addTechniqueEntry(element, tableId, entryName) {
-  var classHistory = document.getElementById(tableId);
-
-  var rowCount = document.getElementById(tableId).getElementsByTagName("tr").length;
-  var row = classHistory.insertRow(rowCount);
-
-  var cellOne = row.insertCell(0);
-  cellOne.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "\" type=\"text\" oninput=\"saveValue(this)\" />"
-  var cellTwo = row.insertCell(1);
-  cellTwo.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "_desc\" type=\"text\" oninput=\"saveValue(this)\" />"
-}
-
-/* Afflictions Functions  */
-
-function addAfflictionEntry(element, tableId, entryName) {
-  var classHistory = document.getElementById(tableId);
-
-  var rowCount = document.getElementById(tableId).getElementsByTagName("tr").length;
-  var row = classHistory.insertRow(rowCount);
-
-  var cellOne = row.insertCell(0);
-  cellOne.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "_name\" type=\"text\" oninput=\"saveValue(this)\" />"
-  var cellTwo = row.insertCell(1);
-  cellTwo.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "_duration\" type=\"text\" oninput=\"saveValue(this)\" />"
-  var cellThree = row.insertCell(2);
-  cellThree.innerHTML = "<textarea id=\"" + entryName + "_" + rowCount + "_effects\" type=\"number\" oninput=\"saveValue(this)\" ></textarea>"
-}
-
-/* Spell Functions  */
-
-function addSpellEntry(element, tableId, entryName) {
-  var classHistory = document.getElementById(tableId);
-
-  var rowCount = document.getElementById(tableId).getElementsByTagName("tr").length;
-  var row = classHistory.insertRow(rowCount);
-
-  var cellOne = row.insertCell(0);
-  cellOne.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "_name\" type=\"text\" oninput=\"saveValue(this)\" />"
-  var cellTwo = row.insertCell(1);
-  cellTwo.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "_attack\" type=\"text\" oninput=\"saveValue(this)\" />"
-  var cellThree = row.insertCell(2);
-  cellThree.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "_mod\" type=\"text\" oninput=\"saveValue(this)\" />"
-  var cellFour = row.insertCell(3);
-  cellFour.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "_usage\" type=\"text\" oninput=\"saveValue(this)\" />"
-  var cellFive = row.insertCell(4);
-  cellFive.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "_requirements\" type=\"text\" oninput=\"saveValue(this)\" />"
-  var cellSix = row.insertCell(5);
-  cellSix.innerHTML = "<textarea id=\"" + entryName + "_" + rowCount + "_effects\" type=\"number\" oninput=\"saveValue(this)\" ></textarea>"
-}
-
-/* Trait Update Functions  */
+/* Experience */
 
 function confirmEXP(element) {
-  var expToAdd = parseInt(document.getElementById("exp-to-add").value);
-  var result = confirm("Are you certain you want to add " + expToAdd  + " experience points?");
-  
-  if (result) {
-    var total = parseInt(document.getElementById("exp-total").innerHTML);
-    total = total + expToAdd;
-    document.getElementById("exp-total").innerHTML = total;
+  var input = byId("exp-to-add");
+  if (!isWholeNumber(input.value) || parseInt(input.value, 10) <= 0) {
+    sheetMessage("traits-msg", input, "Enter a whole number of EXP greater than 0.");
+    return;
+  }
+  var expToAdd = parseInt(input.value, 10);
+  if (confirm("Are you certain you want to add " + expToAdd + " experience points?")) {
+    byId("exp-total").textContent = readIntText("exp-total") + expToAdd;
+    input.value = 0;
+    input.defaultValue = "0";
+    markDirty();
+    recalcAll();
+    sheetMessage("traits-msg", input, "");
   }
 }
 
-function updateHealth(element) {
-  var vitality = parseInt(document.getElementById("str").value);
-  var vitMod = parseInt(document.getElementById("str-mod").value);
-  document.getElementById("health").innerHTML = " / " + (vitality + vitMod);
-  document.getElementById("damage").value = vitality + vitMod;
-  document.getElementById("damage").max = vitality + vitMod;
-  document.getElementById("damage").min = 0;
+function expUsed() {
+  return (readIntText("attr-pts-bought") + readIntText("skill-pts-bought")) * EXP_PER_POINT;
 }
 
-function updateSurvivalPoints(element) {
-  var spirit = Math.floor(parseInt(document.getElementById("will").value) / 3);
-  var spiMod = parseInt(document.getElementById("will-mod").value / 3);
-  document.getElementById("survival-pts").innerHTML = " / " + (spirit + spiMod);
-  document.getElementById("survival-pts-used").value = spirit + spiMod;
-  document.getElementById("survival-pts-used").max = spirit + spiMod;
-  document.getElementById("survival-pts-used").min = 0;
-}
-
-function updateStressPoints(element) {
-  var stressPts = parseInt(document.getElementById("will").value) * 2;
-  var spiMod = parseInt(document.getElementById("will-mod").value) * 2;
-  document.getElementById("stress-pts").innerHTML = " / " + (stressPts + spiMod);
-  document.getElementById("stress-pts-used").value = 0;
-  document.getElementById("stress-pts-used").min = 0;
-}
-
-function updateBodyWeightAndCapcity(element) {
-  var str = parseInt(document.getElementById("str").value);
-  var strMod = parseInt(document.getElementById("str-mod").value);
-  var totalStr = str + strMod;
-
-  document.getElementById("body-weight").innerHTML = (totalStr * 15) + 50;
-  document.getElementById("capacity").innerHTML = "/ " + (totalStr * 20) + " lb " + calculateAGIModifier();
-  document.getElementById("capacity-value").innerHTML = (totalStr * 20);
-}
-
-function updateSpeed(element) {
-  var agi = document.getElementById("agi").value;
-  var intAGI = parseInt(agi);
-  document.getElementById("speed").innerHTML = Math.floor(intAGI/3);
-  document.getElementById("action-pts").innerHTML = Math.floor(intAGI/25) + 1;
-}
-
-function updateKnowledgeUsed(element) {
-  var knowledge = document.getElementById("knl").value;
-  if (element.value > knowledge) {
-    element.value = element.defaultValue;
-  } else if (parseInt(element.value) < 0) {
-    element.value = 0;
-  }
-  document.getElementById("knl-used").max = knowledge;
-  document.getElementById("knl-used").min = 0;
-}
-
-function updateDamage(element) {
-  var health = document.getElementById("health").value;
-  if (parseInt(element.value) > health) {
-    element.value = element.defaultValue;
-  } else if (parseInt(element.value) < 0) {
-    element.value = 0;
-  }
-  document.getElementById("damage").max = health;
-  document.getElementById("damage").min = 0;
-}
-
-function updateSurvivalPointsUsed(element) {
-  var will = Math.floor(parseInt(document.getElementById("will").value) / 3);
-  if (parseInt(element.value) > will) {
-    element.value = element.defaultValue;
-  } else if (parseInt(element.value) < 0) {
-    element.value = 0;
-  }
-  document.getElementById("survival-pts-used").max = will;
-  document.getElementById("survival-pts-used").min = 0;
-}
-
-function updateStressPointsUsed(element) {
-  if (parseInt(element.value) < 0) {
-    element.value = 0;
-  }
-  document.getElementById("stress-pts-used").min = 0;
-}
-
-function updateKnowledge(element) {
-  var wisdom = document.getElementById("int").value;
-  var wisdomMod = parseInt(document.getElementById("int-mod").value);
-  var knowledge = (parseInt(wisdom) + wisdomMod) / 3;
-  document.getElementById("knl").innerHTML = " / " + Math.floor(knowledge);
-  document.getElementById("knl-used").max = knowledge;
-  document.getElementById("knl-used").min = 0;
+function notEnoughExpMessage() {
+  return "Not enough EXP: a point costs " + EXP_PER_POINT + " and " +
+    (readIntText("exp-total") - expUsed()) + " is unspent.";
 }
 
 function buySkillPoint(element) {
-  var totalExp = parseInt(document.getElementById("exp-total").innerHTML);
-  var usedExp = parseInt(document.getElementById("exp-used").innerHTML) + 10;
-  if (usedExp <= totalExp) {	
-    document.getElementById("skill_pts").innerHTML = parseInt(document.getElementById("skill_pts").innerHTML) + 1;
-    document.getElementById("exp-used").innerHTML = usedExp;
+  if (expUsed() + EXP_PER_POINT > readIntText("exp-total")) {
+    sheetMessage("skills-msg", null, notEnoughExpMessage());
+    return;
   }
+  byId("skill-pts-bought").textContent = readIntText("skill-pts-bought") + 1;
+  markDirty();
+  recalcAll();
+  sheetMessage("skills-msg", null, "");
 }
 
 function buyAttributePoint(element) {
-  var totalExp = parseInt(document.getElementById("exp-total").innerHTML);
-  var usedExp = parseInt(document.getElementById("exp-used").innerHTML) + 10;
-  if (usedExp <= totalExp) {
-    document.getElementById("remaining_pts").innerHTML = parseInt(document.getElementById("remaining_pts").innerHTML) + 1;
-    document.getElementById("exp-used").innerHTML = usedExp;
+  if (expUsed() + EXP_PER_POINT > readIntText("exp-total")) {
+    sheetMessage("attr-msg", null, notEnoughExpMessage());
+    return;
   }
+  byId("attr-pts-bought").textContent = readIntText("attr-pts-bought") + 1;
+  markDirty();
+  recalcAll();
+  sheetMessage("attr-msg", null, "");
 }
 
+/* Trackers: current Health, Knowledge used, Survival Points left, Stress */
 
-/* Skill Update Functions  */
-
-function updateSkillPoints(skill) {
-  var remainingPts = parseInt(document.getElementById("skill_pts").innerHTML);
-  var skillPtsAssigned = parseInt(document.getElementById("skill_pts_assigned").innerHTML);
-  var totalPts = remainingPts + skillPtsAssigned;
-  var skillValue = parseInt(skill.value);
-  var skillDefaultValue = parseInt(skill.defaultValue);
-
-  if (skillValue < 0) {
-    skill.value = 0;
-  } else if (skillValue <= skillDefaultValue) {
-    var diff = skill.defaultValue - skill.value;
-    document.getElementById("skill_pts").innerHTML = remainingPts + diff;
-    document.getElementById("skill_pts_assigned").innerHTML = skillPtsAssigned - diff;
-    remainingPts = parseInt(document.getElementById("skill_pts").innerHTML);
-  } else if (skillValue >= skillDefaultValue && remainingPts > 0) {
-    var difference = parseInt(skill.value) - parseInt(skill.defaultValue);
-    document.getElementById("skill_pts").innerHTML = remainingPts - difference;
-    document.getElementById("skill_pts_assigned").innerHTML = skillPtsAssigned + difference;
-  } else if (skillValue > remainingPts || remainingPts === 0) {
-    // Skip as player does not have enough points...
-    skill.value = skill.defaultValue;
+/* Commits a whole number within min..max (null = no bound). Returns a message
+   when the value was refused or corrected, otherwise "". */
+function commitWholeNumber(element, min, max, name) {
+  if (!isWholeNumber(element.value)) {
+    element.value = element.defaultValue;
+    return name + " must be a whole number.";
   }
-  skill.defaultValue = skill.value;
-
-  remainingPts = parseInt(document.getElementById("skill_pts").innerHTML);
-  updateAllSkillProperties(remainingPts);
+  var value = parseInt(element.value, 10);
+  var message = "";
+  if (min !== null && value < min) {
+    value = min;
+    message = name + " can't go below " + min + ", so it was set to " + min + ".";
+  }
+  if (max !== null && value > max) {
+    value = max;
+    message = name + " can't go above " + max + ", so it was set to " + max + ".";
+  }
+  element.value = value;
+  element.defaultValue = element.value;
+  return message;
 }
 
-
-function updateAllSkillProperties(remainingPts) {
-  updateSkillProperties("acrobatics", remainingPts);
-  updateSkillProperties("alchemy", remainingPts);
-  updateSkillProperties("arcane-sorcery", remainingPts);
-  updateSkillProperties("archery", remainingPts);
-  updateSkillProperties("art", remainingPts);
-  updateSkillProperties("atheltics", remainingPts);
-  updateSkillProperties("blade", remainingPts);
-  updateSkillProperties("blunt", remainingPts);
-  updateSkillProperties("brawl", remainingPts);
-  updateSkillProperties("carpentry", remainingPts);
-  updateSkillProperties("catalyst", remainingPts);
-  updateSkillProperties("culinary-arts", remainingPts);
-  updateSkillProperties("communing-arts", remainingPts);
-  updateSkillProperties("cryokinesis", remainingPts);
-  updateSkillProperties("deception", remainingPts);
-  updateSkillProperties("discipline", remainingPts);
-  updateSkillProperties("duel-wield", remainingPts);
-  updateSkillProperties("enchantment", remainingPts);
-  updateSkillProperties("grapple", remainingPts);
-  updateSkillProperties("mechanics", remainingPts);
-  updateSkillProperties("handle-animal", remainingPts);
-  updateSkillProperties("herbalism", remainingPts);
-  updateSkillProperties("lore", remainingPts);
-  updateSkillProperties("magnemancy", remainingPts);
-  updateSkillProperties("masonry", remainingPts);
-  updateSkillProperties("medicine", remainingPts);
-  updateSkillProperties("necromancy", remainingPts);
-  updateSkillProperties("persuasion", remainingPts);
-  updateSkillProperties("psionics", remainingPts);
-  updateSkillProperties("pyromancy", remainingPts);
-  updateSkillProperties("resilience", remainingPts);
-  updateSkillProperties("ride", remainingPts);
-  updateSkillProperties("sewing", remainingPts);
-  updateSkillProperties("shamanism", remainingPts);
-  updateSkillProperties("slight-of-hand", remainingPts);
-  updateSkillProperties("smithing", remainingPts);
-  updateSkillProperties("staff", remainingPts);
-  updateSkillProperties("spellcraft", remainingPts);
-  updateSkillProperties("sneak", remainingPts);
-  updateSkillProperties("throw", remainingPts);
-  updateSkillProperties("vigilance", remainingPts);
-  updateSkillProperties("void-sorcery", remainingPts);
-  updateSkillProperties("whip", remainingPts);
+function updateDamage(element) {
+  // Health may drop to zero or below (unconscious), but not above its max.
+  var message = commitWholeNumber(element, null, readMaxLabel("health"), "Health");
+  recalcAll();
+  sheetMessage("traits-msg", element, message);
 }
 
-function updateSkillProperties(elementName, remainingPts) {
-  var value = parseInt(document.getElementById(elementName).value);
-  // Set the max value to the already assigned points plus remaining)
-  document.getElementById(elementName).max = (value + remainingPts);
-  document.getElementById(elementName).min = 0;
-
-  return value;
+function updateKnowledgeUsed(element) {
+  var message = commitWholeNumber(element, 0, readMaxLabel("knl"), "Knowledge used");
+  recalcAll();
+  sheetMessage("traits-msg", element, message);
 }
 
-/* Inventory Functions  */
-
-function addInventoryItem(element) {
-  var inventory = document.getElementById("inventory");
-
-  var rowCount = document.getElementById("inventory").getElementsByTagName("tr").length;
-  var row = inventory.insertRow(rowCount);
-
-  var cellOne = row.insertCell(0);
-  cellOne.innerHTML = "<input id=\"item_" + rowCount + "_name\" type=\"text\" oninput=\"saveValue(this)\" />";
-  var cellTwo = row.insertCell(1);
-  cellTwo.innerHTML = "<input id=\"item_" + rowCount + "_desc\" type=\"text\" oninput=\"saveValue(this)\" />";
-  var cellThree = row.insertCell(2);
-  cellThree.innerHTML = "<input id=\"item_" + rowCount + "_weight\" type=\"number\" oninput=\"updateTotalWeightUsed(this)\" />";
+function updateSurvivalPointsUsed(element) {
+  var message = commitWholeNumber(element, 0, readMaxLabel("survival-pts"), "Survival points");
+  recalcAll();
+  sheetMessage("traits-msg", element, message);
 }
+
+function updateStressPointsUsed(element) {
+  // Stress may go over its max: the rules deal 1d4 damage per point over.
+  var message = commitWholeNumber(element, 0, null, "Stress");
+  recalcAll();
+  sheetMessage("traits-msg", element, message);
+}
+
+/* Sets a tracker's new max. Its current value is kept and capped at the new
+   max; with stayFull, a tracker that was full stays full (Health and
+   Survival Points left, so raising STR or WILL doesn't leave them short). */
+function setTrackerMax(inputId, labelId, newMax, minValue, stayFull) {
+  var input = byId(inputId);
+  var oldMax = readMaxLabel(labelId);
+  var current = parseInt(input.value, 10);
+
+  if (isNaN(current) || (stayFull && current === oldMax)) {
+    current = stayFull ? newMax : 0;
+  } else {
+    current = Math.min(current, newMax);
+  }
+  if (minValue !== null && current < minValue) {
+    current = minValue;
+  }
+  input.value = current;
+  input.defaultValue = input.value;
+  input.max = newMax;
+  byId(labelId).textContent = " / " + newMax;
+}
+
+/* Weight and encumbrance */
 
 function updateTotalWeightUsed(element) {
-  var changeValue = element.value;
-  if (changeValue < 0) {
+  var message = "";
+  if (parseFloat(element.value) < 0) {
     element.value = 0;
+    message = "Weight can't be negative, so it was set to 0.";
   }
-
-  var totalCapcityUsed = document.getElementById("used-capacity").innerHTML;
-  var diff = element.defaultValue - element.value;
-  document.getElementById("used-capacity").innerHTML = (totalCapcityUsed - diff).toFixed(2);
   element.defaultValue = element.value;
-
-  document.getElementById("capacity").innerHTML = " / " + document.getElementById("capacity-value").innerHTML + " lb " + calculateAGIModifier();
+  recalcAll();
+  sheetMessage("traits-msg", element, message);
 }
 
-function calculateAGIModifier() {
-  var capcityValue = parseInt(document.getElementById("capacity-value").innerHTML);
-  var usedCapacity = parseInt(document.getElementById("used-capacity").innerHTML);
-  var overCapcity = capcityValue - usedCapacity;
-  var ratio = (usedCapacity / capcityValue) * 100;
-  var agi = parseInt(document.getElementById("agi").value);
-  var agiModifier = " ";
-  if (overCapcity < 0) {
-    // Over capacity calculator
-    var agiModValue = agi;
-    agiModifier = " (" + agiModValue + " AGI)";
-  } else if (ratio >= 75) {
-    // Over 50% body weight, AGI decrease of 25%
-    var agiModValue = Math.ceil(agi / 4);
-    agiModifier = " (-" + agiModValue + " AGI)";
-  } else if (ratio >= 50) {
-    // Over 50% body weight, AGI decrease of 10%
-    var agiModValue = Math.ceil(agi / 10);
-    agiModifier = " (-" + agiModValue + " AGI)";
-  } else if (ratio >= 25) {
-    // Over 50% body weight, AGI decrease of 5%
-    var agiModValue = Math.floor(agi / 20);
-    agiModifier = " (-" + agiModValue + " AGI)";
+function totalWeightUsed() {
+  var total = 0;
+  var inputs = byId("content").querySelectorAll("input[id$='-weight'], input[id$='_weight']");
+  for (var i = 0; i < inputs.length; i++) {
+    var weight = parseFloat(inputs[i].value);
+    if (!isNaN(weight) && weight > 0) {
+      total += weight;
+    }
   }
-  return agiModifier;
+  return Math.round(total * 100) / 100;
 }
 
-/* Table Functions  */
+/* AGI penalty for carried weight, as a share of Weight Capacity. */
+function encumbranceText(used, capacity, agi) {
+  var penalty = 0;
+  if (used <= 0) {
+    penalty = 0;
+  } else if (used > capacity) {
+    // Over capacity: all AGI is lost.
+    penalty = agi;
+  } else if (used >= capacity * 0.75) {
+    // 75% of capacity or more: AGI decrease of 25%
+    penalty = Math.ceil(agi / 4);
+  } else if (used >= capacity * 0.5) {
+    // 50% of capacity or more: AGI decrease of 10%
+    penalty = Math.ceil(agi / 10);
+  } else if (used >= capacity * 0.25) {
+    // 25% of capacity or more: AGI decrease of 5%
+    penalty = Math.floor(agi / 20);
+  }
+  return penalty > 0 ? " (-" + penalty + " AGI)" : "";
+}
+
+/* Recompute everything derived on the sheet */
+
+function recalcAll() {
+  if (!byId("remaining_pts")) {
+    return; // The sheet isn't on screen.
+  }
+  var str = effectiveAttribute("str");
+  var agi = atLeastZero(effectiveAttribute("agi"));
+  var intelligence = effectiveAttribute("int");
+  var will = effectiveAttribute("will");
+
+  // Attribute and skill points, EXP
+  byId("remaining_pts").textContent = attributePointsBudget().remaining;
+  byId("exp-used").textContent = expUsed();
+
+  var assigned = skillPointsAssigned();
+  var skillRemaining = skillPointsTotal() - assigned;
+  byId("skill_pts").textContent = skillRemaining;
+  byId("skill_pts_assigned").textContent = assigned;
+  SKILLS.forEach(function (skill) {
+    var input = byId(skill);
+    input.min = 0;
+    input.max = readInt(skill) + atLeastZero(skillRemaining);
+  });
+
+  // Traits
+  setTrackerMax("damage", "health", atLeastZero(str), null, true);
+  setTrackerMax("knl-used", "knl", atLeastZero(Math.floor(intelligence / 5)), 0, false);
+  setTrackerMax("survival-pts-used", "survival-pts", atLeastZero(Math.floor(will / 3)), 0, true);
+  byId("stress-pts").textContent = " / " + atLeastZero(will * 2);
+
+  var capacity = atLeastZero(str * 20);
+  var used = totalWeightUsed();
+  byId("capacity-value").textContent = capacity;
+  byId("used-capacity").textContent = used;
+  byId("capacity").textContent = "/ " + capacity + " lb" + encumbranceText(used, capacity, agi);
+  byId("body-weight").textContent = atLeastZero(str * 10 + 30);
+
+  byId("speed").textContent = Math.floor(agi / 4);
+  byId("action-pts").textContent = 1 + Math.floor(agi / 20);
+  byId("quick-action-pts").textContent = 1 + Math.floor(agi / 15);
+}
+
+/* Table rows: abilities, talents, techniques, afflictions, spells,
+   inventory, languages, class history, mounts, champions */
+
+function addRow(tableId, cells) {
+  var table = byId(tableId);
+  var row = table.insertRow(table.rows.length);
+  cells.forEach(function (html, index) {
+    row.insertCell(index).innerHTML = html;
+  });
+  labelTableInputs(table);
+  markDirty();
+}
+
+function textCell(id) {
+  return "<input id=\"" + id + "\" type=\"text\" oninput=\"saveValue(this)\" />";
+}
+
+function areaCell(id) {
+  return "<textarea id=\"" + id + "\" oninput=\"saveValue(this)\"></textarea>";
+}
+
+function addAbilityEntry(element, tableId, entryName) {
+  var n = entryName + "_" + byId(tableId).rows.length;
+  addRow(tableId, [textCell(n), textCell(n + "_effect")]);
+}
+
+function addTalentEntry(element, tableId, entryName) {
+  var n = entryName + "_" + byId(tableId).rows.length;
+  addRow(tableId, [textCell(n), textCell(n + "_effect")]);
+}
+
+function addTechniqueEntry(element, tableId, entryName) {
+  var n = entryName + "_" + byId(tableId).rows.length;
+  addRow(tableId, [textCell(n), textCell(n + "_desc")]);
+}
+
+function addAfflictionEntry(element, tableId, entryName) {
+  var n = entryName + "_" + byId(tableId).rows.length;
+  addRow(tableId, [textCell(n + "_name"), textCell(n + "_duration"), areaCell(n + "_effects")]);
+}
+
+function addSpellEntry(element, tableId, entryName) {
+  var n = entryName + "_" + byId(tableId).rows.length;
+  addRow(tableId, [textCell(n + "_name"), textCell(n + "_attack"), textCell(n + "_mod"),
+    textCell(n + "_usage"), textCell(n + "_requirements"), areaCell(n + "_effects")]);
+}
+
+function addInventoryItem(element) {
+  var n = "item_" + byId("inventory").rows.length;
+  addRow("inventory", [textCell(n + "_name"), textCell(n + "_desc"),
+    "<input id=\"" + n + "_weight\" type=\"number\" min=\"0\" step=\"any\" oninput=\"updateTotalWeightUsed(this)\" />"]);
+}
 
 function addEntry(element, tableId, entryName) {
-  var classHistory = document.getElementById(tableId);
+  var n = entryName + "_" + byId(tableId).rows.length;
+  addRow(tableId, [textCell(n + "_name"), textCell(n + "_years"), areaCell(n + "_notes")]);
+}
 
-  var rowCount = document.getElementById(tableId).getElementsByTagName("tr").length;
-  var row = classHistory.insertRow(rowCount);
-
-  var cellOne = row.insertCell(0);
-  cellOne.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "_name\" type=\"text\" oninput=\"saveValue(this)\" />"
-  var cellTwo = row.insertCell(1);
-  cellTwo.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "_years\" type=\"text\" oninput=\"saveValue(this)\" />"
-  var cellThree = row.insertCell(2);
-  cellThree.innerHTML = "<textarea id=\"" + entryName + "_" + rowCount + "_notes\" type=\"number\" oninput=\"saveValue(this)\" ></textarea>"
+function addMountOrChampionEntry(element, tableId, entryName) {
+  var n = entryName + "_" + byId(tableId).rows.length;
+  addRow(tableId, [textCell(n + "_name"), textCell(n + "_requirements"), areaCell(n + "_desc")]);
 }
 
 function removeEntry(element, tableId) {
-  var classHistory = document.getElementById(tableId);
-
-  var rowCount = document.getElementById(tableId).getElementsByTagName("tr").length;
-  if (rowCount > 1) {
-    classHistory.deleteRow(rowCount - 1 );
-    removeWeightFromTotalWeight(tableId, rowCount);
+  var table = byId(tableId);
+  if (table.rows.length > 1) {
+    table.deleteRow(table.rows.length - 1);
+    markDirty();
+    recalcAll(); // Drops a removed item's weight from the total.
   }
 }
 
-function removeWeightFromTotalWeight(tableId, rowCount) {
-  var table = document.getElementById(tableId);
-  if (table == undefined || table == null
-      || table.rows[rowCount - 1] == undefined
-      || table.rows[rowCount - 1] == null
-      || table.rows[rowCount - 1].cells[2] == undefined
-      || table.rows[rowCount - 1].cells[2] == null
-      || table.rows[rowCount - 1].cells[2].children[0] == undefined
-      || table.rows[rowCount - 1].cells[2].children[0] == null) {
+/* Gives every input in a table row an accessible name from its column. */
+function labelTableInputs(table) {
+  if (!table.rows.length) {
     return;
   }
-  var element = table.rows[rowCount - 1].cells[2].children[0];
-
-  var totalCapcityUsed = parseInt(document.getElementById("used-capacity").innerHTML);
-  document.getElementById("used-capacity").innerHTML = (totalCapcityUsed - parseInt(element.value)).toFixed(2);
-
-  var overCapcity = parseInt(document.getElementById("capacity-value").innerHTML) - parseInt(document.getElementById("used-capacity").innerHTML);
-  var agiModifier = " ";
-  if (overCapcity < 0) {
-    var agiModValue = Math.floor(overCapcity/2);
-    agiModifier = " (" + agiModValue + " AGI)";
+  var headers = table.rows[0].cells;
+  for (var r = 1; r < table.rows.length; r++) {
+    var cells = table.rows[r].cells;
+    for (var c = 0; c < cells.length && c < headers.length; c++) {
+      var control = cells[c].querySelector("input, textarea, select");
+      if (control) {
+        control.setAttribute("aria-label", headers[c].textContent.trim() + " " + r);
+      }
+    }
   }
-  document.getElementById("capacity").innerHTML = " / " + document.getElementById("capacity-value").innerHTML + " lb " + agiModifier;
 }
 
-/* Mounts Functions  */
-
-function addMountOrChampionEntry(element, tableId, entryName) {
-  var classHistory = document.getElementById(tableId);
-
-  var rowCount = document.getElementById(tableId).getElementsByTagName("tr").length;
-  var row = classHistory.insertRow(rowCount);
-
-  var cellOne = row.insertCell(0);
-  cellOne.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "_name\" type=\"text\" oninput=\"saveValue(this)\" />"
-  var cellTwo = row.insertCell(1);
-  cellTwo.innerHTML = "<input id=\"" + entryName + "_" + rowCount + "_requirements\" type=\"text\" oninput=\"saveValue(this)\" />"
-  var cellThree = row.insertCell(2);
-  cellThree.innerHTML = "<textarea id=\"" + entryName + "_" + rowCount + "_desc\" type=\"number\" oninput=\"saveValue(this)\" ></textarea>"
+/* Called once the sheet fragment is on screen. */
+function initSheet() {
+  var tables = byId("content").querySelectorAll("table");
+  for (var i = 0; i < tables.length; i++) {
+    labelTableInputs(tables[i]);
+  }
+  flaggedField = {};
+  recalcAll();
+  if (typeof setSheetDirty === "function") {
+    setSheetDirty(false);
+  }
 }
 
-/* Load and Save Character Sheet Functions */
+/* Load and Save Character Sheet Functions
+ *
+ * A saved sheet is the sheet's HTML with every value written into it. On
+ * load, the file is parsed without running anything in it, a fresh sheet is
+ * loaded, and only the values are copied across, so a file can't inject
+ * markup or script into the page. Sheets saved by the older version load
+ * the same way.
+ */
+
+function savedValue(control) {
+  var tag = control.tagName.toLowerCase();
+  if (tag === "textarea") {
+    return control.textContent;
+  }
+  if (tag === "select") {
+    var option = control.querySelector("option[selected]");
+    if (!option) {
+      return null;
+    }
+    return option.hasAttribute("value") ? option.getAttribute("value") : option.textContent;
+  }
+  return control.getAttribute("value") || "";
+}
+
+function copySavedControl(from, to) {
+  var value = savedValue(from);
+  if (value === null) {
+    return;
+  }
+  if (to.tagName.toLowerCase() === "select") {
+    value = value.replace("Chatoic", "Chaotic"); // Old spelling.
+    for (var i = 0; i < to.options.length; i++) {
+      if (to.options[i].value === value) {
+        to.selectedIndex = i;
+      }
+    }
+    return;
+  }
+  to.value = value;
+  to.defaultValue = to.value;
+}
+
+function controlsOf(element) {
+  return element.querySelectorAll("input, textarea, select");
+}
+
+function applySavedSheet(saved) {
+  var content = byId("content");
+
+  // Table rows: match the saved row count, then copy by position.
+  SHEET_TABLES.forEach(function (entry) {
+    var savedTable = saved.getElementById(entry.id);
+    var table = byId(entry.id);
+    if (!savedTable || !table) {
+      return;
+    }
+    var wanted = Math.max(1, savedTable.rows.length);
+    while (table.rows.length > wanted) {
+      table.deleteRow(table.rows.length - 1);
+    }
+    while (table.rows.length < wanted) {
+      entry.add();
+    }
+    for (var r = 1; r < wanted; r++) {
+      var from = controlsOf(savedTable.rows[r]);
+      var to = controlsOf(table.rows[r]);
+      for (var c = 0; c < to.length && c < from.length; c++) {
+        copySavedControl(from[c], to[c]);
+      }
+    }
+  });
+
+  // Everything else: copy by id.
+  var controls = content.querySelectorAll("input[id], textarea[id], select[id]");
+  for (var i = 0; i < controls.length; i++) {
+    var control = controls[i];
+    if (control.type === "file" || control.closest("table")) {
+      continue;
+    }
+    // Older saves could hold two fields with one id: prefer the filled one.
+    var matches = saved.querySelectorAll("[id=\"" + control.id + "\"]");
+    var source = matches.length ? matches[0] : null;
+    for (var m = 0; m < matches.length; m++) {
+      var value = savedValue(matches[m]);
+      if (value !== null && value !== "") {
+        source = matches[m];
+        break;
+      }
+    }
+    if (source) {
+      copySavedControl(source, control);
+    }
+  }
+
+  // Max labels, so a tracker that was full is still seen as full.
+  ["health", "knl", "survival-pts"].forEach(function (id) {
+    var label = saved.getElementById(id);
+    if (label) {
+      byId(id).textContent = label.textContent;
+    }
+  });
+
+  // Points bought and EXP earned.
+  function savedCount(id) {
+    var element = saved.getElementById(id);
+    var value = element ? parseInt(element.textContent, 10) : NaN;
+    return isNaN(value) ? null : value;
+  }
+  var expTotal = savedCount("exp-total");
+  if (expTotal !== null && expTotal >= 0) {
+    byId("exp-total").textContent = expTotal;
+  }
+  var attrBought = savedCount("attr-pts-bought");
+  var skillBought = savedCount("skill-pts-bought");
+  if (attrBought === null || skillBought === null) {
+    // Older save: every skill point was bought, and EXP used covers both.
+    skillBought = (savedCount("skill_pts") || 0) + (savedCount("skill_pts_assigned") || 0);
+    attrBought = Math.floor((savedCount("exp-used") || 0) / EXP_PER_POINT) - skillBought;
+  }
+  byId("attr-pts-bought").textContent = atLeastZero(attrBought);
+  byId("skill-pts-bought").textContent = atLeastZero(skillBought);
+
+  // Character art: images only.
+  var savedArt = saved.getElementById("character-art");
+  var art = savedArt ? savedArt.getAttribute("src") : null;
+  if (art && /^data:image\//i.test(art)) {
+    byId("character-art").src = art;
+  }
+
+  // Collapsed sections stay collapsed.
+  var buttons = content.querySelectorAll("button.collapsible[aria-controls]");
+  for (var b = 0; b < buttons.length; b++) {
+    var sectionId = buttons[b].getAttribute("aria-controls");
+    var savedSection = saved.getElementById(sectionId);
+    if (savedSection && savedSection.style.display === "none") {
+      collapseExpand(buttons[b].id, sectionId);
+    }
+  }
+}
 
 function loadCharacterSheet(element) {
-  var file = element.files[0];
-  if (!file) {
+  var file = element.files && element.files[0];
+  element.value = ""; // So the same file can be picked again.
+  if (!file || !confirmLeaveSheet()) {
     return;
   }
   var reader = new FileReader();
-  reader.onload = function(e) {
-    var contents = e.target.result;
-    document.getElementById('content').innerHTML = contents;
+  reader.onload = function (e) {
+    var saved = new DOMParser().parseFromString(e.target.result, "text/html");
+    if (!saved.getElementById("remaining_pts")) {
+      alert("That file isn't a saved Dungeon Lore character sheet.");
+      return;
+    }
+    loadFile("dungeonlore.html", function () {
+      applySavedSheet(saved);
+      initSheet();
+    });
   };
   reader.readAsText(file);
 }
 
+/* Writes every current value into the markup so it's kept in the file. */
+function writeValuesIntoMarkup(container) {
+  var controls = controlsOf(container);
+  for (var i = 0; i < controls.length; i++) {
+    var control = controls[i];
+    var tag = control.tagName.toLowerCase();
+    if (tag === "textarea") {
+      control.textContent = control.value;
+    } else if (tag === "select") {
+      for (var o = 0; o < control.options.length; o++) {
+        if (control.options[o].selected) {
+          control.options[o].setAttribute("selected", "");
+        } else {
+          control.options[o].removeAttribute("selected");
+        }
+      }
+    } else if (control.type !== "file") {
+      control.setAttribute("value", control.value);
+    }
+  }
+}
+
+function fileNamePart(text) {
+  return text.trim().replace(/[^A-Za-z0-9_-]+/g, "_");
+}
 
 function saveCharacterSheet(element) {
-  var characterName = document.getElementById("name").value;
-  characterName = characterName.replace(new RegExp(" ", 'g'), "_");
-  var characterClass = document.getElementById("title").value;
-  characterClass = characterClass.replace(new RegExp(" ", 'g'), "_");
+  var content = byId("content");
+  writeValuesIntoMarkup(content);
 
-  var characterSheet = document.getElementById("content").innerHTML;
-  downloadSheet( characterName + "_" + characterClass + ".html", characterSheet);
+  var name = fileNamePart(byId("name").value);
+  var title = fileNamePart(byId("title").value);
+  var fileName = [name, title].filter(function (part) { return part; }).join("_") || "Dungeon_Lore_Character";
+
+  downloadSheet(fileName + ".html", content.innerHTML);
+  if (typeof setSheetDirty === "function") {
+    setSheetDirty(false);
+  }
 }
 
 function downloadSheet(filename, text) {
-  var dom = document.createElement('a');
-  dom.setAttribute("href", "data:text/html;charset=utf-8," + encodeURIComponent(text));
-  dom.setAttribute("download", filename);
-
-  if (document.createEvent) {
-    var event = document.createEvent('MouseEvents');
-    event.initEvent('click', true, true);
-    dom.dispatchEvent(event);
-  } else {
-    dom.click();
-  }
+  var url = URL.createObjectURL(new Blob([text], { type: "text/html;charset=utf-8" }));
+  var link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
 }
 
 function saveValue(element) {
@@ -510,19 +745,19 @@ function saveValue(element) {
 /* Collapse and Expand Functions */
 
 function collapseExpand(btnName, elementName) {
-  var element = document.getElementById(elementName);
-  var style = window.getComputedStyle(element);
-  var display = style.getPropertyValue('display');
+  var element = byId(elementName);
+  var button = byId(btnName);
+  var hidden = window.getComputedStyle(element).getPropertyValue("display") === "none";
 
-  var nameOfBtn = document.getElementById(btnName).innerHTML
-  nameOfBtn = nameOfBtn.substring(1, nameOfBtn.length-1);
-   if (display === "none") {
+  var name = button.textContent.replace(/^[-+]\s*/, "").replace(/\s*[-+]$/, "");
+  if (hidden) {
     element.style.display = "block";
-    document.getElementById(btnName).innerHTML = "- " + nameOfBtn + " -";
+    button.textContent = "- " + name + " -";
   } else {
-   element.style.display = "none";
-   document.getElementById(btnName).innerHTML = "+ " + nameOfBtn + " +";
- }
+    element.style.display = "none";
+    button.textContent = "+ " + name + " +";
+  }
+  button.setAttribute("aria-expanded", hidden ? "true" : "false");
 }
 
 function loadCharacterArt(element) {
@@ -530,52 +765,26 @@ function loadCharacterArt(element) {
   if (!file) {
     return;
   }
-  var image = document.getElementById('character-art');
+  var image = byId("character-art");
   var reader = new FileReader();
   reader.onload = function readSuccess(evt) {
-      image.src = evt.target.result;
+    image.src = evt.target.result;
   };
   reader.readAsDataURL(file);
 }
 
 /* Dice Emulator Functions */
 
-function rollOneDFour(element) {
-  document.getElementById("1d4").innerHTML = Math.round((Math.random(4) * new Date().getTime()) % 4) + 1;
+function rollDie(sides, labelId) {
+  byId(labelId).textContent = Math.floor(Math.random() * sides) + 1;
 }
 
-function rollOneDFive(element) {
-  document.getElementById("1d5").innerHTML = Math.round((Math.random(5) * new Date().getTime()) % 5) + 1;
-}
-
-function rollOneDSix(element) {
-  document.getElementById("1d6").innerHTML = Math.round((Math.random(6) * new Date().getTime()) % 6) + 1;
-}
-
-function rollOneDSeven(element) {
-  document.getElementById("1d7").innerHTML = Math.round((Math.random(7) * new Date().getTime()) % 7) + 1;
-}
-
-function rollOneDEight(element) {
-  document.getElementById("1d8").innerHTML = Math.round((Math.random(8) * new Date().getTime()) % 8) + 1;
-}
-
-function rollOneDNine(element) {
-  document.getElementById("1d9").innerHTML = Math.round((Math.random(9) * new Date().getTime()) % 9) + 1;
-}
-
-function rollOneDTen(element) {
-  document.getElementById("1d9").innerHTML = Math.round((Math.random(10) * new Date().getTime()) % 10) + 1;
-}
-
-function rollOneDTen(element) {
-  document.getElementById("1d10").innerHTML = Math.round((Math.random(10) * new Date().getTime()) % 10) + 1;
-}
-
-function rollOneDTwelve(element) {
-  document.getElementById("1d12").innerHTML = Math.round((Math.random(12) * new Date().getTime()) % 12) + 1;
-}
-
-function rollOneDTwenty(element) {
-  document.getElementById("1d20").innerHTML = Math.round((Math.random(20) * new Date().getTime()) % 20) + 1;
-}
+function rollOneDFour(element) { rollDie(4, "1d4"); }
+function rollOneDFive(element) { rollDie(5, "1d5"); }
+function rollOneDSix(element) { rollDie(6, "1d6"); }
+function rollOneDSeven(element) { rollDie(7, "1d7"); }
+function rollOneDEight(element) { rollDie(8, "1d8"); }
+function rollOneDNine(element) { rollDie(9, "1d9"); }
+function rollOneDTen(element) { rollDie(10, "1d10"); }
+function rollOneDTwelve(element) { rollDie(12, "1d12"); }
+function rollOneDTwenty(element) { rollDie(20, "1d20"); }

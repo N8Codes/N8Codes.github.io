@@ -1,12 +1,11 @@
 <link rel="stylesheet" href="dungeonlorerules.style.css">
-<script src="dungeonlore.script.js"></script>
 
 <div class="version-info">
   <label>Dungeon Lore Rules V3.0.1 - 2018-2019</label>
 </div>
 <div class="mygm-border">
 
-  <button id="dice-btn" class="collapsible" onclick="collapseExpand('dice-btn', 'dice')">- Dice Emulator -</button>
+  <button id="dice-btn" class="collapsible" onclick="collapseExpand('dice-btn', 'dice')" aria-expanded="true" aria-controls="dice">- Dice Emulator -</button>
   <div id="dice" class="dice">
     <div>
       <label id="1d4">1d4</label>
@@ -46,11 +45,11 @@
     </div>
   </div>
 
-  <button id="action-rules-btn" class="collapsible" onclick="collapseExpand('action-rules-btn', 'action-rules')">- Character Action Rules -</button>
+  <button id="action-rules-btn" class="collapsible" onclick="collapseExpand('action-rules-btn', 'action-rules')" aria-expanded="true" aria-controls="action-rules">- Character Action Rules -</button>
   <div id="action-rules" class="action-rules">
     <label class="title">Character Setup</label>
     <label class="info">Each character is required to choose a backstory with a goal in mind for their character.
-    Each player will start with 50 experience points which they can spend on attribute points, abilities, or skills for 10 experience points.
+    Each player will start with 35 attribute points to spread across their seven attributes, which each begin at 5, plus 50 experience points which they can spend on attribute points, abilities, or skills for 10 experience points each.
     No attribute may go higher than 15 at character creation, or lower than 5, unless bought with experience points.
     Dice checks are determined by two people rolling a 1d20 with their conflicting attributes subtracted from each other. 
     No player takes negative scores on their rolls, only the player with the higher attributes receives a bonus to their roll.
@@ -110,7 +109,7 @@
     </label>
   </div>
 
-  <button id="attribute-rules-btn" class="collapsible" onclick="collapseExpand('attribute-rules-btn', 'attribute-rules')">- Attribute Rules -</button>
+  <button id="attribute-rules-btn" class="collapsible" onclick="collapseExpand('attribute-rules-btn', 'attribute-rules')" aria-expanded="true" aria-controls="attribute-rules">- Attribute Rules -</button>
   <div id="attribute-rules" class="gm-rules">
     <label>Accuracy (ACC) is used to determine hit success with all weapons or spells.</label>
     <label>Agility (AGI) is used to determine movement per turn, actions per turn, weapon requirements, discrete actions, and defense.</label>
@@ -121,21 +120,21 @@
     <label>Willpower (WILL) is used to determine ability to live without food or water, cast spells, and deal with stress to maintain stress.</label>
   </div>
 
-  <button id="trait-rules-btn" class="collapsible" onclick="collapseExpand('trait-rules-btn', 'trait-rules')">- Trait Rules -</button>
+  <button id="trait-rules-btn" class="collapsible" onclick="collapseExpand('trait-rules-btn', 'trait-rules')" aria-expanded="true" aria-controls="trait-rules">- Trait Rules -</button>
   <div id="trait-rules" class="gm-rules">
     <label>Weight Capacity is calculated by taking the character's Strength (STR) multiplied by 20 lb.</label>
     <label>A character's Body Weight is calculated by taking the character's Strength (STR) multiplied by 10 lb plus 30lb.</label>
-    <label>Skill points are calculated by taking the character's Wisdom (WIS). All weapons, armor, devices, tools, and spells require a certain level skill to use.
-      A character is unable to perform actions if no skill points are allocated, for every skill point you assign you receive a plus one to any roll involoving that skil.</label>
-    <label>Knowledge is increased every 5 Wisdom (WIS) points. One Knowledge slot allows for the character to remember a spell or technique without using a scroll or book.</label>
+    <label>Skill points are calculated by taking the character's Intelligence (INT), one skill point per INT point, plus any skill points bought with experience points. All weapons, armor, devices, tools, and spells require a certain level skill to use.
+      A character is unable to perform actions if no skill points are allocated, for every skill point you assign you receive a plus one to any roll involving that skill.</label>
+    <label>Knowledge is increased every 5 Intelligence (INT) points. One Knowledge slot allows for the character to remember a spell or technique without using a scroll or book.</label>
     <label>Speed will increase every 4 Agility (AGI) points. Movement is equivalent to Speed, an Action Point used reduces the movement that turn by one point.</label>
     <label>Action Points will increase every 20 Agility (AGI) points. One Action Point is used per action meaning an attack, item use, environment interaction, or spell cast.</label>
-    <label>Quick Action Points will increase every 15 to 20 Agility (AGI) points. One Action Point is used per action meaning select items, environment interactions, or select spells.</label>
+    <label>Quick Action Points will increase every 15 Agility (AGI) points. One Quick Action Point is used per action meaning select items, environment interactions, or select spells.</label>
     <label>Survival Points are calculated by taking the player's Willpower (WILL) and dividing by 3. One Survival Point is equal to one day (24h) with no penalty to perception, health, hunger, or thirst. Can also be used for additional saving throws.</label>
     <label>If a character's Stress level has exceeded their maximum that character will roll to take damage based on the amount over the limit. 1d4 damage for each point over the limit.</label>
   </div>
 
-  <button id="ancestry-btn" class="collapsible" onclick="collapseExpand('ancestry-btn', 'ancestry')">- Ancestry -</button>
+  <button id="ancestry-btn" class="collapsible" onclick="collapseExpand('ancestry-btn', 'ancestry')" aria-expanded="true" aria-controls="ancestry">- Ancestry -</button>
   <div id="ancestry" class="ancestries">
     <div class="ancestry">
       <label>Dark Elf</label>
@@ -231,7 +230,7 @@
     </div>
   </div>
 
-  <button id="class-btn" class="collapsible" onclick="collapseExpand('class-btn', 'classes')">- Classes -</button>
+  <button id="class-btn" class="collapsible" onclick="collapseExpand('class-btn', 'classes')" aria-expanded="true" aria-controls="classes">- Classes -</button>
   <div id="classes" class="classes">
     <div class="class">
       <label>Bard</label>
@@ -252,12 +251,12 @@
     <div class="class">
       <label>Monk</label>
       <p>Monks are spirit guides who rely on their physical strength, agility, and spiritual inclination to survive.</p>
-      <p>Skill Modifiers: +1 to Brawl, Communing Arts, Culinary Arts, Grapple, Psiconics, Cryokinesis, or Shamanism</p>
+      <p>Skill Modifiers: +1 to Brawl, Communing Arts, Culinary Arts, Grapple, Psionics, Cryokinesis, or Shamanism</p>
     </div>
     <div class="class">
       <label>Rogue</label>
       <p>Rogues are crafty, cunning, and strategic fighters relying on their agility, intelligence, and skill to win battles, games, or just survive.</p>
-      <p>Skill Modifiers: +1 to Acrobatics, Archery, Blade, Brawl, Grapple, Staff, Slight of Hand, Sneak, or Whip</p>
+      <p>Skill Modifiers: +1 to Acrobatics, Archery, Blade, Brawl, Grapple, Staff, Sleight of Hand, Sneak, or Whip</p>
     </div>
     <div class="class">
       <label>Warrior</label>
@@ -266,7 +265,7 @@
     </div>
   </div>
 
-  <button id="prestige-class-btn" class="collapsible" onclick="collapseExpand('prestige-class-btn', 'prestige-classes')">+ Prestige Classes +</button>
+  <button id="prestige-class-btn" class="collapsible" onclick="collapseExpand('prestige-class-btn', 'prestige-classes')" aria-expanded="false" aria-controls="prestige-classes">+ Prestige Classes +</button>
   <div id="prestige-classes" class="classes" style="display: none;">
     <div class="class">
       <label>Alchemist</label>
@@ -325,12 +324,12 @@
     <div class="class">
       <label>Fighter</label>
       <p>Fighters are hardened, trained, killers who fight for honor, glory, and wealth.</p>
-      <p>Additional Skill Modifiers: +1 to Acrobatics, Atheltics and +1 to Blade, Blunt, Brawl, Grapple, or Staff</p>
+      <p>Additional Skill Modifiers: +1 to Acrobatics, Athletics and +1 to Blade, Blunt, Brawl, Grapple, or Staff</p>
     </div>
     <div class="class">
       <label>Knight</label>
       <p>Knights are trained and skilled protectors of the land who fight for honor.</p>
-      <p>Additional Skill Modifiers: +1 to Atheltics, Lore, or Ride and +1 to Blade, Blunt, or Staff</p>
+      <p>Additional Skill Modifiers: +1 to Athletics, Lore, or Ride and +1 to Blade, Blunt, or Staff</p>
     </div>
     <div class="class">
       <label>Necromancer</label>
@@ -341,7 +340,7 @@
       <label>Paladin</label>
       <p>Paldins are spiritual warriors who fight under the name of a devine deity.
       They rely on their strength, agility, and spiritual prowess to win battles and survive.</p>
-      <p>Skill Modifiers: +1 to Atheltics, Blade, Block, Blunt, Brawl, or Staff and +1 to Communing Arts, Medicine, or Ride</p>
+      <p>Skill Modifiers: +1 to Athletics, Blade, Block, Blunt, Brawl, or Staff and +1 to Communing Arts, Medicine, or Ride</p>
     </div>
     <div class="class">
       <label>Performer</label>
@@ -351,13 +350,13 @@
     </div>
     <div class="class">
       <label>Psiconic</label>
-      <p>Psiconics are magic users that rely on their spiritual ability to create illusions, move objects, and telepathically communicate.</p>
-      <p>Skill Modifiers: +1 to Lore and Psiconics </p>
+      <p>Psionics are magic users that rely on their spiritual ability to create illusions, move objects, and telepathically communicate.</p>
+      <p>Skill Modifiers: +1 to Lore and Psionics </p>
     </div>
     <div class="class">
       <label>Priest/Sage</label>
       <p>Monks and Priests are spiritual guides who rely on their physical strength, agility, and spiritual inclination to survive.</p>
-      <p>Skill Modifiers: +1 to Communing Arts, Medicine, Lore, or Psiconics and +1 to Deception, Persuasion, or Haggle</p>
+      <p>Skill Modifiers: +1 to Communing Arts, Medicine, Lore, or Psionics and +1 to Deception, Persuasion, or Haggle</p>
     </div>
     <div class="class">
       <label>Pyromancer</label>
@@ -384,12 +383,12 @@
       <label>Templar</label>
       <p>Templars are spiritual warriors who fight under the name of a devine deity, lord, or spiritual way.
       They rely on their strength, agility, and spiritual prowess to win battles and survive.</p>
-      <p>Skill Modifiers: +1 to Atheltics, Blade, Block, Blunt, Ride, or Staff and +1 to Lore, Psiconics, or Shamanism</p>
+      <p>Skill Modifiers: +1 to Athletics, Blade, Block, Blunt, Ride, or Staff and +1 to Lore, Psionics, or Shamanism</p>
     </div>
     <div class="class">
       <label>Thief</label>
       <p>Thieves are cunning, agile, sneaky individuals relying on their agility, intelligence, and skill to win battles and survive.</p>
-      <p>Skill Modifiers: +1 to Slight of Hand and Sneak</p>
+      <p>Skill Modifiers: +1 to Sleight of Hand and Sneak</p>
     </div>
     <div class="class">
       <label>Trader</label>
@@ -408,10 +407,10 @@
     </div>
   </div>
 
-  <button id="weapons-btn" class="collapsible" onclick="collapseExpand('weapons-btn', 'weapons')">+ Weapons +</button>
+  <button id="weapons-btn" class="collapsible" onclick="collapseExpand('weapons-btn', 'weapons')" aria-expanded="false" aria-controls="weapons">+ Weapons +</button>
   <div id="weapons" class="weapons" style="display: none;">
 
-    <button id="blunt-weapons-btn" class="collapsible" onclick="collapseExpand('blunt-weapons-btn', 'blunt-weapons')">- Blunt Weapons -</button>
+    <button id="blunt-weapons-btn" class="collapsible" onclick="collapseExpand('blunt-weapons-btn', 'blunt-weapons')" aria-expanded="true" aria-controls="blunt-weapons">- Blunt Weapons -</button>
     <div id="blunt-weapons" class="weapons">
       <div class="weapon">
         <div class="equipment-detail">
@@ -857,7 +856,7 @@
       </div>
     </div>
 
-    <button id="blade-weapons-btn" class="collapsible" onclick="collapseExpand('blade-weapons-btn', 'blade-weapons')">- Blade Weapons -</button>
+    <button id="blade-weapons-btn" class="collapsible" onclick="collapseExpand('blade-weapons-btn', 'blade-weapons')" aria-expanded="true" aria-controls="blade-weapons">- Blade Weapons -</button>
     <div id="blade-weapons" class="weapons">
       <div class="weapon">
         <div class="equipment-detail">
@@ -1473,7 +1472,7 @@
       </div>
     </div>
 
-    <button id="ranged-weapons-btn" class="collapsible" onclick="collapseExpand('ranged-weapons-btn', 'ranged-weapons')">- Ranged Weapons -</button>
+    <button id="ranged-weapons-btn" class="collapsible" onclick="collapseExpand('ranged-weapons-btn', 'ranged-weapons')" aria-expanded="true" aria-controls="ranged-weapons">- Ranged Weapons -</button>
     <div id="ranged-weapons" class="weapons">
       <div class="weapon">
         <div class="equipment-detail">
@@ -1681,7 +1680,7 @@
       </div>
     </div>
 
-    <button id="staff-weapons-btn" class="collapsible" onclick="collapseExpand('staff-weapons-btn', 'staff-weapons')">- Staff Weapons -</button>
+    <button id="staff-weapons-btn" class="collapsible" onclick="collapseExpand('staff-weapons-btn', 'staff-weapons')" aria-expanded="true" aria-controls="staff-weapons">- Staff Weapons -</button>
     <div id="staff-weapons" class="weapons">
       <div class="weapon">
         <div class="equipment-detail">
@@ -1991,7 +1990,7 @@
       </div>
     </div>
 
-    <button id="catalyst-weapons-btn" class="collapsible" onclick="collapseExpand('catalyst-weapons-btn', 'catalyst-weapons')">- Catalyst Weapons -</button>
+    <button id="catalyst-weapons-btn" class="collapsible" onclick="collapseExpand('catalyst-weapons-btn', 'catalyst-weapons')" aria-expanded="true" aria-controls="catalyst-weapons">- Catalyst Weapons -</button>
     <div id="catalyst-weapons" class="weapons">
       <div class="weapon">
         <div class="equipment-detail">
@@ -2710,7 +2709,7 @@
     </div>
 
 
-    <button id="martial-weapons-btn" class="collapsible" onclick="collapseExpand('martial-weapons-btn', 'martial-weapons')">- Martial Arts Weapons -</button>
+    <button id="martial-weapons-btn" class="collapsible" onclick="collapseExpand('martial-weapons-btn', 'martial-weapons')" aria-expanded="true" aria-controls="martial-weapons">- Martial Arts Weapons -</button>
     <div id="martial-weapons" class="weapons">
       <div class="weapon">
         <div class="equipment-detail">
@@ -2920,7 +2919,7 @@
 
   </div>
 
-  <button id="items-sets-btn" class="collapsible" onclick="collapseExpand('items-sets-btn', 'items-sets')">+ Items +</button>
+  <button id="items-sets-btn" class="collapsible" onclick="collapseExpand('items-sets-btn', 'items-sets')" aria-expanded="false" aria-controls="items-sets">+ Items +</button>
   <div id="items-sets" class="armor-sets" style="display: none;">
       <div class="armor">
         <div class="equipment-detail">
@@ -3783,10 +3782,10 @@
 
   </div>
 
-  <button id="armor-sets-btn" class="collapsible" onclick="collapseExpand('armor-sets-btn', 'armor-sets')">+ Armor +</button>
+  <button id="armor-sets-btn" class="collapsible" onclick="collapseExpand('armor-sets-btn', 'armor-sets')" aria-expanded="false" aria-controls="armor-sets">+ Armor +</button>
   <div id="armor-sets" class="armor-sets" style="display: none;">
 
-    <button id="robes-btn" class="collapsible" onclick="collapseExpand('robes-btn', 'robes')">- Robes -</button>
+    <button id="robes-btn" class="collapsible" onclick="collapseExpand('robes-btn', 'robes')" aria-expanded="true" aria-controls="robes">- Robes -</button>
     <div id="robes" class="armor-sets">
       <div class="armor">
         <div class="equipment-detail">
@@ -3833,7 +3832,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Resistance: </label>
-          <label>Arcane, Pyromancy, and Psiconics resistence plus 2</label>
+          <label>Arcane, Pyromancy, and Psionics resistence plus 2</label>
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Weight: </label>
@@ -3867,7 +3866,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Resistance: </label>
-          <label>Arcane, Pyromancy, and Psiconics resistence plus 4</label>
+          <label>Arcane, Pyromancy, and Psionics resistence plus 4</label>
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Weight: </label>
@@ -3901,7 +3900,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Resistance: </label>
-          <label>Arcane, Pyromancy, and Psiconics resistence plus 4</label>
+          <label>Arcane, Pyromancy, and Psionics resistence plus 4</label>
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Weight: </label>
@@ -3935,7 +3934,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Resistance: </label>
-          <label>Arcane, Pyromancy, and Psiconics resistence plus 8</label>
+          <label>Arcane, Pyromancy, and Psionics resistence plus 8</label>
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Weight: </label>
@@ -3969,7 +3968,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Resistance: </label>
-          <label>Arcane, Pyromancy, and Psiconics resistence plus 6</label>
+          <label>Arcane, Pyromancy, and Psionics resistence plus 6</label>
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Weight: </label>
@@ -4003,7 +4002,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Resistance: </label>
-          <label>Arcane, Pyromancy, Void, and Psiconics resistence plus 4</label>
+          <label>Arcane, Pyromancy, Void, and Psionics resistence plus 4</label>
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Weight: </label>
@@ -4037,7 +4036,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Resistance: </label>
-          <label>Void and Psiconics resistence plus 3</label>
+          <label>Void and Psionics resistence plus 3</label>
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Weight: </label>
@@ -4130,7 +4129,7 @@
       </div>
     </div>
 
-    <button id="leather-armor-btn" class="collapsible" onclick="collapseExpand('leather-armor-btn', 'leather-armor')">- Leather Armor -</button>
+    <button id="leather-armor-btn" class="collapsible" onclick="collapseExpand('leather-armor-btn', 'leather-armor')" aria-expanded="true" aria-controls="leather-armor">- Leather Armor -</button>
     <div id="leather-armor" class="armor-sets">
       <div class="armor">
         <div class="equipment-detail">
@@ -4585,7 +4584,7 @@
       </div>
     </div>
 
-    <button id="bone-armor-btn" class="collapsible" onclick="collapseExpand('bone-armor-btn', 'bone-armor')">- Bone Armor -</button>
+    <button id="bone-armor-btn" class="collapsible" onclick="collapseExpand('bone-armor-btn', 'bone-armor')" aria-expanded="true" aria-controls="bone-armor">- Bone Armor -</button>
     <div id="bone-armor" class="armor-sets">
       <div class="armor">
         <div class="equipment-detail">
@@ -4949,7 +4948,7 @@
       </div>
     </div>
 
-    <button id="iron-armor-btn" class="collapsible" onclick="collapseExpand('iron-armor-btn', 'iron-armor')">- Iron Armor -</button>
+    <button id="iron-armor-btn" class="collapsible" onclick="collapseExpand('iron-armor-btn', 'iron-armor')" aria-expanded="true" aria-controls="iron-armor">- Iron Armor -</button>
     <div id="iron-armor" class="armor-sets">
       <div class="armor">
         <div class="equipment-detail">
@@ -5313,7 +5312,7 @@
       </div>
     </div>
 
-    <button id="steel-armor-btn" class="collapsible" onclick="collapseExpand('steel-armor-btn', 'steel-armor')">- Steel Armor -</button>
+    <button id="steel-armor-btn" class="collapsible" onclick="collapseExpand('steel-armor-btn', 'steel-armor')" aria-expanded="true" aria-controls="steel-armor">- Steel Armor -</button>
     <div id="steel-armor" class="armor-sets">
       <div class="armor">
         <div class="equipment-detail">
@@ -5677,7 +5676,7 @@
       </div>
     </div>
 
-    <button id="enchanted-armor-btn" class="collapsible" onclick="collapseExpand('enchanted-armor-btn', 'enchanted-armor')">- Enchanted Armor -</button>
+    <button id="enchanted-armor-btn" class="collapsible" onclick="collapseExpand('enchanted-armor-btn', 'enchanted-armor')" aria-expanded="true" aria-controls="enchanted-armor">- Enchanted Armor -</button>
     <div id="enchanted-armor" class="armor-sets">
       <div class="armor">
         <div class="equipment-detail">
@@ -6127,7 +6126,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Effect: </label>
-          <label>Resistance to Void, Necromancy, and Psiconics of 1</label>
+          <label>Resistance to Void, Necromancy, and Psionics of 1</label>
         </div>
       </div>
       <div class="armor">
@@ -6157,7 +6156,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Effect: </label>
-          <label>Resistance to Void, Necromancy, and Psiconics of 2</label>
+          <label>Resistance to Void, Necromancy, and Psionics of 2</label>
         </div>
       </div>
       <div class="armor">
@@ -6187,7 +6186,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Effect: </label>
-          <label>Resistance to Void, Necromancy, and Psiconics of 1</label>
+          <label>Resistance to Void, Necromancy, and Psionics of 1</label>
         </div>
       </div>
       <div class="armor">
@@ -6217,7 +6216,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Effect: </label>
-          <label>Resistance to Void, Necromancy, and Psiconics of 2</label>
+          <label>Resistance to Void, Necromancy, and Psionics of 2</label>
         </div>
       </div>
       <div class="armor">
@@ -6247,7 +6246,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Effect: </label>
-          <label>Resistance to Void, Necromancy, and Psiconics of 1</label>
+          <label>Resistance to Void, Necromancy, and Psionics of 1</label>
         </div>
       </div>
       <div class="armor">
@@ -6277,7 +6276,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Effect: </label>
-          <label>Resistance to Void, Necromancy, and Psiconics of 2</label>
+          <label>Resistance to Void, Necromancy, and Psionics of 2</label>
         </div>
       </div>
       <div class="armor">
@@ -6307,7 +6306,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Effect: </label>
-          <label>Resistance to Void, Necromancy, and Psiconics of 1</label>
+          <label>Resistance to Void, Necromancy, and Psionics of 1</label>
         </div>
       </div>
       <div class="armor">
@@ -6337,7 +6336,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Effect: </label>
-          <label>Resistance to Void, Necromancy, and Psiconics of 2</label>
+          <label>Resistance to Void, Necromancy, and Psionics of 2</label>
         </div>
       </div>
       <div class="armor">
@@ -6367,7 +6366,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Effect: </label>
-          <label>Resistance to Void, Necromancy, and Psiconics of 1</label>
+          <label>Resistance to Void, Necromancy, and Psionics of 1</label>
         </div>
       </div>
       <div class="armor">
@@ -6397,7 +6396,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Effect: </label>
-          <label>Resistance to Void, Necromancy, and Psiconics of 2</label>
+          <label>Resistance to Void, Necromancy, and Psionics of 2</label>
         </div>
       </div>
       <div class="armor">
@@ -6427,7 +6426,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Effect: </label>
-          <label>Resistance to Void, Necromancy, and Psiconics of 1</label>
+          <label>Resistance to Void, Necromancy, and Psionics of 1</label>
         </div>
       </div>
       <div class="armor">
@@ -6457,7 +6456,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Effect: </label>
-          <label>Resistance to Void, Necromancy, and Psiconics of 2</label>
+          <label>Resistance to Void, Necromancy, and Psionics of 2</label>
         </div>
       </div>
       <div class="armor">
@@ -6487,7 +6486,7 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Effect: </label>
-          <label>Resistance to Void, Necromancy, and Psiconics of 2</label>
+          <label>Resistance to Void, Necromancy, and Psionics of 2</label>
         </div>
       </div>
       <div class="armor">
@@ -6517,12 +6516,12 @@
         </div>
         <div class="equipment-detail">
           <label class="equipment-label">Effect: </label>
-          <label>Resistance to Void, Necromancy, and Psiconics of 2</label>
+          <label>Resistance to Void, Necromancy, and Psionics of 2</label>
         </div>
       </div>
     </div>
 
-    <button id="synthetic-armor-btn" class="collapsible" onclick="collapseExpand('synthetic-armor-btn', 'synthetic-armor')">- Synthetic Armor -</button>
+    <button id="synthetic-armor-btn" class="collapsible" onclick="collapseExpand('synthetic-armor-btn', 'synthetic-armor')" aria-expanded="true" aria-controls="synthetic-armor">- Synthetic Armor -</button>
     <div id="synthetic-armor" class="armor-sets">
       <div class="armor">
         <div class="equipment-detail">
@@ -6934,7 +6933,7 @@
       </div>
     </div>
 
-    <button id="shields-armor-btn" class="collapsible" onclick="collapseExpand('shields-armor-btn', 'shields-armor')">- Shields -</button>
+    <button id="shields-armor-btn" class="collapsible" onclick="collapseExpand('shields-armor-btn', 'shields-armor')" aria-expanded="true" aria-controls="shields-armor">- Shields -</button>
     <div id="shields-armor" class="armor-sets">
       <div class="armor">
         <div class="equipment-detail">
@@ -7209,10 +7208,10 @@
     </div>
   </div>
 
-  <button id="sorcery-btn" class="collapsible" onclick="collapseExpand('sorcery-btn', 'sorcery')">+ Sorcery +</button>
+  <button id="sorcery-btn" class="collapsible" onclick="collapseExpand('sorcery-btn', 'sorcery')" aria-expanded="false" aria-controls="sorcery">+ Sorcery +</button>
   <div id="sorcery" class="sorceries" style="display: none;">
 
-    <button id="arcane-sorcery-btn" class="collapsible" onclick="collapseExpand('arcane-sorcery-btn', 'arcane-sorcery')">- Arcane Sorcery -</button>
+    <button id="arcane-sorcery-btn" class="collapsible" onclick="collapseExpand('arcane-sorcery-btn', 'arcane-sorcery')" aria-expanded="true" aria-controls="arcane-sorcery">- Arcane Sorcery -</button>
     <div id="arcane-sorcery" >
       <div class="sorcery">
         <div class="equipment-detail">
@@ -7554,7 +7553,7 @@
       </div>
     </div>
 
-    <button id="communing-arts-btn" class="collapsible" onclick="collapseExpand('communing-arts-btn', 'communing-arts')">- Communing Arts -</button>
+    <button id="communing-arts-btn" class="collapsible" onclick="collapseExpand('communing-arts-btn', 'communing-arts')" aria-expanded="true" aria-controls="communing-arts">- Communing Arts -</button>
     <div id="communing-arts" >
       <div class="sorcery">
         <div class="equipment-detail">
@@ -7948,7 +7947,7 @@
       </div>
     </div>
 
-    <button id="cryokinesis-btn" class="collapsible" onclick="collapseExpand('cryokinesis-btn', 'cryokinesis')">- Cryokinesis -</button>
+    <button id="cryokinesis-btn" class="collapsible" onclick="collapseExpand('cryokinesis-btn', 'cryokinesis')" aria-expanded="true" aria-controls="cryokinesis">- Cryokinesis -</button>
     <div id="cryokinesis" >
       <div class="sorcery">
         <div class="equipment-detail">
@@ -8264,7 +8263,7 @@
       </div>
     </div>
 
-    <button id="psionics-btn" class="collapsible" onclick="collapseExpand('psionics-btn', 'psionics')">- Psionics -</button>
+    <button id="psionics-btn" class="collapsible" onclick="collapseExpand('psionics-btn', 'psionics')" aria-expanded="true" aria-controls="psionics">- Psionics -</button>
     <div id="psionics" >
       <div class="sorcery">
         <div class="equipment-detail">
@@ -8684,7 +8683,7 @@
       </div>
     </div>
 
-    <button id="pyromancy-btn" class="collapsible" onclick="collapseExpand('pyromancy-btn', 'pyromancy')">- Pyromancy -</button>
+    <button id="pyromancy-btn" class="collapsible" onclick="collapseExpand('pyromancy-btn', 'pyromancy')" aria-expanded="true" aria-controls="pyromancy">- Pyromancy -</button>
     <div id="pyromancy" >
       <div class="sorcery">
         <div class="equipment-detail">
@@ -9000,7 +8999,7 @@
       </div>
     </div>
 
-    <button id="magnemancy-btn" class="collapsible" onclick="collapseExpand('magnemancy-btn', 'magnemancy')">- Magnemancy -</button>
+    <button id="magnemancy-btn" class="collapsible" onclick="collapseExpand('magnemancy-btn', 'magnemancy')" aria-expanded="true" aria-controls="magnemancy">- Magnemancy -</button>
     <div id="magnemancy" >
       <div class="sorcery">
         <div class="equipment-detail">
@@ -9238,7 +9237,7 @@
       </div>
     </div>
 
-    <button id="necromancy-btn" class="collapsible" onclick="collapseExpand('necromancy-btn', 'necromancy')">- Necromancy -</button>
+    <button id="necromancy-btn" class="collapsible" onclick="collapseExpand('necromancy-btn', 'necromancy')" aria-expanded="true" aria-controls="necromancy">- Necromancy -</button>
     <div id="necromancy" >
       <div class="sorcery">
         <div class="equipment-detail">
@@ -9606,7 +9605,7 @@
       </div>
     </div>
 
-    <button id="shamanism-btn" class="collapsible" onclick="collapseExpand('shamanism-btn', 'shamanism')">- Shamanism -</button>
+    <button id="shamanism-btn" class="collapsible" onclick="collapseExpand('shamanism-btn', 'shamanism')" aria-expanded="true" aria-controls="shamanism">- Shamanism -</button>
     <div id="shamanism" >
       <div class="sorcery">
         <div class="equipment-detail">
@@ -9870,7 +9869,7 @@
       </div>
     </div>
 
-    <button id="void-sorcery-btn" class="collapsible" onclick="collapseExpand('void-sorcery-btn', 'void-sorcery')">- Void Sorcery -</button>
+    <button id="void-sorcery-btn" class="collapsible" onclick="collapseExpand('void-sorcery-btn', 'void-sorcery')" aria-expanded="true" aria-controls="void-sorcery">- Void Sorcery -</button>
     <div id="void-sorcery" >
       <div class="sorcery">
         <div class="equipment-detail">

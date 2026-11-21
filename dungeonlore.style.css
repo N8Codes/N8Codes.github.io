@@ -526,3 +526,16 @@
     font-size: 0.75em;
   }
 }
+
+/* Messages explaining a refused or corrected value */
+
+.sheet-msg {
+  clear: both;
+  margin: 0.25em 0;
+  font-weight: bold;
+  color: #b91c1c; /* red-700: about 6.5:1 on white, above WCAG's 4.5:1 */
+}
+
+.sheet-msg:empty {
+  display: none;
+}
