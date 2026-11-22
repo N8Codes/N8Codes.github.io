@@ -1,0 +1,115 @@
+// Paladin, from the 3.5 System Reference Document (Open Game Content, OGL 1.0a): Classes II, Paladin.
+export default {
+  id: "paladin",
+  name: "Paladin",
+  cite: "Classes II, Paladin",
+  alignment: { allowed: ["Lawful Good"], text: "Lawful good" },
+  hitDie: 10,
+  bab: "good",
+  saves: { fort: "good", ref: "poor", will: "poor" },
+  skillPoints: 2, // "(2 + Int modifier) x4" at 1st level, "2 + Int modifier" after
+  classSkills: ["concentration", "craft", "diplomacy", "handle-animal", "heal", "knowledge-nobility", "knowledge-religion",
+    "profession", "ride", "sense-motive"],
+  proficiencies: {
+    simple: true, martial: true, weapons: [],
+    armor: ["light", "medium", "heavy"], shields: "no-tower",
+    text: "All simple and martial weapons, all types of armor (heavy, medium, and light), and shields (except tower shields).",
+  },
+  // Table: The Paladin. bab is the first (highest) attack bonus of the row.
+  table: [
+    { bab: 1, fort: 2, ref: 0, will: 0, special: ["Aura of good", "Detect evil", "Smite evil 1/day"] },
+    { bab: 2, fort: 3, ref: 0, will: 0, special: ["Divine grace", "Lay on hands"] },
+    { bab: 3, fort: 3, ref: 1, will: 1, special: ["Aura of courage", "Divine health"] },
+    { bab: 4, fort: 4, ref: 1, will: 1, special: ["Turn undead"] },
+    { bab: 5, fort: 4, ref: 1, will: 1, special: ["Smite evil 2/day", "Special mount"] },
+    { bab: 6, fort: 5, ref: 2, will: 2, special: ["Remove disease 1/week"] },
+    { bab: 7, fort: 5, ref: 2, will: 2, special: [] },
+    { bab: 8, fort: 6, ref: 2, will: 2, special: [] },
+    { bab: 9, fort: 6, ref: 3, will: 3, special: ["Remove disease 2/week"] },
+    { bab: 10, fort: 7, ref: 3, will: 3, special: ["Smite evil 3/day"] },
+    { bab: 11, fort: 7, ref: 3, will: 3, special: [] },
+    { bab: 12, fort: 8, ref: 4, will: 4, special: ["Remove disease 3/week"] },
+    { bab: 13, fort: 8, ref: 4, will: 4, special: [] },
+    { bab: 14, fort: 9, ref: 4, will: 4, special: [] },
+    { bab: 15, fort: 9, ref: 5, will: 5, special: ["Remove disease 4/week", "Smite evil 4/day"] },
+    { bab: 16, fort: 10, ref: 5, will: 5, special: [] },
+    { bab: 17, fort: 10, ref: 5, will: 5, special: [] },
+    { bab: 18, fort: 11, ref: 6, will: 6, special: ["Remove disease 5/week"] },
+    { bab: 19, fort: 11, ref: 6, will: 6, special: [] },
+    { bab: 20, fort: 12, ref: 6, will: 6, special: ["Smite evil 5/day"] },
+  ],
+  spells: {
+    ability: "wis", kind: "divine", prepares: true,
+    casterLevel: "half", // "Through 3rd level, a paladin has no caster level. At 4th level and higher, her caster level is one-half her paladin level."
+    // Table: The Paladin, Spells per Day (columns 1st–4th only; no 0-level column).
+    perDay: [
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, 0, null, null, null, null, null, null, null, null],
+      [null, 0, null, null, null, null, null, null, null, null],
+      [null, 1, null, null, null, null, null, null, null, null],
+      [null, 1, null, null, null, null, null, null, null, null],
+      [null, 1, 0, null, null, null, null, null, null, null],
+      [null, 1, 0, null, null, null, null, null, null, null],
+      [null, 1, 1, null, null, null, null, null, null, null],
+      [null, 1, 1, 0, null, null, null, null, null, null],
+      [null, 1, 1, 1, null, null, null, null, null, null],
+      [null, 1, 1, 1, null, null, null, null, null, null],
+      [null, 2, 1, 1, 0, null, null, null, null, null],
+      [null, 2, 1, 1, 1, null, null, null, null, null],
+      [null, 2, 2, 1, 1, null, null, null, null, null],
+      [null, 2, 2, 2, 1, null, null, null, null, null],
+      [null, 3, 2, 2, 1, null, null, null, null, null],
+      [null, 3, 3, 3, 2, null, null, null, null, null],
+      [null, 3, 3, 3, 3, null, null, null, null, null],
+    ],
+    known: null,
+    cite: "Classes II, Table: The Paladin; Paladin, Spells",
+    notes: [
+      "Spells begin at 4th level; through 3rd level a paladin has no caster level.",
+      "Where the table shows 0, the paladin gets only the bonus spells her Wisdom score grants for that spell level.",
+      "No domain spells or granted powers, and no spontaneous cure spells.",
+    ],
+  },
+  bonusFeats: [],
+  grantedFeats: [],
+  resources: [
+    // "At 5th level, and at every five levels thereafter, the paladin may smite evil one additional time per day … a maximum of five times per day at 20th level."
+    { id: "smite-evil", name: "Smite evil", per: "day", fromLevel: 1,
+      uses: { byLevel: [1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5] }, cite: "Classes II, Paladin, Smite Evil" },
+    // "Each day she can heal a total number of hit points of damage equal to her paladin level x her Charisma bonus."
+    { id: "lay-on-hands", name: "Lay on hands (hit points)", per: "day", fromLevel: 2,
+      uses: { ability: "cha", timesClassLevel: true }, cite: "Classes II, Paladin, Lay on Hands" },
+    // "a number of times per day equal to 3 + her Charisma modifier"
+    { id: "turn-undead", name: "Turn undead", per: "day", fromLevel: 4,
+      uses: { base: 3, ability: "cha" }, cite: "Classes II, Paladin, Turn Undead" },
+    // "once per week … one additional time per week for every three levels after 6th"
+    { id: "remove-disease", name: "Remove disease", per: "week", fromLevel: 6,
+      uses: { byLevel: [0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5] }, cite: "Classes II, Paladin, Remove Disease" },
+  ],
+  choices: [
+    { id: "special-mount", level: 5, kind: "text", count: 1, label: "Special mount", cite: "Classes II, Paladin, Special Mount; The Paladin's Mount" },
+  ],
+  effects: [
+    // "At 2nd level, a paladin gains a bonus equal to her Charisma bonus (if any) on all saving throws."
+    { kind: "save-ability", ability: "cha", fromLevel: 2, cite: "Classes II, Paladin, Divine Grace" },
+  ],
+  restrictions: [
+    { kind: "no-new-levels-after-other-class",
+      text: "A paladin who gains a level in any class other than paladin may never again raise her paladin level, though she retains all her paladin abilities.",
+      cite: "Classes II, Paladin, Ex-Paladins" },
+    { kind: "ex-member-alignment",
+      text: "A paladin who ceases to be lawful good, willfully commits an evil act, or grossly violates the code of conduct loses all paladin spells and abilities (not weapon, armor, and shield proficiencies) and may not progress further as a paladin until she atones.",
+      cite: "Classes II, Paladin, Ex-Paladins" },
+  ],
+  todo: [
+    "Divine Grace adds the Charisma bonus \"(if any)\": a negative Charisma modifier must not lower saves.",
+    "Lay on hands needs a Charisma score of 12 or higher; with a lower score the pool is 0.",
+    "Smite evil adds the Charisma bonus (if any) to the attack roll and 1 extra damage per paladin level; not added to attacks.",
+    "Turn undead works as a cleric of three levels lower (effective cleric level = paladin level - 3); turning checks and damage are not computed.",
+    "Aura of courage (immune to fear, allies within 10 feet +4 morale bonus on saves against fear) is conditional and not added.",
+    "Special mount statistics (Table: The Paladin's Mount: bonus HD, natural armor, Str, Int, special abilities by paladin level) are not modelled.",
+    "Code of conduct and associates rules are shown as text only.",
+  ],
+};

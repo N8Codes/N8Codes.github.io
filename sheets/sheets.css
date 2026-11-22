@@ -46,6 +46,15 @@ input[type=number] { text-align: center; }
 input[type=checkbox], input[type=radio] { width: 1.1rem; height: 1.1rem; accent-color: var(--accent); flex: none; margin: 0; }
 textarea { min-height: 4.5rem; resize: vertical; }
 select:disabled { opacity: .7; }
+/* A drawn arrow with room around it, instead of the browser's own arrow hugging the border.
+   Two gradients make a chevron: no image file or data URL, which the page's CSP would block. */
+select {
+    -webkit-appearance: none; appearance: none; padding-right: 2.2rem; text-overflow: ellipsis;
+    background-image: linear-gradient(45deg, transparent 50%, var(--text-soft) 50%), linear-gradient(135deg, var(--text-soft) 50%, transparent 50%);
+    background-position: calc(100% - 17px) 55%, calc(100% - 12px) 55%;
+    background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
+}
+select:hover:not(:disabled) { border-color: var(--text-soft); }
 label, .lbl { font-size: .85rem; color: var(--text-soft); font-weight: 600; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
@@ -82,11 +91,15 @@ body.free-on .invalid { outline-color: var(--warn); }
 .menu hr { border: 0; border-top: 1px solid var(--border); margin: 6px 4px; }
 .menu small { display: block; color: var(--text-soft); font-size: .8rem; }
 .menu .state { margin-left: auto; font-size: .8rem; color: var(--text-soft); }
-.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); margin: 14px 0 0; overflow-x: auto; }
-.tab { font: inherit; font-weight: 700; color: var(--text-soft); background: none; border: 0; border-bottom: 3px solid transparent; padding: 10px 16px 9px; cursor: pointer; white-space: nowrap; }
-.tab small { font-weight: 400; margin-left: 6px; }
-.tab[aria-selected=true] { color: var(--text); border-bottom-color: var(--accent); }
-.tab[aria-disabled=true] { opacity: .55; cursor: default; }
+.tabs { display: flex; align-items: flex-end; gap: 6px; border-bottom: 1px solid var(--border); margin: 16px 0 0; overflow-x: auto; padding-top: 2px; }
+.tabs-label { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--text-soft); margin: 16px 0 -8px; }
+/* Each system is a folder tab: a box with a top rounded edge that the chosen one opens into the page below. */
+.tab { font: inherit; font-weight: 700; color: var(--text-soft); background: var(--bg-soft); border: 1px solid var(--border); border-bottom: 0;
+    border-radius: 12px 12px 0 0; padding: 10px 18px 9px; cursor: pointer; white-space: nowrap;
+    display: flex; flex-direction: column; align-items: flex-start; line-height: 1.25; text-align: left; }
+.tab small { font-weight: 400; font-size: .78rem; }
+.tab:hover:not([aria-selected=true]) { color: var(--text); background: var(--bg-tile); border-color: var(--text-soft); }
+.tab[aria-selected=true] { color: var(--text); background: var(--bg); box-shadow: inset 0 3px 0 var(--accent); padding-bottom: 10px; }
 .bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 12px 0; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 5; background: var(--bg); margin-bottom: 18px; }
 .bar .spacer { flex: 1; }
 .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 11px; overflow: hidden; margin: 0; padding: 0; }
@@ -266,3 +279,51 @@ footer a { color: var(--text-soft); text-decoration: underline; }
     .identity .top, .identity .top2 { grid-template-columns: 1fr; }
     .pick-grid { grid-template-columns: 1fr; }
 }
+
+/* 3.5 sheet (2026-11-22): levels table, skills spending table, the six abilities in a row, the OGL footer. */
+.ab-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.ab-row .ability { margin: 0; }
+.ability .score-edit input, .ability .from input { width: 4.2rem; text-align: center; }
+.big-line { font-weight: 700; padding: 6px 0; }
+table.levels td { vertical-align: top; }
+table.levels select { width: 100%; min-width: 0; max-width: 8rem; }
+table.levels input { width: 3.6rem; }
+table.levels th, table.levels td { padding-left: 4px; padding-right: 4px; }
+.cite .block { display: block; }
+td.over { color: var(--danger); }
+.skills-t td { vertical-align: middle; }
+.skills-t td:first-child { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.skills-t td.a { font-size: .8rem; color: var(--text-soft); }
+.skills-t .cite.block { width: 100%; margin: 0 0 0 1.4rem; }
+.skills-t .field-msgs { width: 100%; }
+.spend { white-space: nowrap; }
+.spend .pts { display: inline-block; min-width: 3.2ch; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+.spend .pts.cross { color: var(--text-soft); }
+.spend .pts .half { font-size: .7rem; font-weight: 400; margin-left: 1px; }
+.sub-skill { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.sub-name { width: 6.5rem; padding: 2px 6px; }
+.spend-row { align-items: center; gap: 10px; }
+.spell-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 34rem), 1fr)); gap: 20px; margin-top: 20px; }
+.spell-pick { align-items: center; gap: 8px; }
+.rating { display: block; font-size: .8rem; }
+.rating input { width: 3.4rem; margin-left: 4px; }
+.license-full { margin: 10px 0; }
+.license-full summary { cursor: pointer; text-decoration: underline; }
+.license-full pre { white-space: pre-wrap; font: inherit; font-size: .8rem; max-height: 22rem; overflow: auto; border: 1px solid var(--border); border-radius: 10px; padding: 12px; background: var(--bg-soft); }
+@media (max-width: 480px) {
+    .ab-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .skills-t td.a, .skills-t th:nth-child(4) { display: none; }
+}
+
+/* Whole sheet: rule explanations, summaries and citations ("note") stay out of the way; Guided mode shows them. */
+.full .note { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.mark { color: var(--text-soft); font-size: .75rem; margin-left: 2px; }
+.legend { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+details.domain { border-bottom: 1px solid var(--border); padding: 8px 0; }
+details.domain summary { cursor: pointer; }
+details.domain[open] summary { margin-bottom: 6px; }
+/* Narrow score selects (5E): a tighter arrow, and room so it never sits on the number. */
+.ability select { padding-right: 1.5rem !important; background-position: calc(100% - 13px) 55%, calc(100% - 8px) 55%; }
+.ability .score-edit select { width: 5.6rem; }
+.ability .from select { width: 4.8rem; }

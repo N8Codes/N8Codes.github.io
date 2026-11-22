@@ -39,6 +39,7 @@
 
         <noscript><p class="import-err">This page needs JavaScript to do the rules math. It loads nothing from other sites and sends nothing anywhere.</p></noscript>
 
+        <p class="tabs-label" aria-hidden="true">Game system</p>
         <div class="tabs" id="system-picker" role="tablist" aria-label="Game system"></div>
 
         <div class="bar">
@@ -72,9 +73,13 @@
     <footer>
         <div class="wrap">
             <p id="license-text"></p>
-            <p>The rules here are adapted from the SRD 5.2.1: summarised and turned into calculations. Its license disclaims warranties (Section 5).</p>
+            <div id="license-lines"></div>
+            <details id="license-full" class="license-full" hidden>
+                <summary id="license-full-name">License</summary>
+                <pre id="license-full-text"></pre>
+            </details>
             <p>An independent, fan-made tool. Not an official product. Characters stay on your device: <a href="privacy-sheets.html">privacy</a>.</p>
-            <p>© 2026 N. W. Heard. All rights reserved, except the SRD 5.2.1 material, which is under CC-BY-4.0 as stated above.</p>
+            <p id="copyright-line"></p>
         </div>
     </footer>
 </body>

@@ -12,7 +12,8 @@ export function exportEnvelope(system, character) {
     schemaVersion: system.schemaVersion,
     system: system.id,
     systemVersion: system.systemVersion,
-    license: system.license.attribution,
+    // The license notice each system's license asks to travel with its content (the OGL's full text for 3.5).
+    license: system.license.fileNotice ?? system.license.attribution,
     exported: new Date().toISOString(),
     character: system.toSaveData(character),
   }, null, 2);

@@ -44,10 +44,10 @@ site.
 ## Optional Browser Copy
 
 If you turn on **Keep a copy in this browser** (in the File menu), the page
-stores your character in your browser's local storage, on your device only,
-so it is still there when you come back to the page. It stores the same
-contents as an exported file, plus one setting that remembers the switch is
-on. Nothing in local storage is sent anywhere. The page uses no cookies.
+stores the character on each game system's tab in your browser's local
+storage, on your device only, so it is still there when you come back to the
+page. It stores the same contents as an exported file, plus one setting that
+remembers the switch is on. Nothing in local storage is sent anywhere.
 
 To delete it, turn the switch off. Clearing this site's data in your browser
 settings also deletes it.

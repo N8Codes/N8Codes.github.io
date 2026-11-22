@@ -135,6 +135,7 @@ export function startApp(systems) {
       ],
       problemsMatching: (prefix) => all.filter((p) => p.field.startsWith(prefix)),
       setStatus,
+      refresh: renderAll,   // redraw after a view-only change (nothing in the character changed)
     };
     root.replaceChildren(state.mode === "guided" ? state.system.renderGuided(ctx) : state.system.renderSheet(ctx));
     updateChrome(all);
@@ -174,7 +175,18 @@ export function startApp(systems) {
       tab.setAttribute("aria-selected", String(on));
       tab.tabIndex = on ? 0 : -1;
     }
-    $("license-text").textContent = state.system.license.attribution;
+    renderLicense(state.system.license);
+  }
+
+  /** The footer's license lines belong to the system on screen (CC-BY for 5E, the OGL for 3.5). Text only. */
+  function renderLicense(license) {
+    $("license-text").textContent = license.attribution;
+    $("license-lines").replaceChildren(...(license.footer || []).map((t) => el("p", {}, t)));
+    $("copyright-line").textContent = license.copyrightLine || "";
+    const full = $("license-full");
+    full.hidden = !license.fullText;
+    $("license-full-text").textContent = license.fullText || "";
+    $("license-full-name").textContent = license.name;
   }
 
   function showImportError(text) {
@@ -194,12 +206,10 @@ export function startApp(systems) {
     if (!fromHash) history.replaceState(null, "", `#${system.id}`);
     renderAll();
   }
-  // System tabs. "More systems" is a placeholder until the next one is licensed and built.
+  // System tabs: only systems that work. No placeholder tab for systems not built yet (user, 2026-11-22).
   const picker = $("system-picker");
   picker.replaceChildren(...systems.map((s) => el("button", { type: "button", role: "tab", className: "tab", data: { system: s.id }, aria: { controls: "sheet-root" },
-    on: { click: () => selectSystem(s) } }, s.label, el("small", {}, s.subtitle))),
-  el("button", { type: "button", role: "tab", className: "tab", aria: { disabled: "true", selected: "false" }, tabindex: "-1", title: "One system at a time, after each license review" },
-    "More systems", el("small", {}, "not yet available")));
+    on: { click: () => selectSystem(s) } }, s.label, el("small", {}, s.subtitle))));
   picker.addEventListener("keydown", (e) => {
     if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
     const tabs = [...picker.querySelectorAll(".tab[data-system]")];
@@ -256,8 +266,8 @@ export function startApp(systems) {
   });
   $("random-character").addEventListener("click", () => {
     if (!confirmDiscard("Replace it with a random character anyway?")) return;
-    const c = state.character;
-    state.character = state.system.randomCharacter({ name: c.name, player: c.player, notes: c.notes, level: c.level, alignment: c.alignment });
+    // The system decides what to keep from the character on screen (name, player, notes, level count…).
+    state.character = state.system.randomCharacter(structuredClone(state.character));
     state.refused = {};
     setDirty(true); showImportError("");
     setStatus("Rolled a random character");
