@@ -1,2 +1,8 @@
 CLAUDE.md
 .DS_Store
+
+# Rulebooks downloaded for reference (local only, never published)
+srd/
+
+# Approved design mockups (local reference, never published)
+mockups/

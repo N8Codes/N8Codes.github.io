@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character sheets — free tabletop RPG character sheets | N8Codes</title>
+    <meta name="description" content="Free tabletop RPG character sheets in your browser. Build a character step by step or fill in the whole sheet, then export it to a file and import it again next session. Nothing is sent anywhere.">
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="theme-color" content="#15803d">
+    <link rel="canonical" href="https://n8codes.github.io/sheets.html">
+    <link rel="stylesheet" href="sheets/sheets.css">
+    <script type="module" src="sheets/main.js"></script>
+</head>
+<body>
+    <header class="wrap">
+        <nav class="nav">
+            <a class="brand" href="index.html">N8Codes</a>
+            <div class="links">
+                <a href="index.html#games">Games</a>
+                <a href="index.html#apps">Apps</a>
+                <a href="index.html#series">Series</a>
+                <a href="index.html#ttrpg">TTRPG</a>
+                <a href="privacy.html">Privacy</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap">
+        <div class="title-row">
+            <h1>Character sheets</h1>
+            <button class="info" type="button" id="about-btn" popovertarget="about" aria-label="About these sheets">i</button>
+            <div id="about" popover class="bubble">
+                <p><strong>Free tabletop RPG character sheets.</strong> Build a character step by step or fill in the whole sheet, then save it to a file and load it again next session.</p>
+                <p>Nothing is sent anywhere. <a href="privacy-sheets.html">Privacy</a></p>
+            </div>
+        </div>
+
+        <noscript><p class="import-err">This page needs JavaScript to do the rules math. It loads nothing from other sites and sends nothing anywhere.</p></noscript>
+
+        <div class="tabs" id="system-picker" role="tablist" aria-label="Game system"></div>
+
+        <div class="bar">
+            <fieldset class="seg">
+                <legend>Mode</legend>
+                <input type="radio" name="mode" id="mode-sheet" checked><label for="mode-sheet">Whole sheet</label>
+                <input type="radio" name="mode" id="mode-guided"><label for="mode-guided">Guided</label>
+            </fieldset>
+            <label class="toggle" for="free-edit" title="Rules still compute, but rule breaks are shown in amber instead of being refused. The saved file records it."><input type="checkbox" id="free-edit"> Free edit</label>
+            <button class="chip bad" type="button" id="rule-count" hidden></button>
+            <span class="spacer"></span>
+            <button class="btn" type="button" id="random-character">Roll random</button>
+            <button class="btn file-btn" type="button" id="file-btn" popovertarget="file-menu">File <span aria-hidden="true">&#9662;</span><span class="dot" id="unsaved-dot" aria-hidden="true" hidden></span></button>
+            <div id="file-menu" popover class="menu" aria-label="File">
+                <button type="button" id="new-character">New character<span class="state">clears this sheet</span></button>
+                <button type="button" id="import-json">Import JSON…</button>
+                <button type="button" id="export-json">Export JSON<span class="state" id="export-state"></span></button>
+                <button type="button" id="export-txt">Export .txt<span class="state">readable printout</span></button>
+                <hr>
+                <label for="keep-copy"><input type="checkbox" id="keep-copy"> <span>Keep a copy in this browser<small>Your sheet is still here when you come back, on this device only. Turning it off deletes the copy.</small></span></label>
+            </div>
+            <input type="file" id="import-file" accept=".json,application/json" hidden>
+        </div>
+
+        <p class="import-err" id="import-error" role="alert" hidden></p>
+        <p class="toast" id="toast" role="status" hidden></p>
+
+        <div id="sheet-root" role="tabpanel" aria-label="Character sheet"></div>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <p id="license-text"></p>
+            <p>The rules here are adapted from the SRD 5.2.1: summarised and turned into calculations. Its license disclaims warranties (Section 5).</p>
+            <p>An independent, fan-made tool. Not an official product. Characters stay on your device: <a href="privacy-sheets.html">privacy</a>.</p>
+            <p>© 2026 N. W. Heard. All rights reserved, except the SRD 5.2.1 material, which is under CC-BY-4.0 as stated above.</p>
+        </div>
+    </footer>
+</body>
+</html>
