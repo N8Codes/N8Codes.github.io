@@ -106,8 +106,8 @@ export const CONTENT = {
   ],
   "specs": {
    "Socket": {
-    "gist": "Must match the motherboard exactly.",
-    "text": "Which processors fit. It must match the processor exactly.",
+    "gist": "Must match the processor exactly.",
+    "text": "Which processors fit the board.",
     "examples": "AM5, LGA 1851"
    },
    "Chipset": {
@@ -137,7 +137,7 @@ export const CONTENT = {
    },
    "Back panel": {
     "gist": "The ports on the back of the computer.",
-    "text": "The ports at the back of the computer. The board's video outputs only work with a processor that has built-in graphics.",
+    "text": "The board's video outputs only work with a processor that has built-in graphics.",
     "examples": "USB, network, Wi-Fi, video out"
    }
   },
@@ -199,7 +199,7 @@ export const CONTENT = {
     "examples": "DDR4 or DDR5"
    },
    "Capacity": {
-    "gist": "How much fits at once. More means more open at once.",
+    "gist": "More lets you keep more open at once.",
     "text": "How much the kit holds in total, and how it's split across sticks.",
     "examples": "32 GB (2 × 16 GB)"
    },
@@ -210,7 +210,7 @@ export const CONTENT = {
    },
    "Speed and latency": {
     "gist": "Higher speed and lower CL are faster.",
-    "text": "How fast data moves, and how long each request waits. Higher speed and lower CL are faster. The rated speed usually needs the kit's memory profile turned on in the BIOS; without it, the memory runs at a slower default.",
+    "text": "How fast data moves, and how long each request waits. The rated speed usually needs the kit's memory profile turned on in the BIOS; without it, the memory runs at a slower default.",
     "examples": "6000 MT/s, CL30"
    },
    "Height": {
@@ -278,7 +278,7 @@ export const CONTENT = {
    },
    "Capacity": {
     "gist": "How much it holds.",
-    "text": "How much it holds. Makers count 1 TB as 1000 GB, while computers count in powers of two, so a 2 TB drive shows up as about 1.8 TB.",
+    "text": "Makers count 1 TB as 1000 GB, while computers count in powers of two, so a 2 TB drive shows up as about 1.8 TB.",
     "examples": "2 TB"
    },
    "PCIe generation": {
@@ -574,7 +574,7 @@ export const CONTENT = {
    },
    "Graphics card length": {
     "gist": "The longest card that fits.",
-    "text": "The longest card that fits. Front fans or a radiator can take some of that space.",
+    "text": "Front fans or a radiator can take some of that space.",
     "examples": "up to 400 mm"
    },
    "Expansion slots": {

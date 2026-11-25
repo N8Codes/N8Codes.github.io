@@ -1,47 +1,58 @@
 # N8Codes site (`N8Codes.github.io`)
 
-Static marketing + legal site listing games, apps, and TTRPG tools by
-N8Codes — **NutCracker**, a cozy pixel-art match-3 puzzle for Android;
-**Noted**, a privacy-first local-only notes app; **DragonWatch**, a macOS
-process trust monitor; and the **Dungeon Lore**
-interactive TTRPG character sheets and rules. Served via **GitHub Pages** at
-`https://n8codes.github.io/` (this is the user-site repo, so it publishes at
-the domain root).
+The N8Codes website: games, apps and tabletop tools, each with its own
+privacy policy. Served by GitHub Pages at `https://n8codes.github.io/`.
 
-Everything listed here follows the same philosophy: privacy-first, no ads, no
-tracking, no accounts. Games play offline, and any in-app purchase is a
-one-time unlock handled by Google Play. Apps keep your data on your device.
+Everything listed follows the same rules: no ads, no tracking, no accounts.
+
+## What is here
+
+| Title | Pages |
+|-------|-------|
+| NutCracker (Android match-3) | `nutcracker.html`, `privacy-nutcracker.html`, `terms-nutcracker.html` |
+| Wreckage of the Namtar (Android, in development) | `namtar.html`, `privacy-namtar.html`, `terms-namtar.html` |
+| BitBoard (Android tabletop grid and board games) | `bitboard.html`, `privacy-bitboard.html` |
+| DragonWatch (macOS) | links to its GitHub repo; `privacy-dragonwatch.html` |
+| Noted (notes app) | links to its own site, which also holds its policy |
+| PC builder and the Build a PC guide | `pc-builder.html`, `learn-pc*.html`, `privacy-pcbuilder.html` |
+| Character sheets | `sheets.html`, `privacy-sheets.html` |
+| Dungeon Lore (archive) | `ttrpg.html` |
+
+`index.html` is the home page and `privacy.html` lists every policy.
 
 ## Structure
 
-| File / dir              | Purpose                                                     |
-|-------------------------|-------------------------------------------------------------|
-| `index.html`            | Home page — Games, Apps, and TTRPG sections.                |
-| `nutcracker.html`       | NutCracker detail page.                                     |
-| `privacy.html`          | Privacy hub — lists every title with a link to its policy.  |
-| `privacy-nutcracker.html` | NutCracker's privacy policy (its Play Console URL).       |
-| `privacy-nutcracker.md` | Markdown source of the NutCracker policy (keep in sync).    |
-| `privacy-dragonwatch.html` | DragonWatch's privacy policy.                            |
-| `privacy-dragonwatch.md` | Markdown source of the DragonWatch policy (keep in sync). |
-| `styles.css`            | Shared styles for the main site pages.                      |
-| `icon.png`              | Site favicon (the N8Codes "N8" monogram).                   |
-| `images/`               | Per-title icons and feature graphics.                       |
-| `ttrpg.html`            | Dungeon Lore TTRPG tools (legacy single-page app shell).    |
-| `noted.html`, `noted-about.html` | Staged Noted pages for the future switch-over from noted-site. |
-| `dungeonlore*.{html,js,css}`, `home.html`, `home.style.css`, `script.js`, `style.css` | Dungeon Lore pages, scripts, and styles loaded by `ttrpg.html`. |
-| `License.GPL2`          | GPL v2 license covering the Dungeon Lore code.              |
+| File / dir | Purpose |
+|------------|---------|
+| `styles.css`, `icon.png`, `images/` | Shared styles, favicon, per-title art. |
+| `privacy-*.md`, `terms-*.md` | Markdown source of each policy or terms page. Keep each pair in sync. |
+| `sheets/` | Character sheet code (ES modules, no libraries). |
+| `pc/` | PC builder code, styles and pixel art. |
+| `_tools/` | Dev scripts, not published. `learn_pages.py` generates the `learn-pc*.html` pages and `pc/builder/content.js`. |
+| `_tests/` | Tests, not published. |
+| `noted.html`, `noted-about.html` | Staged Noted pages, not linked and not indexed. |
+| `dungeonlore*`, `home.html`, `home.style.css`, `script.js`, `style.css` | The Dungeon Lore app loaded by `ttrpg.html` (GPL v2, `License.GPL2`). |
+| `404.html` | Shown for any address that does not exist. |
 
-## Adding a game or app
+## Rules
 
-1. Add `images/<name>.png` (icon) and optionally a feature graphic.
-2. Create `<name>.html` (copy `nutcracker.html` as a template) — or, for an
-   app with its own site (like Noted), link out to it instead.
-3. Add a `.game-card` entry to the Games or Apps grid in `index.html`.
-4. Give it its own policy: copy `privacy-nutcracker.html`/`.md` as a
-   template, audit the title's code (manifest permissions, dependencies,
-   billing usage) so the policy matches what it actually does, and add an
-   entry to the `privacy.html` hub.
+- A policy or terms URL never changes once its title ships. Edit the content
+  in place.
+- A policy states what the code does. Audit the title's manifest,
+  dependencies and billing before writing or changing one.
+- The main site has no JavaScript and loads nothing from other sites. The
+  character sheets, the PC builder and Dungeon Lore are the exceptions, and
+  they load nothing third-party either.
+
+## Develop
+
+```sh
+python3 -m http.server 8000          # preview; the sheets and builder need a server
+node --test '_tests/*.test.mjs'      # Node 22 or newer
+python3 -I _tools/learn_pages.py .   # after editing the guide's content
+```
 
 ## Deploy
 
-Push to `master`. No CI, no build — GitHub Pages serves the files as-is.
+Push to `master`. There is no build: GitHub Pages serves the files as they
+are.

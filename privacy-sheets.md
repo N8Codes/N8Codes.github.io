@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**Character sheets** (`sheets.html`) — Last updated: November 2026
+**Character sheets** (`sheets.html`). Last updated: November 2026
 
 ## Summary
 

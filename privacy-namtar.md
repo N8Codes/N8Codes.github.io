@@ -21,9 +21,10 @@ Your saves (position, inventory, keys and map progress), your settings, and
 the record of your purchase are written to the game's private app storage on
 your device. Uninstalling the game deletes them. The game also writes short
 lines to the Android system log on your device: one when it starts (the game
-version, the Android version and the device model) and one when something
-goes wrong, naming the failure but never the contents of a save. The game
-never sends these lines anywhere.
+version, the Android version and the device's maker and model) and one when
+something goes wrong, naming the failure. If a save cannot be read, that line
+may give the save's level name or format version, and never your position,
+inventory or progress. The game never sends these lines anywhere.
 
 ## Backups
 

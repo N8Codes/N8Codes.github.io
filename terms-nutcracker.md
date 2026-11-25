@@ -1,6 +1,6 @@
 # Terms of Service
 
-**NutCracker** — Last updated: November 2026
+**NutCracker**. Last updated: November 2026
 
 These terms cover the NutCracker game for Android, made by Nathanial
 Wilson Heard, trading as N8Codes ("we"). By installing or playing NutCracker, you agree to

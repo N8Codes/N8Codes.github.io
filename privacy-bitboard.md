@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**BitBoard** — Last updated: November 2026
+**BitBoard**. Last updated: November 2026
 
 ## Summary
 

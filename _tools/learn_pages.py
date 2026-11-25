@@ -1,4 +1,4 @@
-# Generates the Learn: Build a computer pages (learn-pc*.html) as plain static HTML.
+# Generates the Learn: Build a PC pages (learn-pc*.html) as plain static HTML.
 # Edit the content here, then run from the repo root:  python3 -I _tools/learn_pages.py .
 # Never hand-edit the generated pages: the next run overwrites them.
 # Not published (Jekyll skips _ folders); not a build step: the output is committed.
@@ -108,7 +108,7 @@ def page(file, title, desc, body):
 
 def head(crumb, h1, lede):
     return f'''    <div class="learn-head">
-        <p class="crumbs"><a href="learn-pc.html">Build a computer</a> › {crumb}</p>
+        <p class="crumbs"><a href="learn-pc.html">Build a PC</a> › {crumb}</p>
         <h1>{h1}</h1>
         <p class="lede">{lede}</p>
     </div>'''
@@ -177,7 +177,8 @@ GIST = {
 }
 # Per-page overrides where one name means different things
 GIST_PAGE = {
-    ("ram", "Capacity"): "How much fits at once. More means more open at once.",
+    ("board", "Socket"): "Must match the processor exactly.",
+    ("ram", "Capacity"): "More lets you keep more open at once.",
     ("ram", "Height"): "Tall sticks can block a big air cooler.",
     ("cooler", "Height"): "Must fit under the case's side panel.",
     ("gpu", "Power"): "Usually the biggest power user in the computer.",
@@ -258,13 +259,13 @@ CONTENT["board"] = dict(
     <p>Every other part connects to the motherboard: the processor sits in its socket, the memory and drives go in its slots, and the power supply feeds it. The copper lines in the board are the roads between them.</p>
     <p>The board's <strong>chipset</strong> adds extra connections on top of the processor's own: more drive slots, USB ports, networking and sound. Its <strong>firmware</strong> (the BIOS, or UEFI) is the small program that checks the parts and hands over to the operating system when you press the power button.</p>''',
     specs=[
-        ("Socket", "e.g. AM5, LGA 1851", "Which processors fit. It must match the processor exactly."),
+        ("Socket", "e.g. AM5, LGA 1851", "Which processors fit the board."),
         ("Chipset", "e.g. a B- or Z-series chipset", "Decides how many extra slots and ports the board has, and features such as overclocking. Each processor maker names its own chipset families."),
         ("Form factor", "ATX, Micro-ATX, Mini-ITX", "The board's size and screw-hole layout. ATX is 305 × 244 mm, Micro-ATX up to 244 × 244 mm, Mini-ITX 170 × 170 mm. The case must list it."),
         ("Memory", "e.g. 4 slots, DDR5", "How many memory sticks fit and which generation. Mini-ITX boards usually have two slots."),
         ("M.2 slots and SATA ports", "e.g. 3 × M.2, 4 × SATA", "Where drives connect. M.2 drives plug straight into the board; SATA drives use a cable."),
         ("Expansion slots", "e.g. 1 × PCIe 5.0 x16", "Long slots for a graphics card and other add-in cards. The top long slot is usually the one wired to the processor."),
-        ("Back panel", "USB, network, Wi-Fi, video out", "The ports at the back of the computer. The board's video outputs only work with a processor that has built-in graphics."),
+        ("Back panel", "USB, network, Wi-Fi, video out", "The board's video outputs only work with a processor that has built-in graphics."),
     ],
     connects=[
         ("Processor, memory and drives", "In the socket, the memory slots and the M.2 slots."),
@@ -293,7 +294,7 @@ CONTENT["ram"] = dict(
         ("Type", "DDR4 or DDR5", "The memory generation. The two have their notch in different places, so a stick physically fits only its own kind of slot. The motherboard decides which one you need."),
         ("Capacity", "e.g. 32 GB (2 × 16 GB)", "How much the kit holds in total, and how it's split across sticks."),
         ("Kit size", "e.g. 2 sticks", "Memory works fastest in pairs (dual channel). Buy the sticks as one kit, so they're matched, and put them in the slots the board's manual names, often the second and fourth."),
-        ("Speed and latency", "e.g. 6000 MT/s, CL30", "How fast data moves, and how long each request waits. Higher speed and lower CL are faster. The rated speed usually needs the kit's memory profile turned on in the BIOS; without it, the memory runs at a slower default."),
+        ("Speed and latency", "e.g. 6000 MT/s, CL30", "How fast data moves, and how long each request waits. The rated speed usually needs the kit's memory profile turned on in the BIOS; without it, the memory runs at a slower default."),
         ("Height", "e.g. 35 mm", "Tall heat spreaders can get in the way of a large air cooler that overhangs the memory slots."),
     ],
     connects=[
@@ -323,7 +324,7 @@ CONTENT["storage"] = dict(
     </ul>''',
     specs=[
         ("Interface", "NVMe or SATA", "How the drive talks to the board. NVMe uses fast PCIe lanes; SATA is an older, slower link."),
-        ("Capacity", "e.g. 2 TB", "How much it holds. Makers count 1 TB as 1000 GB, while computers count in powers of two, so a 2 TB drive shows up as about 1.8 TB."),
+        ("Capacity", "e.g. 2 TB", "Makers count 1 TB as 1000 GB, while computers count in powers of two, so a 2 TB drive shows up as about 1.8 TB."),
         ("PCIe generation", "e.g. Gen 4, Gen 5", "The speed of the link an NVMe drive uses. A newer drive works in an older slot, at the slot's speed."),
         ("Size code", "e.g. 2280", "For M.2 drives: 22 mm wide, 80 mm long. Most boards take 2280; some slots also take shorter or longer drives."),
         ("Endurance", "e.g. 1,200 TBW", "How much data the maker expects can be written before the drive wears out. Normal use takes years to get near it."),
@@ -440,7 +441,7 @@ CONTENT["case"] = dict(
     <p>The case is the frame: the motherboard screws to it, drives and the power supply sit in it, and the front panel gives you the power button and USB ports. Its panels, vents and fan mounts also decide how air can flow through it.</p>''',
     specs=[
         ("Motherboard sizes", "ATX, Micro-ATX, Mini-ITX", "Which board sizes it has holes for. A bigger case usually takes smaller boards too."),
-        ("Graphics card length", "e.g. up to 400 mm", "The longest card that fits. Front fans or a radiator can take some of that space."),
+        ("Graphics card length", "e.g. up to 400 mm", "Front fans or a radiator can take some of that space."),
         ("Expansion slots", "e.g. 7, or 3 in small cases", "How many slot covers the back has, which limits how thick a graphics card can be."),
         ("CPU cooler height", "e.g. up to 170 mm", "The tallest air cooler that fits under the side panel."),
         ("Radiator support", "e.g. 360 mm front and top", "Where a liquid cooler's radiator can go, and how long it can be."),
@@ -616,13 +617,13 @@ def part_page(key):
         "".join(more(q, a) for q, a in c["more"]),
         pager(key),
     ])
-    return page(FILE[key], c["title"] + " · Build a computer", c["desc"], body)
+    return page(FILE[key], c["title"] + " · Build a PC", c["desc"], body)
 
 
 def overview():
     cards = [card(k, compact=True) for k, _, _ in PAGES]
     body = f'''    <div class="learn-head">
-        <h1>Build a computer</h1>
+        <h1>Build a PC</h1>
         <p class="lede">A desktop computer is nine kinds of parts that plug into each other. Pull it apart below, then pick a part to see what it does, what its numbers mean, and what it connects to.</p>
     </div>
 
@@ -658,14 +659,14 @@ def overview():
 {"".join(cards)}
     </div>
 
-    <p><a class="btn" href="pc-builder.html">Build a PC</a> &nbsp; <a class="btn secondary" href="learn-pc-connections.html">How it all connects</a> &nbsp; <a class="btn secondary" href="learn-pc-safety.html">Build safely</a></p>'''
-    return page("learn-pc.html", "Build a computer: what each part does",
+    <p><a class="btn" href="pc-builder.html">Open the PC builder</a> &nbsp; <a class="btn secondary" href="learn-pc-connections.html">How it all connects</a> &nbsp; <a class="btn secondary" href="learn-pc-safety.html">Build safely</a></p>'''
+    return page("learn-pc.html", "Build a PC: what each part does",
                 "Learn what each part of a desktop computer does, what its specs mean, and how the parts connect. Free, no ads, no tracking.", body)
 
 
 def connections():
     body = '''    <div class="learn-head">
-        <p class="crumbs"><a href="learn-pc.html">Build a computer</a> › How it all connects</p>
+        <p class="crumbs"><a href="learn-pc.html">Build a PC</a> › How it all connects</p>
         <h1>How it all connects</h1>
         <p class="lede">Three things flow through a computer: power, data and air. Here is where each one goes.</p>
     </div>
@@ -699,13 +700,13 @@ def connections():
         <a href="learn-pc-case.html">← Case and fans</a>
         <a href="learn-pc.html">All parts →</a>
     </nav>'''
-    return page("learn-pc-connections.html", "How a computer's parts connect · Build a computer",
+    return page("learn-pc-connections.html", "How a computer's parts connect · Build a PC",
                 "How power, data and air move through a desktop computer, and why some slots share lanes.", body)
 
 
 def safety():
     body = '''    <div class="learn-head">
-        <p class="crumbs"><a href="learn-pc.html">Build a computer</a> › Safety</p>
+        <p class="crumbs"><a href="learn-pc.html">Build a PC</a> › Safety</p>
         <h1>Build safely</h1>
         <p class="lede">Building a computer is safe when you take a little care. This is a general guide, not instructions for your particular parts.</p>
     </div>
@@ -726,7 +727,7 @@ def safety():
         <a href="learn-pc.html">← All parts</a>
         <a href="learn-pc-cpu.html">Start: Processor →</a>
     </nav>'''
-    return page("learn-pc-safety.html", "Build a computer safely",
+    return page("learn-pc-safety.html", "Build a PC safely",
                 "Safety basics for building a desktop computer: power, static electricity, power supplies, cables and manuals.", body)
 
 

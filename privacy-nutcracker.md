@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**NutCracker** — Last updated: November 2026
+**NutCracker**. Last updated: November 2026
 
 ## Summary
 
@@ -17,8 +17,8 @@ operated by the developer.
 
 ## Data Storage
 
-Game progress — scores, stars, unlocked levels, settings, and the record of
-your purchase — is stored locally on your device in the game's private app
+Game progress (scores, stars, unlocked levels, settings, and the record of
+your purchase) is stored locally on your device in the game's private app
 storage. Uninstalling the game deletes this local data.
 
 ## Backups
@@ -42,7 +42,7 @@ game at all.
 NutCracker offers a single, optional one-time purchase that unlocks chapters
 8–14. It is processed **entirely by Google Play**:
 
-- The developer never sees, collects, or stores your payment details — no card
+- The developer never sees, collects, or stores your payment details: no card
   numbers, billing address, or real name.
 - The game only learns whether the purchase completed, and stores that unlock
   on your device.

@@ -1,6 +1,6 @@
 # Privacy Policy
 
-**PC builder and the Build a computer guide** (`pc-builder.html`, `learn-pc*.html`) — Last updated: November 2026
+**PC builder and the Build a PC guide** (`pc-builder.html`, `learn-pc*.html`). Last updated: November 2026
 
 ## Summary
 
