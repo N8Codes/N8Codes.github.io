@@ -203,6 +203,25 @@ h2 {
     font-size: 0.94rem;
 }
 
+/* ---- Character cards (game pages) ---- */
+.cast-title { margin-bottom: 28px; }
+.cast .card { text-align: center; }
+.cast .portrait {
+    width: 128px;
+    height: 128px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    image-rendering: pixelated;
+    margin-bottom: 12px;
+}
+.cast .card h3 { margin-bottom: 2px; }
+.cast .card .role {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
 /* ---- Game listing (home page) ---- */
 .games {
     display: grid;
