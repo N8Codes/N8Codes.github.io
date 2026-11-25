@@ -82,7 +82,7 @@ def page(file, title, desc, body):
         <div class="links">
             <a href="index.html#games">Games</a>
             <a href="index.html#apps">Apps</a>
-            <a href="learn-pc.html">Learn</a>
+            <a href="learn-pc.html">Guide</a>
             <a href="pc-builder.html">PC builder</a>
             <a href="privacy.html">Privacy</a>
         </div>
@@ -230,7 +230,7 @@ CONTENT["cpu"] = dict(
         ("Socket", "e.g. AM5, LGA 1851", "The shape and contact layout of the processor's underside. It must match the motherboard's socket exactly. This is the first thing to check, and the most common mistake."),
         ("Cores and threads", "e.g. 8 cores, 16 threads", "Cores are separate workers. A thread is a stream of work a core keeps going; some cores handle two at once. More cores help most with work that splits up."),
         ("Clock speed", "e.g. 4.2 GHz base, up to 5.4 GHz boost", "How many steps a core takes per second, in billions. Boost is the top speed for short bursts while the processor is cool enough. Only compare clock speeds within the same generation: newer designs do more per step."),
-        ("Power", "e.g. 65 W, 120 W", "Roughly how much heat the processor gives off under steady load, in watts. Makers call it TDP or base power, and some list a higher short-term figure too. The cooler has to remove it and the power supply has to provide it."),
+        ("Power", "e.g. 65 W, 120 W", "Roughly how much heat the processor gives off under load, in watts. Makers call it TDP or base power, and most list a higher maximum too, which many processors hold for as long as the load lasts. Size the cooler and power supply for the higher figure. The cooler has to remove it and the power supply has to provide it."),
         ("Cache", "e.g. 32 MB", "A small store of very fast memory on the chip itself. A bigger cache means fewer trips out to the RAM, which helps some games noticeably."),
         ("Memory support", "e.g. DDR5 only", "Which generation of RAM the processor can drive. The motherboard settles the final choice: a board has DDR4 slots or DDR5 slots, never both."),
         ("Built-in graphics", "yes / no", "Whether the processor can drive a monitor on its own, through the motherboard's video ports."),
@@ -293,7 +293,7 @@ CONTENT["ram"] = dict(
     specs=[
         ("Type", "DDR4 or DDR5", "The memory generation. The two have their notch in different places, so a stick physically fits only its own kind of slot. The motherboard decides which one you need."),
         ("Capacity", "e.g. 32 GB (2 × 16 GB)", "How much the kit holds in total, and how it's split across sticks."),
-        ("Kit size", "e.g. 2 sticks", "Memory works fastest in pairs (dual channel). Buy the sticks as one kit, so they're matched, and put them in the slots the board's manual names, often the second and fourth."),
+        ("Kit size", "e.g. 2 sticks", "Memory works fastest in pairs (dual channel). Buy the sticks as one kit, so they're matched, and put them in the slots the board's manual names, often the second and fourth. Four DDR5 sticks usually run slower than two."),
         ("Speed and latency", "e.g. 6000 MT/s, CL30", "How fast data moves, and how long each request waits. The rated speed usually needs the kit's memory profile turned on in the BIOS; without it, the memory runs at a slower default."),
         ("Height", "e.g. 35 mm", "Tall heat spreaders can get in the way of a large air cooler that overhangs the memory slots."),
     ],
@@ -347,7 +347,7 @@ CONTENT["gpu"] = dict(
     title="The graphics card (GPU)", desc="What a graphics card does, what its specs mean, and how it fits and connects.",
     lede="The graphics card draws the picture you see. Its chip has thousands of small cores that work on many pixels at once.",
     what='''    <h2>What it does</h2>
-    <p>Drawing a frame means working out the colour of millions of pixels, dozens of times a second. A graphics card does that with thousands of simple cores running side by side, plus its own fast memory to hold textures and the frame being drawn.</p>
+    <p>Drawing a frame means working out the color of millions of pixels, dozens of times a second. A graphics card does that with thousands of simple cores running side by side, plus its own fast memory to hold textures and the frame being drawn.</p>
     <p>The same parallel cores also speed up video encoding, 3D rendering and AI work. For everyday use without games, the processor's built-in graphics may be enough.</p>''',
     specs=[
         ("Video memory", "e.g. 12 GB", "Memory on the card itself, for textures and frames. Higher resolutions and detail settings need more."),
@@ -355,7 +355,7 @@ CONTENT["gpu"] = dict(
         ("Thickness", "e.g. 2 slots, 3.1 slots", "How many expansion-slot widths the card covers. Small cases may have room for only two or three."),
         ("Power", "e.g. 250 W", "How much power the card draws under load. Usually the biggest draw in the whole computer."),
         ("Recommended power supply", "e.g. 650 W", "The card maker's suggestion for the whole computer's power supply, with headroom built in."),
-        ("Power connectors", "e.g. 2 × 8-pin, or 12V-2x6", "The plugs the card needs from the power supply. Newer cards often use a single 12V-2x6 plug; it must be pushed in all the way."),
+        ("Power connectors", "e.g. 2 × 8-pin, or 12V-2x6", "The plugs the card needs from the power supply. Newer cards often use a single 12V-2x6 plug: push it in all the way, and don't bend the cable sharply near the plug. Each 8-pin plug carries up to 150 W, and the card's slot gives 75 W more."),
         ("Outputs", "HDMI, DisplayPort", "Where the monitor plugs in. With a graphics card, plug the monitor into the card, not the motherboard."),
     ],
     connects=[
@@ -416,7 +416,7 @@ CONTENT["psu"] = dict(
         ("Efficiency rating", "e.g. Gold, Platinum", "How little power is lost as heat while converting. Higher tiers waste less, run cooler and are often quieter."),
         ("Form factor", "ATX or SFX", "Its size. Most cases take ATX; small cases often need the smaller SFX."),
         ("Modular cables", "fully, semi, or none", "Whether the cables unplug from the power supply, so you only fit the ones you need."),
-        ("Connectors", "24-pin, 8-pin, 12V-2x6, SATA", "Which plugs it has, and how many. Check there are enough for the graphics card and the drives."),
+        ("Connectors", "24-pin, 8-pin, 12V-2x6, SATA", "Which plugs it has, and how many. Check there are enough for the graphics card and the drives. Supplies built to ATX 3.0 or 3.1 are made for graphics cards' short power spikes and usually have a 12V-2x6 cable (12VHPWR on older ones)."),
     ],
     connects=[
         ("Motherboard", "The 24-pin cable for the board, and the 8-pin CPU (EPS) cable or cables for the processor."),
@@ -466,7 +466,7 @@ CONTENT["case"] = dict(
 CONTENT["fans"] = dict(
     title="Case fans", desc="What case fans do, what their specs mean, and how to set them up for airflow.",
     lede="Case fans move air through the computer: cool air in, warm air out, past the parts that make the most heat.",
-    what='''    <h2>What it does</h2>
+    what='''    <h2>What they do</h2>
     <p>Every part turns power into heat. The processor's and graphics card's own coolers move that heat into the air inside the case; the case fans then swap that warm air for cool air from the room. Without them, the inside slowly heats up and the parts slow themselves down to stay safe.</p>
     <p>The motherboard sets each fan's speed from the temperatures it reads, so fans stay quiet when the computer is idle and speed up under load.</p>''',
     specs=[
@@ -497,11 +497,11 @@ CONTENT["fans"] = dict(
 # Trading card per part: name, type, a headline stat, the turning part, stats.
 CARD = {
     # key: (type badge, headline label, headline value, shape class for the art)
-    "cpu": ("CPU", "Power", "65–170 W", "shape-cpu"),
+    "cpu": ("CPU", "Power", "65–250 W", "shape-cpu"),
     "board": ("Motherboard", "Size", "ATX", "shape-board-atx"),
     "ram": ("RAM", "Typical", "16–64 GB", "shape-ram"),
     "storage": ("Drive", "Typical", "1–4 TB", "shape-drive-35"),
-    "gpu": ("GPU", "Power", "120–450 W", "shape-gpu-3fan"),
+    "gpu": ("GPU", "Power", "75–600 W", "shape-gpu-3fan"),
     "cooler": ("Cooler", "Type", "Air / Liquid", "shape-cooler-tower"),
     "psu": ("PSU", "Power", "550–1000 W", "shape-psu-atx"),
     "case": ("Case", "Size", "Mid tower", "shape-case"),
@@ -697,7 +697,7 @@ def connections():
     <p>If a part fails the firmware's check, many boards light a small LED marked CPU, DRAM, VGA or BOOT to show which part to look at.</p>
 
     <nav class="pager" aria-label="Parts">
-        <a href="learn-pc-case.html">← Case and fans</a>
+        <a href="learn-pc-fans.html">← Case fans</a>
         <a href="learn-pc.html">All parts →</a>
     </nav>'''
     return page("learn-pc-connections.html", "How a computer's parts connect · Build a PC",
@@ -717,7 +717,7 @@ def safety():
         <li><strong>Never open a power supply</strong>, even when it's unplugged. It can hold a dangerous charge.</li>
         <li><strong>Use the right cables.</strong> Only use the modular cables that came with your power supply, and push every power plug in until it clicks.</li>
         <li><strong>Your manuals come first.</strong> Wherever they differ from this site, follow the manual for your part.</li>
-        <li><strong>Take your time with the socket.</strong> Socket pins bend easily. Keep the socket's cover on until the processor goes in, and never force anything.</li>
+        <li><strong>Take your time with the socket.</strong> Most sockets have tiny pins that bend easily (on AM4 the pins are on the processor instead). Keep the socket's cover on until the processor goes in, and never force anything.</li>
     </ul>
 
     <h2>About the information here</h2>

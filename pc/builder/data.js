@@ -118,13 +118,13 @@ const g = (id, cat, name, specs) => Object.freeze({ id, cat, kind: "generic", na
 const ALL = ["AM4", "AM5", "LGA 1700", "LGA 1851"];
 
 export const GENERIC = [
-    g("cpu-6c-am5", "cpu", "6-core processor, AM5, 65 W", { socket: "AM5", memory: ["DDR5"], cores: 6, powerW: 65, maxPowerW: null, igpu: true }),
-    g("cpu-8c-am5", "cpu", "8-core processor, AM5, 120 W", { socket: "AM5", memory: ["DDR5"], cores: 8, powerW: 120, maxPowerW: null, igpu: true }),
-    g("cpu-16c-am5", "cpu", "16-core processor, AM5, 170 W", { socket: "AM5", memory: ["DDR5"], cores: 16, powerW: 170, maxPowerW: null, igpu: true }),
-    g("cpu-6c-am4", "cpu", "6-core processor, AM4, 65 W, no graphics", { socket: "AM4", memory: ["DDR4"], cores: 6, powerW: 65, maxPowerW: null, igpu: false }),
-    g("cpu-8c-am4", "cpu", "8-core processor, AM4, 105 W, no graphics", { socket: "AM4", memory: ["DDR4"], cores: 8, powerW: 105, maxPowerW: null, igpu: false }),
-    g("cpu-14c-1700", "cpu", "14-core processor, LGA 1700, 125 W", { socket: "LGA 1700", memory: ["DDR4", "DDR5"], cores: 14, powerW: 125, maxPowerW: null, igpu: true }),
-    g("cpu-20c-1851", "cpu", "20-core processor, LGA 1851, 125 W", { socket: "LGA 1851", memory: ["DDR5"], cores: 20, powerW: 125, maxPowerW: null, igpu: true }),
+    g("cpu-6c-am5", "cpu", "6-core processor, AM5, 65 W", { socket: "AM5", memory: ["DDR5"], cores: 6, powerW: 65, maxPowerW: 88, igpu: true }),
+    g("cpu-8c-am5", "cpu", "8-core processor, AM5, 120 W", { socket: "AM5", memory: ["DDR5"], cores: 8, powerW: 120, maxPowerW: 162, igpu: true }),
+    g("cpu-16c-am5", "cpu", "16-core processor, AM5, 170 W", { socket: "AM5", memory: ["DDR5"], cores: 16, powerW: 170, maxPowerW: 230, igpu: true }),
+    g("cpu-6c-am4", "cpu", "6-core processor, AM4, 65 W, no graphics", { socket: "AM4", memory: ["DDR4"], cores: 6, powerW: 65, maxPowerW: 88, igpu: false }),
+    g("cpu-8c-am4", "cpu", "8-core processor, AM4, 105 W, no graphics", { socket: "AM4", memory: ["DDR4"], cores: 8, powerW: 105, maxPowerW: 142, igpu: false }),
+    g("cpu-14c-1700", "cpu", "14-core processor, LGA 1700, 125 W", { socket: "LGA 1700", memory: ["DDR4", "DDR5"], cores: 14, powerW: 125, maxPowerW: 181, igpu: true }),
+    g("cpu-20c-1851", "cpu", "20-core processor, LGA 1851, 125 W", { socket: "LGA 1851", memory: ["DDR5"], cores: 20, powerW: 125, maxPowerW: 250, igpu: true }),
 
     g("board-am5-atx", "board", "AM5 board, ATX, DDR5", { socket: "AM5", size: "ATX", memory: "DDR5", ramSlots: 4, m2Slots: 3, sataPorts: 4, maxCpuW: null }),
     g("board-am5-matx", "board", "AM5 board, Micro-ATX, DDR5", { socket: "AM5", size: "Micro-ATX", memory: "DDR5", ramSlots: 4, m2Slots: 2, sataPorts: 4, maxCpuW: null }),
@@ -152,12 +152,12 @@ export const GENERIC = [
     g("gpu-mid-2fan", "gpu", "Mid-range graphics card, 2 fans, 245 mm", { lengthMm: 245, slots: 2, powerW: 200, psuW: 550 }),
     g("gpu-mid-3fan", "gpu", "Mid-range graphics card, 3 fans, 300 mm", { lengthMm: 300, slots: 2.5, powerW: 250, psuW: 650 }),
     g("gpu-high-3fan", "gpu", "High-end graphics card, 3 fans, 336 mm", { lengthMm: 336, slots: 3, powerW: 320, psuW: 750 }),
-    g("gpu-top-3fan", "gpu", "Top-end graphics card, 3 fans, 357 mm", { lengthMm: 357, slots: 3.5, powerW: 450, psuW: 850 }),
+    g("gpu-top-3fan", "gpu", "Top-end graphics card, 3 fans, 357 mm", { lengthMm: 357, slots: 3.5, powerW: 575, psuW: 1000 }),
 
     g("cooler-low-47", "cooler", "Low-profile air cooler, 47 mm", { type: "Air", heightMm: 47, sockets: ALL, ratedW: 65 }),
     g("cooler-tower-155", "cooler", "Tower air cooler, 155 mm", { type: "Air", heightMm: 155, sockets: ALL, ratedW: 180 }),
     g("cooler-tower-165", "cooler", "Dual-tower air cooler, 165 mm", { type: "Air", heightMm: 165, sockets: ALL, ratedW: 250 }),
-    g("cooler-tower-old", "cooler", "Older tower air cooler, 158 mm (AM4 and LGA 1700 only)", { type: "Air", heightMm: 158, sockets: ["AM4", "LGA 1700"], ratedW: 200 }),
+    g("cooler-tower-old", "cooler", "Older tower air cooler, 158 mm (AM4 and AM5 only)", { type: "Air", heightMm: 158, sockets: ["AM4", "AM5"], ratedW: 200 }),
     g("cooler-aio-240", "cooler", "Liquid cooler (AIO), 240 mm radiator", { type: "Liquid (AIO)", radiatorMm: "240", sockets: ALL, ratedW: 250 }),
     g("cooler-aio-360", "cooler", "Liquid cooler (AIO), 360 mm radiator", { type: "Liquid (AIO)", radiatorMm: "360", sockets: ALL, ratedW: 300 }),
 
@@ -166,6 +166,7 @@ export const GENERIC = [
     g("psu-750-atx", "psu", "750 W power supply, ATX", { watts: 750, size: "ATX" }),
     g("psu-850-atx", "psu", "850 W power supply, ATX", { watts: 850, size: "ATX" }),
     g("psu-1000-atx", "psu", "1000 W power supply, ATX", { watts: 1000, size: "ATX" }),
+    g("psu-1200-atx", "psu", "1200 W power supply, ATX", { watts: 1200, size: "ATX" }),
     g("psu-650-sfx", "psu", "650 W power supply, SFX", { watts: 650, size: "SFX" }),
     g("psu-850-sfx", "psu", "850 W power supply, SFX", { watts: 850, size: "SFX" }),
 

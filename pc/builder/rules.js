@@ -44,11 +44,14 @@ const r = (status, text, parts = []) => ({ status, text, parts });
 const has = v => v !== null && v !== undefined;
 const plural = (n, one, many = one + "s") => `${n} ${n === 1 ? one : many}`;
 
+// The processor's full-load power: its maximum when the page gives one.
+const cpuLoadW = cpu => Math.max(cpu.powerW, cpu.maxPowerW ?? 0);
+
 // A rough full-load estimate: processor (its maximum power when the page gives
 // one) + graphics card + about 50 W for board, memory and fans + 10 W a drive.
 export function estimateWatts(build) {
     const gpu = build.gpu && build.gpu !== "none" ? build.gpu : null;
-    const cpuW = build.cpu ? Math.max(build.cpu.powerW, build.cpu.maxPowerW ?? 0) : 0;
+    const cpuW = build.cpu ? cpuLoadW(build.cpu) : 0;
     const drives = DRIVE_KEYS.filter(k => build[k]).length;
     return cpuW + (gpu ? gpu.powerW : 0) + 50 + 10 * drives;
 }
@@ -117,8 +120,9 @@ export function checkBuild(build) {
         }
         if (!has(cooler.ratedW)) {
             out.push(r("info", "The cooler's maker doesn't give a wattage rating, so its cooling can't be compared with the processor's power.", ["cooler"]));
-        } else if (cooler.ratedW < cpu.powerW) {
-            out.push(r("warn", `The cooler is rated for ${cooler.ratedW} W and the processor gives off about ${cpu.powerW} W. It will run hot and slow itself down.`, ["cooler", "cpu"]));
+        } else if (cooler.ratedW < cpuLoadW(cpu)) {
+            // Current processors hold their maximum power for as long as the load lasts.
+            out.push(r("warn", `The cooler is rated for ${cooler.ratedW} W and the processor gives off up to ${cpuLoadW(cpu)} W. It will run hot and slow itself down.`, ["cooler", "cpu"]));
         }
     }
     if (cooler && kase) {

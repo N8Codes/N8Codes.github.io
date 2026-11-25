@@ -114,8 +114,8 @@ test("radiator and power supply size are checked against the case", () => {
 
 test("power: a refusal under the estimate, a warning without headroom", () => {
     const b = specsOf({ ...SAMPLE, gpu: { id: "gpu-top-3fan" }, psu: { id: "psu-550-atx" } });
-    assert.equal(estimateWatts(b), 120 + 450 + 50 + 10);
-    assert.ok(has(checkBuild(b), "fail", /about 630 W at full load, more than this 550 W/));
+    assert.equal(estimateWatts(b), 120 + 575 + 50 + 10);
+    assert.ok(has(checkBuild(b), "fail", /about 755 W at full load, more than this 550 W/));
     assert.ok(has(check({ psu: { id: "corsair-rm750e" }, gpu: { id: "asus-tuf-rx9070xt-o16g-gaming" } }), "warn", /Choose at least 850 W/));
     // the higher of base and maximum power counts for the estimate
     const intel = specsOf({ ...SAMPLE, cpu: { id: "intel-core-ultra-7-265k" }, board: { id: "asus-prime-z890-p-wifi" } });
@@ -272,4 +272,11 @@ test("random builds reach every part, and save and load like any build", () => {
         }
     }
     assert.deepEqual(PARTS.map((p) => p.id).filter((id) => !seen.has(id)), []);
+});
+
+test("cooler: compared with the processor's maximum power when one is given", () => {
+    const b = specsOf({ ...SAMPLE, cpu: { id: "cpu-16c-am5" }, cooler: { id: "cooler-aio-240" } });
+    assert.ok(has(checkBuild(b), "warn", /rated for 250 W/) === false);
+    const hot = specsOf({ ...SAMPLE, cpu: { id: "cpu-16c-am5" }, cooler: { id: "cooler-tower-155" } });
+    assert.ok(has(checkBuild(hot), "warn", /rated for 180 W and the processor gives off up to 230 W/));
 });

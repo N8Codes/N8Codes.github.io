@@ -34,7 +34,7 @@ export const CONTENT = {
    },
    "Power": {
     "gist": "Sets how strong the cooler and power supply must be.",
-    "text": "Roughly how much heat the processor gives off under steady load, in watts. Makers call it TDP or base power, and some list a higher short-term figure too. The cooler has to remove it and the power supply has to provide it.",
+    "text": "Roughly how much heat the processor gives off under load, in watts. Makers call it TDP or base power, and most list a higher maximum too, which many processors hold for as long as the load lasts. Size the cooler and power supply for the higher figure. The cooler has to remove it and the power supply has to provide it.",
     "examples": "65 W, 120 W"
    },
    "Cache": {
@@ -205,7 +205,7 @@ export const CONTENT = {
    },
    "Kit size": {
     "gist": "Buy a matched pair for full speed.",
-    "text": "Memory works fastest in pairs (dual channel). Buy the sticks as one kit, so they're matched, and put them in the slots the board's manual names, often the second and fourth.",
+    "text": "Memory works fastest in pairs (dual channel). Buy the sticks as one kit, so they're matched, and put them in the slots the board's manual names, often the second and fourth. Four DDR5 sticks usually run slower than two.",
     "examples": "2 sticks"
    },
    "Speed and latency": {
@@ -332,7 +332,7 @@ export const CONTENT = {
   "what": [
    {
     "kind": "p",
-    "text": "Drawing a frame means working out the colour of millions of pixels, dozens of times a second. A graphics card does that with thousands of simple cores running side by side, plus its own fast memory to hold textures and the frame being drawn."
+    "text": "Drawing a frame means working out the color of millions of pixels, dozens of times a second. A graphics card does that with thousands of simple cores running side by side, plus its own fast memory to hold textures and the frame being drawn."
    },
    {
     "kind": "p",
@@ -367,7 +367,7 @@ export const CONTENT = {
    },
    "Power connectors": {
     "gist": "The plugs it needs from the power supply.",
-    "text": "The plugs the card needs from the power supply. Newer cards often use a single 12V-2x6 plug; it must be pushed in all the way.",
+    "text": "The plugs the card needs from the power supply. Newer cards often use a single 12V-2x6 plug: push it in all the way, and don't bend the cable sharply near the plug. Each 8-pin plug carries up to 150 W, and the card's slot gives 75 W more.",
     "examples": "2 × 8-pin, or 12V-2x6"
    },
    "Outputs": {
@@ -519,7 +519,7 @@ export const CONTENT = {
    },
    "Connectors": {
     "gist": "Must have the plugs your parts need.",
-    "text": "Which plugs it has, and how many. Check there are enough for the graphics card and the drives.",
+    "text": "Which plugs it has, and how many. Check there are enough for the graphics card and the drives. Supplies built to ATX 3.0 or 3.1 are made for graphics cards' short power spikes and usually have a 12V-2x6 cable (12VHPWR on older ones).",
     "examples": "24-pin, 8-pin, 12V-2x6, SATA"
    }
   },
