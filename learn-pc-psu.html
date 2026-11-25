@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The power supply (PSU) · Build a computer | N8Codes</title>
+    <meta name="description" content="What a power supply does, what its specs mean, and which cables go where.">
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="theme-color" content="#15803d">
+    <link rel="canonical" href="https://n8codes.github.io/learn-pc-psu.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pc/pc.css?v=20261125j">
+</head>
+<body>
+<header class="container">
+    <nav class="nav">
+        <a class="brand" href="index.html">N8Codes</a>
+        <div class="links">
+            <a href="index.html#games">Games</a>
+            <a href="index.html#apps">Apps</a>
+            <a href="learn-pc.html">Learn</a>
+            <a href="pc-builder.html">PC builder</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container prose">
+    <div class="learn-head">
+        <p class="crumbs"><a href="learn-pc.html">Build a computer</a> › Power supply</p>
+        <h1>The power supply (PSU)</h1>
+        <p class="lede">The power supply turns power from the wall into the low, steady voltages the parts need.</p>
+    </div>
+
+    <div class="stage-wrap exploded" aria-hidden="true">
+        <div class="scene">
+            <div class="rig">
+                <div class="part slot-case shape-case case-box dim"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div>
+                <div class="part slot-board shape-board-atx dim"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div>
+                <div class="part slot-cpu shape-cpu dim"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div>
+                <div class="part slot-cooler shape-cooler-tower dim"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div>
+                <div class="part slot-ram2 shape-ram dim"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div>
+                <div class="part slot-ram4 shape-ram dim"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div>
+                <div class="part slot-m2a shape-m2 dim"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div>
+                <div class="part slot-gpu shape-gpu-3fan cat-gpu dim"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div>
+                <div class="part slot-psu shape-psu-atx here"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i><span class="tag">Power supply</span></div>
+                <div class="part slot-drive1 shape-drive-35 dim"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div>
+                <div class="part slot-fan1 shape-fan cat-fan dim"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div>
+                <div class="part slot-fan2 shape-fan cat-fan dim"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div>
+                <div class="part slot-fan3 shape-fan cat-fan dim"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <h2>What it does</h2>
+    <p>Wall power is high-voltage alternating current. The parts inside run on low-voltage direct current: mostly 12 volts, plus 5 and 3.3 volts. The power supply converts one to the other and keeps it steady when the load jumps.</p>
+    <div class="safety-box"><strong>Never open a power supply.</strong> Even unplugged, its capacitors can hold a charge that can hurt you. If one fails, replace it.</div>
+
+    <article class="tcard zoomable shape-psu-atx" aria-label="Power supply card">
+        <button class="tcard-open" type="button" popovertarget="zoom-psu" aria-label="Enlarge the power supply card"></button>
+        <header class="tcard-top">
+            <h2 class="tcard-name">Power supply</h2>
+            <span class="tcard-hp"><small>Power</small> 550–1000 W</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-psu"><div class="part shape-psu-atx"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>PSU</span> Converts mains AC into regulated 12 V, 5 V and 3.3 V DC for every component.</p>
+        <dl class="tcard-stats">
+            <div><dt>Wattage <button class="info" type="button" popovertarget="i-psu-0" aria-label="About wattage">i</button><span id="i-psu-0" popover class="bubble"><b>Must cover all the parts at full load, with room to spare.</b> How much power it can deliver continuously. Leave headroom above what the parts draw at full load: the graphics card maker's recommendation is a good guide. <span class="eg">Examples: 750 W.</span></span></dt><dd class="val">750 W</dd></div>
+            <div><dt>Efficiency rating <button class="info" type="button" popovertarget="i-psu-1" aria-label="About efficiency rating">i</button><span id="i-psu-1" popover class="bubble"><b>Higher wastes less power as heat.</b> How little power is lost as heat while converting. Higher tiers waste less, run cooler and are often quieter. <span class="eg">Examples: Gold, Platinum.</span></span></dt><dd class="val">Gold</dd></div>
+            <div><dt>Form factor <button class="info" type="button" popovertarget="i-psu-2" aria-label="About form factor">i</button><span id="i-psu-2" popover class="bubble"><b>Its size: ATX for most cases, SFX for small ones.</b> Its size. Most cases take ATX; small cases often need the smaller SFX. <span class="eg">Examples: ATX or SFX.</span></span></dt><dd class="val">ATX</dd></div>
+            <div><dt>Modular cables <button class="info" type="button" popovertarget="i-psu-3" aria-label="About modular cables">i</button><span id="i-psu-3" popover class="bubble"><b>Lets you leave out the cables you don't need.</b> Whether the cables unplug from the power supply, so you only fit the ones you need. <span class="eg">Examples: fully, semi, or none.</span></span></dt><dd class="val">Fully</dd></div>
+            <div><dt>Connectors <button class="info" type="button" popovertarget="i-psu-4" aria-label="About connectors">i</button><span id="i-psu-4" popover class="bubble"><b>Must have the plugs your parts need.</b> Which plugs it has, and how many. Check there are enough for the graphics card and the drives. <span class="eg">Examples: 24-pin, 8-pin, 12V-2x6, SATA.</span></span></dt><dd class="val">24-pin +</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Motherboard · Graphics card · Drives · The wall</p>
+        <div id="zoom-psu" popover class="card-zoom">
+            <article class="tcard shape-psu-atx" aria-label="Power supply card, enlarged">
+        <header class="tcard-top">
+            <h2 class="tcard-name">Power supply</h2>
+            <span class="tcard-hp"><small>Power</small> 550–1000 W</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-psu"><div class="part shape-psu-atx"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>PSU</span> Converts mains AC into regulated 12 V, 5 V and 3.3 V DC for every component.</p>
+        <dl class="tcard-stats">
+            <div><dt>Wattage <button class="info" type="button" popovertarget="i-psu-0-z" aria-label="About wattage">i</button><span id="i-psu-0-z" popover class="bubble"><b>Must cover all the parts at full load, with room to spare.</b> How much power it can deliver continuously. Leave headroom above what the parts draw at full load: the graphics card maker's recommendation is a good guide. <span class="eg">Examples: 750 W.</span></span></dt><dd class="val">750 W</dd></div>
+            <div><dt>Efficiency rating <button class="info" type="button" popovertarget="i-psu-1-z" aria-label="About efficiency rating">i</button><span id="i-psu-1-z" popover class="bubble"><b>Higher wastes less power as heat.</b> How little power is lost as heat while converting. Higher tiers waste less, run cooler and are often quieter. <span class="eg">Examples: Gold, Platinum.</span></span></dt><dd class="val">Gold</dd></div>
+            <div><dt>Form factor <button class="info" type="button" popovertarget="i-psu-2-z" aria-label="About form factor">i</button><span id="i-psu-2-z" popover class="bubble"><b>Its size: ATX for most cases, SFX for small ones.</b> Its size. Most cases take ATX; small cases often need the smaller SFX. <span class="eg">Examples: ATX or SFX.</span></span></dt><dd class="val">ATX</dd></div>
+            <div><dt>Modular cables <button class="info" type="button" popovertarget="i-psu-3-z" aria-label="About modular cables">i</button><span id="i-psu-3-z" popover class="bubble"><b>Lets you leave out the cables you don't need.</b> Whether the cables unplug from the power supply, so you only fit the ones you need. <span class="eg">Examples: fully, semi, or none.</span></span></dt><dd class="val">Fully</dd></div>
+            <div><dt>Connectors <button class="info" type="button" popovertarget="i-psu-4-z" aria-label="About connectors">i</button><span id="i-psu-4-z" popover class="bubble"><b>Must have the plugs your parts need.</b> Which plugs it has, and how many. Check there are enough for the graphics card and the drives. <span class="eg">Examples: 24-pin, 8-pin, 12V-2x6, SATA.</span></span></dt><dd class="val">24-pin +</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Motherboard · Graphics card · Drives · The wall</p>
+            </article>
+            <button class="zoom-close" type="button" popovertarget="zoom-psu" popovertargetaction="hide" aria-label="Close">×</button>
+        </div>
+    </article>
+
+    <details class="more-detail">
+        <summary>How it connects</summary>
+        <ul>
+            <li><b>Motherboard</b>: The 24-pin cable for the board, and the 8-pin CPU (EPS) cable or cables for the processor.</li>
+            <li><b>Graphics card</b>: PCIe 8-pin or 12V-2x6 cables, depending on the card.</li>
+            <li><b>Drives</b>: SATA power cables for SATA drives. M.2 drives get power through the board.</li>
+            <li><b>The wall</b>: A standard power cord. The switch on the back must be on (|) to start.</li>
+        </ul>
+    </details>
+
+    <div class="check-box">
+        <strong>Before you buy</strong>
+        <ul>
+            <li>Enough watts, with headroom, for the processor and graphics card together.</li>
+            <li>The right size (ATX or SFX) for the case.</li>
+            <li>The plugs the graphics card needs.</li>
+            <li>Only use the cables that came with this power supply. Modular cables from another model can fit but be wired differently at the power supply end, and that can destroy parts.</li>
+        </ul>
+    </div>
+
+    <details class="more">
+        <summary>Is a bigger power supply always better?</summary>
+        <p>Not past a point. A power supply only delivers what the parts ask for, so extra watts don't make anything faster. Enough headroom for spikes and future upgrades is the goal.</p>
+    </details>
+
+    <nav class="pager" aria-label="Parts">
+        <a href="learn-pc-cooler.html">← CPU cooler</a>
+        <a href="learn-pc-case.html">Next: Case →</a>
+    </nav>
+</main>
+
+<footer class="site-foot">
+    <div class="container foot-grid">
+        <section><h2>Safety</h2><p>Unplug before opening the case, touch bare metal first, and never open a power supply. <a href="learn-pc-safety.html">Safety guide</a></p></section>
+        <section><h2>Parts</h2><p>Parts shown are generic examples. N8Codes is not affiliated with any hardware maker. Names of standards such as HDMI, DisplayPort, PCIe and Wi-Fi are trademarks of their owners.</p></section>
+        <section><h2>Privacy</h2><p>No cookies, no trackers, no scripts. <a href="privacy-pcbuilder.html">Privacy policy</a></p></section>
+    </div>
+    <div class="container foot-base">© 2026 N. W. Heard. All rights reserved.</div>
+</footer>
+</body>
+</html>

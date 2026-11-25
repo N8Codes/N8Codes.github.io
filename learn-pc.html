@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build a computer: what each part does | N8Codes</title>
+    <meta name="description" content="Learn what each part of a desktop computer does, what its specs mean, and how the parts connect. Free, no ads, no tracking.">
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="theme-color" content="#15803d">
+    <link rel="canonical" href="https://n8codes.github.io/learn-pc.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pc/pc.css?v=20261125j">
+</head>
+<body>
+<header class="container">
+    <nav class="nav">
+        <a class="brand" href="index.html">N8Codes</a>
+        <div class="links">
+            <a href="index.html#games">Games</a>
+            <a href="index.html#apps">Apps</a>
+            <a href="learn-pc.html">Learn</a>
+            <a href="pc-builder.html">PC builder</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container prose">
+    <div class="learn-head">
+        <h1>Build a computer</h1>
+        <p class="lede">A desktop computer is nine kinds of parts that plug into each other. Pull it apart below, then pick a part to see what it does, what its numbers mean, and what it connects to.</p>
+    </div>
+
+    <input class="view-switch view-exploded" type="radio" name="view" id="view-exploded" checked>
+    <input class="view-switch view-assembled" type="radio" name="view" id="view-assembled">
+    <input class="view-switch turn-1" type="radio" name="turn" id="turn-1" checked>
+    <input class="view-switch turn-2" type="radio" name="turn" id="turn-2">
+    <input class="view-switch turn-3" type="radio" name="turn" id="turn-3">
+    <input class="view-switch turn-4" type="radio" name="turn" id="turn-4">
+
+    <div class="stage-wrap learn-stage" aria-hidden="true">
+        <div class="scene">
+            <div class="rig">
+                <a class="part slot-case shape-case case-box" href="learn-pc-case.html" tabindex="-1"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></a>
+                <a class="part slot-board shape-board-atx" href="learn-pc-motherboard.html" tabindex="-1"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i><span class="tag">Motherboard</span></a>
+                <a class="part slot-cpu shape-cpu" href="learn-pc-cpu.html" tabindex="-1"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i><span class="tag">Processor</span></a>
+                <a class="part slot-cooler shape-cooler-tower" href="learn-pc-cooler.html" tabindex="-1"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i><span class="tag">Cooler</span></a>
+                <a class="part slot-ram2 shape-ram" href="learn-pc-ram.html" tabindex="-1"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></a>
+                <a class="part slot-ram4 shape-ram" href="learn-pc-ram.html" tabindex="-1"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i><span class="tag">Memory</span></a>
+                <a class="part slot-m2a shape-m2" href="learn-pc-storage.html" tabindex="-1"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i><span class="tag">M.2 drive</span></a>
+                <a class="part slot-gpu shape-gpu-3fan cat-gpu" href="learn-pc-gpu.html" tabindex="-1"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i><span class="tag">Graphics card</span></a>
+                <a class="part slot-psu shape-psu-atx" href="learn-pc-psu.html" tabindex="-1"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i><span class="tag">Power supply</span></a>
+                <a class="part slot-drive1 shape-drive-35" href="learn-pc-storage.html" tabindex="-1"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i><span class="tag">Hard drive</span></a>
+                <a class="part slot-fan1 shape-fan cat-fan" href="learn-pc-fans.html" tabindex="-1"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i><span class="tag">Case fans</span></a>
+                <a class="part slot-fan2 shape-fan cat-fan" href="learn-pc-fans.html" tabindex="-1"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></a>
+                <a class="part slot-fan3 shape-fan cat-fan" href="learn-pc-fans.html" tabindex="-1"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="stage-controls">
+        <div class="seg" role="group" aria-label="View">
+            <label for="view-exploded">Apart</label>
+            <label for="view-assembled">Together</label>
+        </div>
+        <div class="seg" role="group" aria-label="Turn">
+            <label for="turn-1">Front</label>
+            <label for="turn-2">Left</label>
+            <label for="turn-3">Back</label>
+            <label for="turn-4">Right</label>
+        </div>
+    </div>
+
+    <h2>The parts</h2>
+    <div class="collection">
+
+    <article class="tcard zoomable shape-cpu compact" aria-label="Processor card">
+        <button class="tcard-open" type="button" popovertarget="zoom-cpu" aria-label="Enlarge the processor card"></button>
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-cpu.html">Processor</a></h3>
+            <span class="tcard-hp"><small>Power</small> 65–170 W</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-cpu"><div class="part shape-cpu"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>CPU</span> Executes program instructions: the arithmetic, logic and control at the core of the system.</p>
+        <dl class="tcard-stats">
+            <div><dt>Socket <button class="info" type="button" popovertarget="i-cpu-0" aria-label="About socket">i</button><span id="i-cpu-0" popover class="bubble"><b>Must match the motherboard exactly.</b> The shape and contact layout of the processor's underside. It must match the motherboard's socket exactly. This is the first thing to check, and the most common mistake. <span class="eg">Examples: AM5, LGA 1851.</span></span></dt><dd class="val">AM5</dd></div>
+            <div><dt>Cores and threads <button class="info" type="button" popovertarget="i-cpu-1" aria-label="About cores and threads">i</button><span id="i-cpu-1" popover class="bubble"><b>More cores do more jobs at once.</b> Cores are separate workers. A thread is a stream of work a core keeps going; some cores handle two at once. More cores help most with work that splits up. <span class="eg">Examples: 8 cores, 16 threads.</span></span></dt><dd class="val">8 cores</dd></div>
+            <div><dt>Clock speed <button class="info" type="button" popovertarget="i-cpu-2" aria-label="About clock speed">i</button><span id="i-cpu-2" popover class="bubble"><b>Higher is faster, within one generation.</b> How many steps a core takes per second, in billions. Boost is the top speed for short bursts while the processor is cool enough. Only compare clock speeds within the same generation: newer designs do more per step. <span class="eg">Examples: 4.2 GHz base, up to 5.4 GHz boost.</span></span></dt><dd class="val">5.4 GHz</dd></div>
+            <div><dt>Power <button class="info" type="button" popovertarget="i-cpu-3" aria-label="About power">i</button><span id="i-cpu-3" popover class="bubble"><b>Sets how strong the cooler and power supply must be.</b> Roughly how much heat the processor gives off under steady load, in watts. Makers call it TDP or base power, and some list a higher short-term figure too. The cooler has to remove it and the power supply has to provide it. <span class="eg">Examples: 65 W, 120 W.</span></span></dt><dd class="val">120 W</dd></div>
+            <div><dt>Cache <button class="info" type="button" popovertarget="i-cpu-4" aria-label="About cache">i</button><span id="i-cpu-4" popover class="bubble"><b>Fast memory on the chip; more helps some games.</b> A small store of very fast memory on the chip itself. A bigger cache means fewer trips out to the RAM, which helps some games noticeably. <span class="eg">Examples: 32 MB.</span></span></dt><dd class="val">32 MB</dd></div>
+            <div><dt>Memory support <button class="info" type="button" popovertarget="i-cpu-5" aria-label="About memory support">i</button><span id="i-cpu-5" popover class="bubble"><b>Which kind of RAM it can use.</b> Which generation of RAM the processor can drive. The motherboard settles the final choice: a board has DDR4 slots or DDR5 slots, never both. <span class="eg">Examples: DDR5 only.</span></span></dt><dd class="val">DDR5</dd></div>
+            <div><dt>Built-in graphics <button class="info" type="button" popovertarget="i-cpu-6" aria-label="About built-in graphics">i</button><span id="i-cpu-6" popover class="bubble"><b>Can it show a picture without a graphics card?</b> Whether the processor can drive a monitor on its own, through the motherboard's video ports. <span class="eg">Examples: yes / no.</span></span></dt><dd class="val">Yes</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Motherboard socket · Cooler · Memory · Graphics card and fast drives · Power</p>
+        <div id="zoom-cpu" popover class="card-zoom">
+            <article class="tcard shape-cpu" aria-label="Processor card, enlarged">
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-cpu.html">Processor</a></h3>
+            <span class="tcard-hp"><small>Power</small> 65–170 W</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-cpu"><div class="part shape-cpu"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>CPU</span> Executes program instructions: the arithmetic, logic and control at the core of the system.</p>
+        <dl class="tcard-stats">
+            <div><dt>Socket <button class="info" type="button" popovertarget="i-cpu-0-z" aria-label="About socket">i</button><span id="i-cpu-0-z" popover class="bubble"><b>Must match the motherboard exactly.</b> The shape and contact layout of the processor's underside. It must match the motherboard's socket exactly. This is the first thing to check, and the most common mistake. <span class="eg">Examples: AM5, LGA 1851.</span></span></dt><dd class="val">AM5</dd></div>
+            <div><dt>Cores and threads <button class="info" type="button" popovertarget="i-cpu-1-z" aria-label="About cores and threads">i</button><span id="i-cpu-1-z" popover class="bubble"><b>More cores do more jobs at once.</b> Cores are separate workers. A thread is a stream of work a core keeps going; some cores handle two at once. More cores help most with work that splits up. <span class="eg">Examples: 8 cores, 16 threads.</span></span></dt><dd class="val">8 cores</dd></div>
+            <div><dt>Clock speed <button class="info" type="button" popovertarget="i-cpu-2-z" aria-label="About clock speed">i</button><span id="i-cpu-2-z" popover class="bubble"><b>Higher is faster, within one generation.</b> How many steps a core takes per second, in billions. Boost is the top speed for short bursts while the processor is cool enough. Only compare clock speeds within the same generation: newer designs do more per step. <span class="eg">Examples: 4.2 GHz base, up to 5.4 GHz boost.</span></span></dt><dd class="val">5.4 GHz</dd></div>
+            <div><dt>Power <button class="info" type="button" popovertarget="i-cpu-3-z" aria-label="About power">i</button><span id="i-cpu-3-z" popover class="bubble"><b>Sets how strong the cooler and power supply must be.</b> Roughly how much heat the processor gives off under steady load, in watts. Makers call it TDP or base power, and some list a higher short-term figure too. The cooler has to remove it and the power supply has to provide it. <span class="eg">Examples: 65 W, 120 W.</span></span></dt><dd class="val">120 W</dd></div>
+            <div><dt>Cache <button class="info" type="button" popovertarget="i-cpu-4-z" aria-label="About cache">i</button><span id="i-cpu-4-z" popover class="bubble"><b>Fast memory on the chip; more helps some games.</b> A small store of very fast memory on the chip itself. A bigger cache means fewer trips out to the RAM, which helps some games noticeably. <span class="eg">Examples: 32 MB.</span></span></dt><dd class="val">32 MB</dd></div>
+            <div><dt>Memory support <button class="info" type="button" popovertarget="i-cpu-5-z" aria-label="About memory support">i</button><span id="i-cpu-5-z" popover class="bubble"><b>Which kind of RAM it can use.</b> Which generation of RAM the processor can drive. The motherboard settles the final choice: a board has DDR4 slots or DDR5 slots, never both. <span class="eg">Examples: DDR5 only.</span></span></dt><dd class="val">DDR5</dd></div>
+            <div><dt>Built-in graphics <button class="info" type="button" popovertarget="i-cpu-6-z" aria-label="About built-in graphics">i</button><span id="i-cpu-6-z" popover class="bubble"><b>Can it show a picture without a graphics card?</b> Whether the processor can drive a monitor on its own, through the motherboard's video ports. <span class="eg">Examples: yes / no.</span></span></dt><dd class="val">Yes</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Motherboard socket · Cooler · Memory · Graphics card and fast drives · Power</p>
+            </article>
+            <button class="zoom-close" type="button" popovertarget="zoom-cpu" popovertargetaction="hide" aria-label="Close">×</button>
+        </div>
+    </article>
+    <article class="tcard zoomable shape-board-atx compact" aria-label="Motherboard card">
+        <button class="tcard-open" type="button" popovertarget="zoom-board" aria-label="Enlarge the motherboard card"></button>
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-motherboard.html">Motherboard</a></h3>
+            <span class="tcard-hp"><small>Size</small> ATX</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-board"><div class="part shape-board-atx"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>Motherboard</span> Main circuit board: routes power and data between every component; its chipset and firmware run the platform.</p>
+        <dl class="tcard-stats">
+            <div><dt>Socket <button class="info" type="button" popovertarget="i-board-0" aria-label="About socket">i</button><span id="i-board-0" popover class="bubble"><b>Must match the motherboard exactly.</b> Which processors fit. It must match the processor exactly. <span class="eg">Examples: AM5, LGA 1851.</span></span></dt><dd class="val">AM5</dd></div>
+            <div><dt>Chipset <button class="info" type="button" popovertarget="i-board-1" aria-label="About chipset">i</button><span id="i-board-1" popover class="bubble"><b>Sets how many extra ports and features you get.</b> Decides how many extra slots and ports the board has, and features such as overclocking. Each processor maker names its own chipset families. <span class="eg">Examples: a B- or Z-series chipset.</span></span></dt><dd class="val">B-series</dd></div>
+            <div><dt>Form factor <button class="info" type="button" popovertarget="i-board-2" aria-label="About form factor">i</button><span id="i-board-2" popover class="bubble"><b>Its size: the case has to fit it.</b> The board's size and screw-hole layout. ATX is 305 × 244 mm, Micro-ATX up to 244 × 244 mm, Mini-ITX 170 × 170 mm. The case must list it. <span class="eg">Examples: ATX, Micro-ATX, Mini-ITX.</span></span></dt><dd class="val">ATX</dd></div>
+            <div><dt>Memory <button class="info" type="button" popovertarget="i-board-3" aria-label="About memory">i</button><span id="i-board-3" popover class="bubble"><b>How many RAM sticks fit, and which kind.</b> How many memory sticks fit and which generation. Mini-ITX boards usually have two slots. <span class="eg">Examples: 4 slots, DDR5.</span></span></dt><dd class="val">4 × DDR5</dd></div>
+            <div><dt>M.2 slots and SATA ports <button class="info" type="button" popovertarget="i-board-4" aria-label="About m.2 slots and sata ports">i</button><span id="i-board-4" popover class="bubble"><b>How many drives you can connect.</b> Where drives connect. M.2 drives plug straight into the board; SATA drives use a cable. <span class="eg">Examples: 3 × M.2, 4 × SATA.</span></span></dt><dd class="val">3 × M.2</dd></div>
+            <div><dt>Expansion slots <button class="info" type="button" popovertarget="i-board-5" aria-label="About expansion slots">i</button><span id="i-board-5" popover class="bubble"><b>Where the graphics card and add-in cards go.</b> Long slots for a graphics card and other add-in cards. The top long slot is usually the one wired to the processor. <span class="eg">Examples: 1 × PCIe 5.0 x16.</span></span></dt><dd class="val">PCIe x16</dd></div>
+            <div><dt>Back panel <button class="info" type="button" popovertarget="i-board-6" aria-label="About back panel">i</button><span id="i-board-6" popover class="bubble"><b>The ports on the back of the computer.</b> The ports at the back of the computer. The board's video outputs only work with a processor that has built-in graphics. <span class="eg">Examples: USB, network, Wi-Fi, video out.</span></span></dt><dd class="val">USB, Wi-Fi</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Processor, memory and drives · Graphics card · Power supply · Case · Fans and cooler</p>
+        <div id="zoom-board" popover class="card-zoom">
+            <article class="tcard shape-board-atx" aria-label="Motherboard card, enlarged">
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-motherboard.html">Motherboard</a></h3>
+            <span class="tcard-hp"><small>Size</small> ATX</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-board"><div class="part shape-board-atx"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>Motherboard</span> Main circuit board: routes power and data between every component; its chipset and firmware run the platform.</p>
+        <dl class="tcard-stats">
+            <div><dt>Socket <button class="info" type="button" popovertarget="i-board-0-z" aria-label="About socket">i</button><span id="i-board-0-z" popover class="bubble"><b>Must match the motherboard exactly.</b> Which processors fit. It must match the processor exactly. <span class="eg">Examples: AM5, LGA 1851.</span></span></dt><dd class="val">AM5</dd></div>
+            <div><dt>Chipset <button class="info" type="button" popovertarget="i-board-1-z" aria-label="About chipset">i</button><span id="i-board-1-z" popover class="bubble"><b>Sets how many extra ports and features you get.</b> Decides how many extra slots and ports the board has, and features such as overclocking. Each processor maker names its own chipset families. <span class="eg">Examples: a B- or Z-series chipset.</span></span></dt><dd class="val">B-series</dd></div>
+            <div><dt>Form factor <button class="info" type="button" popovertarget="i-board-2-z" aria-label="About form factor">i</button><span id="i-board-2-z" popover class="bubble"><b>Its size: the case has to fit it.</b> The board's size and screw-hole layout. ATX is 305 × 244 mm, Micro-ATX up to 244 × 244 mm, Mini-ITX 170 × 170 mm. The case must list it. <span class="eg">Examples: ATX, Micro-ATX, Mini-ITX.</span></span></dt><dd class="val">ATX</dd></div>
+            <div><dt>Memory <button class="info" type="button" popovertarget="i-board-3-z" aria-label="About memory">i</button><span id="i-board-3-z" popover class="bubble"><b>How many RAM sticks fit, and which kind.</b> How many memory sticks fit and which generation. Mini-ITX boards usually have two slots. <span class="eg">Examples: 4 slots, DDR5.</span></span></dt><dd class="val">4 × DDR5</dd></div>
+            <div><dt>M.2 slots and SATA ports <button class="info" type="button" popovertarget="i-board-4-z" aria-label="About m.2 slots and sata ports">i</button><span id="i-board-4-z" popover class="bubble"><b>How many drives you can connect.</b> Where drives connect. M.2 drives plug straight into the board; SATA drives use a cable. <span class="eg">Examples: 3 × M.2, 4 × SATA.</span></span></dt><dd class="val">3 × M.2</dd></div>
+            <div><dt>Expansion slots <button class="info" type="button" popovertarget="i-board-5-z" aria-label="About expansion slots">i</button><span id="i-board-5-z" popover class="bubble"><b>Where the graphics card and add-in cards go.</b> Long slots for a graphics card and other add-in cards. The top long slot is usually the one wired to the processor. <span class="eg">Examples: 1 × PCIe 5.0 x16.</span></span></dt><dd class="val">PCIe x16</dd></div>
+            <div><dt>Back panel <button class="info" type="button" popovertarget="i-board-6-z" aria-label="About back panel">i</button><span id="i-board-6-z" popover class="bubble"><b>The ports on the back of the computer.</b> The ports at the back of the computer. The board's video outputs only work with a processor that has built-in graphics. <span class="eg">Examples: USB, network, Wi-Fi, video out.</span></span></dt><dd class="val">USB, Wi-Fi</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Processor, memory and drives · Graphics card · Power supply · Case · Fans and cooler</p>
+            </article>
+            <button class="zoom-close" type="button" popovertarget="zoom-board" popovertargetaction="hide" aria-label="Close">×</button>
+        </div>
+    </article>
+    <article class="tcard zoomable shape-ram compact" aria-label="Memory card">
+        <button class="tcard-open" type="button" popovertarget="zoom-ram" aria-label="Enlarge the memory card"></button>
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-ram.html">Memory</a></h3>
+            <span class="tcard-hp"><small>Typical</small> 16–64 GB</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-ram"><div class="part shape-ram"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>RAM</span> Volatile working memory: holds running programs and their data for the CPU at high speed.</p>
+        <dl class="tcard-stats">
+            <div><dt>Type <button class="info" type="button" popovertarget="i-ram-0" aria-label="About type">i</button><span id="i-ram-0" popover class="bubble"><b>DDR4 or DDR5: must match the motherboard.</b> The memory generation. The two have their notch in different places, so a stick physically fits only its own kind of slot. The motherboard decides which one you need. <span class="eg">Examples: DDR4 or DDR5.</span></span></dt><dd class="val">DDR5</dd></div>
+            <div><dt>Capacity <button class="info" type="button" popovertarget="i-ram-1" aria-label="About capacity">i</button><span id="i-ram-1" popover class="bubble"><b>How much fits at once. More means more open at once.</b> How much the kit holds in total, and how it's split across sticks. <span class="eg">Examples: 32 GB (2 × 16 GB).</span></span></dt><dd class="val">32 GB</dd></div>
+            <div><dt>Kit size <button class="info" type="button" popovertarget="i-ram-2" aria-label="About kit size">i</button><span id="i-ram-2" popover class="bubble"><b>Buy a matched pair for full speed.</b> Memory works fastest in pairs (dual channel). Buy the sticks as one kit, so they're matched, and put them in the slots the board's manual names, often the second and fourth. <span class="eg">Examples: 2 sticks.</span></span></dt><dd class="val">2 sticks</dd></div>
+            <div><dt>Speed and latency <button class="info" type="button" popovertarget="i-ram-3" aria-label="About speed and latency">i</button><span id="i-ram-3" popover class="bubble"><b>Higher speed and lower CL are faster.</b> How fast data moves, and how long each request waits. Higher speed and lower CL are faster. The rated speed usually needs the kit's memory profile turned on in the BIOS; without it, the memory runs at a slower default. <span class="eg">Examples: 6000 MT/s, CL30.</span></span></dt><dd class="val">6000 MT/s</dd></div>
+            <div><dt>Height <button class="info" type="button" popovertarget="i-ram-4" aria-label="About height">i</button><span id="i-ram-4" popover class="bubble"><b>Tall sticks can block a big air cooler.</b> Tall heat spreaders can get in the way of a large air cooler that overhangs the memory slots. <span class="eg">Examples: 35 mm.</span></span></dt><dd class="val">35 mm</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Memory slots · Processor</p>
+        <div id="zoom-ram" popover class="card-zoom">
+            <article class="tcard shape-ram" aria-label="Memory card, enlarged">
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-ram.html">Memory</a></h3>
+            <span class="tcard-hp"><small>Typical</small> 16–64 GB</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-ram"><div class="part shape-ram"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>RAM</span> Volatile working memory: holds running programs and their data for the CPU at high speed.</p>
+        <dl class="tcard-stats">
+            <div><dt>Type <button class="info" type="button" popovertarget="i-ram-0-z" aria-label="About type">i</button><span id="i-ram-0-z" popover class="bubble"><b>DDR4 or DDR5: must match the motherboard.</b> The memory generation. The two have their notch in different places, so a stick physically fits only its own kind of slot. The motherboard decides which one you need. <span class="eg">Examples: DDR4 or DDR5.</span></span></dt><dd class="val">DDR5</dd></div>
+            <div><dt>Capacity <button class="info" type="button" popovertarget="i-ram-1-z" aria-label="About capacity">i</button><span id="i-ram-1-z" popover class="bubble"><b>How much fits at once. More means more open at once.</b> How much the kit holds in total, and how it's split across sticks. <span class="eg">Examples: 32 GB (2 × 16 GB).</span></span></dt><dd class="val">32 GB</dd></div>
+            <div><dt>Kit size <button class="info" type="button" popovertarget="i-ram-2-z" aria-label="About kit size">i</button><span id="i-ram-2-z" popover class="bubble"><b>Buy a matched pair for full speed.</b> Memory works fastest in pairs (dual channel). Buy the sticks as one kit, so they're matched, and put them in the slots the board's manual names, often the second and fourth. <span class="eg">Examples: 2 sticks.</span></span></dt><dd class="val">2 sticks</dd></div>
+            <div><dt>Speed and latency <button class="info" type="button" popovertarget="i-ram-3-z" aria-label="About speed and latency">i</button><span id="i-ram-3-z" popover class="bubble"><b>Higher speed and lower CL are faster.</b> How fast data moves, and how long each request waits. Higher speed and lower CL are faster. The rated speed usually needs the kit's memory profile turned on in the BIOS; without it, the memory runs at a slower default. <span class="eg">Examples: 6000 MT/s, CL30.</span></span></dt><dd class="val">6000 MT/s</dd></div>
+            <div><dt>Height <button class="info" type="button" popovertarget="i-ram-4-z" aria-label="About height">i</button><span id="i-ram-4-z" popover class="bubble"><b>Tall sticks can block a big air cooler.</b> Tall heat spreaders can get in the way of a large air cooler that overhangs the memory slots. <span class="eg">Examples: 35 mm.</span></span></dt><dd class="val">35 mm</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Memory slots · Processor</p>
+            </article>
+            <button class="zoom-close" type="button" popovertarget="zoom-ram" popovertargetaction="hide" aria-label="Close">×</button>
+        </div>
+    </article>
+    <article class="tcard zoomable shape-drive-35 compact" aria-label="Storage card">
+        <button class="tcard-open" type="button" popovertarget="zoom-storage" aria-label="Enlarge the storage card"></button>
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-storage.html">Storage</a></h3>
+            <span class="tcard-hp"><small>Typical</small> 1–4 TB</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-storage"><div class="part shape-drive-35"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>Drive</span> Non-volatile storage for the operating system, programs and files.</p>
+        <dl class="tcard-stats">
+            <div><dt>Interface <button class="info" type="button" popovertarget="i-storage-0" aria-label="About interface">i</button><span id="i-storage-0" popover class="bubble"><b>NVMe is the fast one.</b> How the drive talks to the board. NVMe uses fast PCIe lanes; SATA is an older, slower link. <span class="eg">Examples: NVMe or SATA.</span></span></dt><dd class="val">NVMe</dd></div>
+            <div><dt>Capacity <button class="info" type="button" popovertarget="i-storage-1" aria-label="About capacity">i</button><span id="i-storage-1" popover class="bubble"><b>How much it holds.</b> How much it holds. Makers count 1 TB as 1000 GB, while computers count in powers of two, so a 2 TB drive shows up as about 1.8 TB. <span class="eg">Examples: 2 TB.</span></span></dt><dd class="val">2 TB</dd></div>
+            <div><dt>PCIe generation <button class="info" type="button" popovertarget="i-storage-2" aria-label="About pcie generation">i</button><span id="i-storage-2" popover class="bubble"><b>Newer is faster, and works in older slots.</b> The speed of the link an NVMe drive uses. A newer drive works in an older slot, at the slot's speed. <span class="eg">Examples: Gen 4, Gen 5.</span></span></dt><dd class="val">Gen 4</dd></div>
+            <div><dt>Size code <button class="info" type="button" popovertarget="i-storage-3" aria-label="About size code">i</button><span id="i-storage-3" popover class="bubble"><b>The drive's size: 2280 is the usual one.</b> For M.2 drives: 22 mm wide, 80 mm long. Most boards take 2280; some slots also take shorter or longer drives. <span class="eg">Examples: 2280.</span></span></dt><dd class="val">2280</dd></div>
+            <div><dt>Endurance <button class="info" type="button" popovertarget="i-storage-4" aria-label="About endurance">i</button><span id="i-storage-4" popover class="bubble"><b>How much it can write before wearing out. Rarely a worry.</b> How much data the maker expects can be written before the drive wears out. Normal use takes years to get near it. <span class="eg">Examples: 1,200 TBW.</span></span></dt><dd class="val">1,200 TBW</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> M.2 slot · SATA port and power · Case drive bays</p>
+        <div id="zoom-storage" popover class="card-zoom">
+            <article class="tcard shape-drive-35" aria-label="Storage card, enlarged">
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-storage.html">Storage</a></h3>
+            <span class="tcard-hp"><small>Typical</small> 1–4 TB</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-storage"><div class="part shape-drive-35"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>Drive</span> Non-volatile storage for the operating system, programs and files.</p>
+        <dl class="tcard-stats">
+            <div><dt>Interface <button class="info" type="button" popovertarget="i-storage-0-z" aria-label="About interface">i</button><span id="i-storage-0-z" popover class="bubble"><b>NVMe is the fast one.</b> How the drive talks to the board. NVMe uses fast PCIe lanes; SATA is an older, slower link. <span class="eg">Examples: NVMe or SATA.</span></span></dt><dd class="val">NVMe</dd></div>
+            <div><dt>Capacity <button class="info" type="button" popovertarget="i-storage-1-z" aria-label="About capacity">i</button><span id="i-storage-1-z" popover class="bubble"><b>How much it holds.</b> How much it holds. Makers count 1 TB as 1000 GB, while computers count in powers of two, so a 2 TB drive shows up as about 1.8 TB. <span class="eg">Examples: 2 TB.</span></span></dt><dd class="val">2 TB</dd></div>
+            <div><dt>PCIe generation <button class="info" type="button" popovertarget="i-storage-2-z" aria-label="About pcie generation">i</button><span id="i-storage-2-z" popover class="bubble"><b>Newer is faster, and works in older slots.</b> The speed of the link an NVMe drive uses. A newer drive works in an older slot, at the slot's speed. <span class="eg">Examples: Gen 4, Gen 5.</span></span></dt><dd class="val">Gen 4</dd></div>
+            <div><dt>Size code <button class="info" type="button" popovertarget="i-storage-3-z" aria-label="About size code">i</button><span id="i-storage-3-z" popover class="bubble"><b>The drive's size: 2280 is the usual one.</b> For M.2 drives: 22 mm wide, 80 mm long. Most boards take 2280; some slots also take shorter or longer drives. <span class="eg">Examples: 2280.</span></span></dt><dd class="val">2280</dd></div>
+            <div><dt>Endurance <button class="info" type="button" popovertarget="i-storage-4-z" aria-label="About endurance">i</button><span id="i-storage-4-z" popover class="bubble"><b>How much it can write before wearing out. Rarely a worry.</b> How much data the maker expects can be written before the drive wears out. Normal use takes years to get near it. <span class="eg">Examples: 1,200 TBW.</span></span></dt><dd class="val">1,200 TBW</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> M.2 slot · SATA port and power · Case drive bays</p>
+            </article>
+            <button class="zoom-close" type="button" popovertarget="zoom-storage" popovertargetaction="hide" aria-label="Close">×</button>
+        </div>
+    </article>
+    <article class="tcard zoomable shape-gpu-3fan compact" aria-label="Graphics card card">
+        <button class="tcard-open" type="button" popovertarget="zoom-gpu" aria-label="Enlarge the graphics card card"></button>
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-gpu.html">Graphics card</a></h3>
+            <span class="tcard-hp"><small>Power</small> 120–450 W</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-gpu"><div class="part shape-gpu-3fan"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>GPU</span> Massively parallel processor: renders frames and accelerates video and compute work.</p>
+        <dl class="tcard-stats">
+            <div><dt>Video memory <button class="info" type="button" popovertarget="i-gpu-0" aria-label="About video memory">i</button><span id="i-gpu-0" popover class="bubble"><b>More helps at high resolutions and detail.</b> Memory on the card itself, for textures and frames. Higher resolutions and detail settings need more. <span class="eg">Examples: 12 GB.</span></span></dt><dd class="val">12 GB</dd></div>
+            <div><dt>Length <button class="info" type="button" popovertarget="i-gpu-1" aria-label="About length">i</button><span id="i-gpu-1" popover class="bubble"><b>Must fit inside the case.</b> Cards vary a lot in length. The case lists the longest card it can hold. <span class="eg">Examples: 242 mm, 330 mm.</span></span></dt><dd class="val">300 mm</dd></div>
+            <div><dt>Thickness <button class="info" type="button" popovertarget="i-gpu-2" aria-label="About thickness">i</button><span id="i-gpu-2" popover class="bubble"><b>How many slots wide it is.</b> How many expansion-slot widths the card covers. Small cases may have room for only two or three. <span class="eg">Examples: 2 slots, 3.1 slots.</span></span></dt><dd class="val">2 slots</dd></div>
+            <div><dt>Power <button class="info" type="button" popovertarget="i-gpu-3" aria-label="About power">i</button><span id="i-gpu-3" popover class="bubble"><b>Usually the biggest power user in the computer.</b> How much power the card draws under load. Usually the biggest draw in the whole computer. <span class="eg">Examples: 250 W.</span></span></dt><dd class="val">250 W</dd></div>
+            <div><dt>Recommended power supply <button class="info" type="button" popovertarget="i-gpu-4" aria-label="About recommended power supply">i</button><span id="i-gpu-4" popover class="bubble"><b>The power supply size the card maker suggests.</b> The card maker's suggestion for the whole computer's power supply, with headroom built in. <span class="eg">Examples: 650 W.</span></span></dt><dd class="val">650 W</dd></div>
+            <div><dt>Power connectors <button class="info" type="button" popovertarget="i-gpu-5" aria-label="About power connectors">i</button><span id="i-gpu-5" popover class="bubble"><b>The plugs it needs from the power supply.</b> The plugs the card needs from the power supply. Newer cards often use a single 12V-2x6 plug; it must be pushed in all the way. <span class="eg">Examples: 2 × 8-pin, or 12V-2x6.</span></span></dt><dd class="val">2 × 8-pin</dd></div>
+            <div><dt>Outputs <button class="info" type="button" popovertarget="i-gpu-6" aria-label="About outputs">i</button><span id="i-gpu-6" popover class="bubble"><b>Plug the monitor in here.</b> Where the monitor plugs in. With a graphics card, plug the monitor into the card, not the motherboard. <span class="eg">Examples: HDMI, DisplayPort.</span></span></dt><dd class="val">HDMI, DP</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> PCIe x16 slot · Power supply · Monitor</p>
+        <div id="zoom-gpu" popover class="card-zoom">
+            <article class="tcard shape-gpu-3fan" aria-label="Graphics card card, enlarged">
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-gpu.html">Graphics card</a></h3>
+            <span class="tcard-hp"><small>Power</small> 120–450 W</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-gpu"><div class="part shape-gpu-3fan"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>GPU</span> Massively parallel processor: renders frames and accelerates video and compute work.</p>
+        <dl class="tcard-stats">
+            <div><dt>Video memory <button class="info" type="button" popovertarget="i-gpu-0-z" aria-label="About video memory">i</button><span id="i-gpu-0-z" popover class="bubble"><b>More helps at high resolutions and detail.</b> Memory on the card itself, for textures and frames. Higher resolutions and detail settings need more. <span class="eg">Examples: 12 GB.</span></span></dt><dd class="val">12 GB</dd></div>
+            <div><dt>Length <button class="info" type="button" popovertarget="i-gpu-1-z" aria-label="About length">i</button><span id="i-gpu-1-z" popover class="bubble"><b>Must fit inside the case.</b> Cards vary a lot in length. The case lists the longest card it can hold. <span class="eg">Examples: 242 mm, 330 mm.</span></span></dt><dd class="val">300 mm</dd></div>
+            <div><dt>Thickness <button class="info" type="button" popovertarget="i-gpu-2-z" aria-label="About thickness">i</button><span id="i-gpu-2-z" popover class="bubble"><b>How many slots wide it is.</b> How many expansion-slot widths the card covers. Small cases may have room for only two or three. <span class="eg">Examples: 2 slots, 3.1 slots.</span></span></dt><dd class="val">2 slots</dd></div>
+            <div><dt>Power <button class="info" type="button" popovertarget="i-gpu-3-z" aria-label="About power">i</button><span id="i-gpu-3-z" popover class="bubble"><b>Usually the biggest power user in the computer.</b> How much power the card draws under load. Usually the biggest draw in the whole computer. <span class="eg">Examples: 250 W.</span></span></dt><dd class="val">250 W</dd></div>
+            <div><dt>Recommended power supply <button class="info" type="button" popovertarget="i-gpu-4-z" aria-label="About recommended power supply">i</button><span id="i-gpu-4-z" popover class="bubble"><b>The power supply size the card maker suggests.</b> The card maker's suggestion for the whole computer's power supply, with headroom built in. <span class="eg">Examples: 650 W.</span></span></dt><dd class="val">650 W</dd></div>
+            <div><dt>Power connectors <button class="info" type="button" popovertarget="i-gpu-5-z" aria-label="About power connectors">i</button><span id="i-gpu-5-z" popover class="bubble"><b>The plugs it needs from the power supply.</b> The plugs the card needs from the power supply. Newer cards often use a single 12V-2x6 plug; it must be pushed in all the way. <span class="eg">Examples: 2 × 8-pin, or 12V-2x6.</span></span></dt><dd class="val">2 × 8-pin</dd></div>
+            <div><dt>Outputs <button class="info" type="button" popovertarget="i-gpu-6-z" aria-label="About outputs">i</button><span id="i-gpu-6-z" popover class="bubble"><b>Plug the monitor in here.</b> Where the monitor plugs in. With a graphics card, plug the monitor into the card, not the motherboard. <span class="eg">Examples: HDMI, DisplayPort.</span></span></dt><dd class="val">HDMI, DP</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> PCIe x16 slot · Power supply · Monitor</p>
+            </article>
+            <button class="zoom-close" type="button" popovertarget="zoom-gpu" popovertargetaction="hide" aria-label="Close">×</button>
+        </div>
+    </article>
+    <article class="tcard zoomable shape-cooler-tower compact" aria-label="CPU cooler card">
+        <button class="tcard-open" type="button" popovertarget="zoom-cooler" aria-label="Enlarge the cpu cooler card"></button>
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-cooler.html">CPU cooler</a></h3>
+            <span class="tcard-hp"><small>Type</small> Air / Liquid</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-cooler"><div class="part shape-cooler-tower"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>Cooler</span> Moves heat from the CPU into the air through a heatsink and fan, or a liquid loop.</p>
+        <dl class="tcard-stats">
+            <div><dt>Height <button class="info" type="button" popovertarget="i-cooler-0" aria-label="About height">i</button><span id="i-cooler-0" popover class="bubble"><b>Must fit under the case's side panel.</b> For air coolers: how tall it stands above the board. The case lists the tallest cooler that fits under its side panel. <span class="eg">Examples: 155 mm.</span></span></dt><dd class="val">155 mm</dd></div>
+            <div><dt>Radiator size <button class="info" type="button" popovertarget="i-cooler-1" aria-label="About radiator size">i</button><span id="i-cooler-1" popover class="bubble"><b>For liquid coolers: must fit a spot in the case.</b> For liquid coolers: the radiator's length, set by its fans (two or three 120 mm fans). The case must have a spot for it. <span class="eg">Examples: 240 mm, 360 mm.</span></span></dt><dd class="val">360 mm</dd></div>
+            <div><dt>Socket support <button class="info" type="button" popovertarget="i-cooler-2" aria-label="About socket support">i</button><span id="i-cooler-2" popover class="bubble"><b>Must list your processor's socket.</b> Which processor sockets its mounting brackets fit. A socket that isn't listed may need a separate kit, or may not fit at all. <span class="eg">Examples: AM5, LGA 1851.</span></span></dt><dd class="val">AM5</dd></div>
+            <div><dt>Cooling rating <button class="info" type="button" popovertarget="i-cooler-3" aria-label="About cooling rating">i</button><span id="i-cooler-3" popover class="bubble"><b>How much heat it can handle.</b> Roughly how much heat the maker says it can handle. Not every maker gives one. <span class="eg">Examples: up to 250 W.</span></span></dt><dd class="val">250 W</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Processor · Motherboard · Case</p>
+        <div id="zoom-cooler" popover class="card-zoom">
+            <article class="tcard shape-cooler-tower" aria-label="CPU cooler card, enlarged">
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-cooler.html">CPU cooler</a></h3>
+            <span class="tcard-hp"><small>Type</small> Air / Liquid</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-cooler"><div class="part shape-cooler-tower"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>Cooler</span> Moves heat from the CPU into the air through a heatsink and fan, or a liquid loop.</p>
+        <dl class="tcard-stats">
+            <div><dt>Height <button class="info" type="button" popovertarget="i-cooler-0-z" aria-label="About height">i</button><span id="i-cooler-0-z" popover class="bubble"><b>Must fit under the case's side panel.</b> For air coolers: how tall it stands above the board. The case lists the tallest cooler that fits under its side panel. <span class="eg">Examples: 155 mm.</span></span></dt><dd class="val">155 mm</dd></div>
+            <div><dt>Radiator size <button class="info" type="button" popovertarget="i-cooler-1-z" aria-label="About radiator size">i</button><span id="i-cooler-1-z" popover class="bubble"><b>For liquid coolers: must fit a spot in the case.</b> For liquid coolers: the radiator's length, set by its fans (two or three 120 mm fans). The case must have a spot for it. <span class="eg">Examples: 240 mm, 360 mm.</span></span></dt><dd class="val">360 mm</dd></div>
+            <div><dt>Socket support <button class="info" type="button" popovertarget="i-cooler-2-z" aria-label="About socket support">i</button><span id="i-cooler-2-z" popover class="bubble"><b>Must list your processor's socket.</b> Which processor sockets its mounting brackets fit. A socket that isn't listed may need a separate kit, or may not fit at all. <span class="eg">Examples: AM5, LGA 1851.</span></span></dt><dd class="val">AM5</dd></div>
+            <div><dt>Cooling rating <button class="info" type="button" popovertarget="i-cooler-3-z" aria-label="About cooling rating">i</button><span id="i-cooler-3-z" popover class="bubble"><b>How much heat it can handle.</b> Roughly how much heat the maker says it can handle. Not every maker gives one. <span class="eg">Examples: up to 250 W.</span></span></dt><dd class="val">250 W</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Processor · Motherboard · Case</p>
+            </article>
+            <button class="zoom-close" type="button" popovertarget="zoom-cooler" popovertargetaction="hide" aria-label="Close">×</button>
+        </div>
+    </article>
+    <article class="tcard zoomable shape-psu-atx compact" aria-label="Power supply card">
+        <button class="tcard-open" type="button" popovertarget="zoom-psu" aria-label="Enlarge the power supply card"></button>
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-psu.html">Power supply</a></h3>
+            <span class="tcard-hp"><small>Power</small> 550–1000 W</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-psu"><div class="part shape-psu-atx"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>PSU</span> Converts mains AC into regulated 12 V, 5 V and 3.3 V DC for every component.</p>
+        <dl class="tcard-stats">
+            <div><dt>Wattage <button class="info" type="button" popovertarget="i-psu-0" aria-label="About wattage">i</button><span id="i-psu-0" popover class="bubble"><b>Must cover all the parts at full load, with room to spare.</b> How much power it can deliver continuously. Leave headroom above what the parts draw at full load: the graphics card maker's recommendation is a good guide. <span class="eg">Examples: 750 W.</span></span></dt><dd class="val">750 W</dd></div>
+            <div><dt>Efficiency rating <button class="info" type="button" popovertarget="i-psu-1" aria-label="About efficiency rating">i</button><span id="i-psu-1" popover class="bubble"><b>Higher wastes less power as heat.</b> How little power is lost as heat while converting. Higher tiers waste less, run cooler and are often quieter. <span class="eg">Examples: Gold, Platinum.</span></span></dt><dd class="val">Gold</dd></div>
+            <div><dt>Form factor <button class="info" type="button" popovertarget="i-psu-2" aria-label="About form factor">i</button><span id="i-psu-2" popover class="bubble"><b>Its size: ATX for most cases, SFX for small ones.</b> Its size. Most cases take ATX; small cases often need the smaller SFX. <span class="eg">Examples: ATX or SFX.</span></span></dt><dd class="val">ATX</dd></div>
+            <div><dt>Modular cables <button class="info" type="button" popovertarget="i-psu-3" aria-label="About modular cables">i</button><span id="i-psu-3" popover class="bubble"><b>Lets you leave out the cables you don't need.</b> Whether the cables unplug from the power supply, so you only fit the ones you need. <span class="eg">Examples: fully, semi, or none.</span></span></dt><dd class="val">Fully</dd></div>
+            <div><dt>Connectors <button class="info" type="button" popovertarget="i-psu-4" aria-label="About connectors">i</button><span id="i-psu-4" popover class="bubble"><b>Must have the plugs your parts need.</b> Which plugs it has, and how many. Check there are enough for the graphics card and the drives. <span class="eg">Examples: 24-pin, 8-pin, 12V-2x6, SATA.</span></span></dt><dd class="val">24-pin +</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Motherboard · Graphics card · Drives · The wall</p>
+        <div id="zoom-psu" popover class="card-zoom">
+            <article class="tcard shape-psu-atx" aria-label="Power supply card, enlarged">
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-psu.html">Power supply</a></h3>
+            <span class="tcard-hp"><small>Power</small> 550–1000 W</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-psu"><div class="part shape-psu-atx"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>PSU</span> Converts mains AC into regulated 12 V, 5 V and 3.3 V DC for every component.</p>
+        <dl class="tcard-stats">
+            <div><dt>Wattage <button class="info" type="button" popovertarget="i-psu-0-z" aria-label="About wattage">i</button><span id="i-psu-0-z" popover class="bubble"><b>Must cover all the parts at full load, with room to spare.</b> How much power it can deliver continuously. Leave headroom above what the parts draw at full load: the graphics card maker's recommendation is a good guide. <span class="eg">Examples: 750 W.</span></span></dt><dd class="val">750 W</dd></div>
+            <div><dt>Efficiency rating <button class="info" type="button" popovertarget="i-psu-1-z" aria-label="About efficiency rating">i</button><span id="i-psu-1-z" popover class="bubble"><b>Higher wastes less power as heat.</b> How little power is lost as heat while converting. Higher tiers waste less, run cooler and are often quieter. <span class="eg">Examples: Gold, Platinum.</span></span></dt><dd class="val">Gold</dd></div>
+            <div><dt>Form factor <button class="info" type="button" popovertarget="i-psu-2-z" aria-label="About form factor">i</button><span id="i-psu-2-z" popover class="bubble"><b>Its size: ATX for most cases, SFX for small ones.</b> Its size. Most cases take ATX; small cases often need the smaller SFX. <span class="eg">Examples: ATX or SFX.</span></span></dt><dd class="val">ATX</dd></div>
+            <div><dt>Modular cables <button class="info" type="button" popovertarget="i-psu-3-z" aria-label="About modular cables">i</button><span id="i-psu-3-z" popover class="bubble"><b>Lets you leave out the cables you don't need.</b> Whether the cables unplug from the power supply, so you only fit the ones you need. <span class="eg">Examples: fully, semi, or none.</span></span></dt><dd class="val">Fully</dd></div>
+            <div><dt>Connectors <button class="info" type="button" popovertarget="i-psu-4-z" aria-label="About connectors">i</button><span id="i-psu-4-z" popover class="bubble"><b>Must have the plugs your parts need.</b> Which plugs it has, and how many. Check there are enough for the graphics card and the drives. <span class="eg">Examples: 24-pin, 8-pin, 12V-2x6, SATA.</span></span></dt><dd class="val">24-pin +</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Motherboard · Graphics card · Drives · The wall</p>
+            </article>
+            <button class="zoom-close" type="button" popovertarget="zoom-psu" popovertargetaction="hide" aria-label="Close">×</button>
+        </div>
+    </article>
+    <article class="tcard zoomable shape-case compact" aria-label="Case card">
+        <button class="tcard-open" type="button" popovertarget="zoom-case" aria-label="Enlarge the case card"></button>
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-case.html">Case</a></h3>
+            <span class="tcard-hp"><small>Size</small> Mid tower</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-case"><div class="part shape-case"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>Case</span> Chassis: mounts the components, routes the cables and sets the airflow path.</p>
+        <dl class="tcard-stats">
+            <div><dt>Motherboard sizes <button class="info" type="button" popovertarget="i-case-0" aria-label="About motherboard sizes">i</button><span id="i-case-0" popover class="bubble"><b>Which boards fit.</b> Which board sizes it has holes for. A bigger case usually takes smaller boards too. <span class="eg">Examples: ATX, Micro-ATX, Mini-ITX.</span></span></dt><dd class="val">ATX</dd></div>
+            <div><dt>Graphics card length <button class="info" type="button" popovertarget="i-case-1" aria-label="About graphics card length">i</button><span id="i-case-1" popover class="bubble"><b>The longest card that fits.</b> The longest card that fits. Front fans or a radiator can take some of that space. <span class="eg">Examples: up to 400 mm.</span></span></dt><dd class="val">400 mm</dd></div>
+            <div><dt>Expansion slots <button class="info" type="button" popovertarget="i-case-2" aria-label="About expansion slots">i</button><span id="i-case-2" popover class="bubble"><b>Limits how thick the graphics card can be.</b> How many slot covers the back has, which limits how thick a graphics card can be. <span class="eg">Examples: 7, or 3 in small cases.</span></span></dt><dd class="val">7</dd></div>
+            <div><dt>CPU cooler height <button class="info" type="button" popovertarget="i-case-3" aria-label="About cpu cooler height">i</button><span id="i-case-3" popover class="bubble"><b>The tallest air cooler that fits.</b> The tallest air cooler that fits under the side panel. <span class="eg">Examples: up to 170 mm.</span></span></dt><dd class="val">170 mm</dd></div>
+            <div><dt>Radiator support <button class="info" type="button" popovertarget="i-case-4" aria-label="About radiator support">i</button><span id="i-case-4" popover class="bubble"><b>Where a liquid cooler's radiator can go.</b> Where a liquid cooler's radiator can go, and how long it can be. <span class="eg">Examples: 360 mm front and top.</span></span></dt><dd class="val">360 mm</dd></div>
+            <div><dt>Power supply <button class="info" type="button" popovertarget="i-case-5" aria-label="About power supply">i</button><span id="i-case-5" popover class="bubble"><b>Which power supply size fits.</b> Which power supply size it takes. <span class="eg">Examples: ATX or SFX, max length.</span></span></dt><dd class="val">ATX</dd></div>
+            <div><dt>Drive bays <button class="info" type="button" popovertarget="i-case-6" aria-label="About drive bays">i</button><span id="i-case-6" popover class="bubble"><b>Places for hard drives and SATA SSDs.</b> Places for SATA drives. Many modern cases have few or none, since M.2 drives sit on the board. <span class="eg">Examples: 2 × 2.5 in, 2 × 3.5 in.</span></span></dt><dd class="val">2 + 2</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Motherboard · Case fans · Everything else</p>
+        <div id="zoom-case" popover class="card-zoom">
+            <article class="tcard shape-case" aria-label="Case card, enlarged">
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-case.html">Case</a></h3>
+            <span class="tcard-hp"><small>Size</small> Mid tower</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-case"><div class="part shape-case"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>Case</span> Chassis: mounts the components, routes the cables and sets the airflow path.</p>
+        <dl class="tcard-stats">
+            <div><dt>Motherboard sizes <button class="info" type="button" popovertarget="i-case-0-z" aria-label="About motherboard sizes">i</button><span id="i-case-0-z" popover class="bubble"><b>Which boards fit.</b> Which board sizes it has holes for. A bigger case usually takes smaller boards too. <span class="eg">Examples: ATX, Micro-ATX, Mini-ITX.</span></span></dt><dd class="val">ATX</dd></div>
+            <div><dt>Graphics card length <button class="info" type="button" popovertarget="i-case-1-z" aria-label="About graphics card length">i</button><span id="i-case-1-z" popover class="bubble"><b>The longest card that fits.</b> The longest card that fits. Front fans or a radiator can take some of that space. <span class="eg">Examples: up to 400 mm.</span></span></dt><dd class="val">400 mm</dd></div>
+            <div><dt>Expansion slots <button class="info" type="button" popovertarget="i-case-2-z" aria-label="About expansion slots">i</button><span id="i-case-2-z" popover class="bubble"><b>Limits how thick the graphics card can be.</b> How many slot covers the back has, which limits how thick a graphics card can be. <span class="eg">Examples: 7, or 3 in small cases.</span></span></dt><dd class="val">7</dd></div>
+            <div><dt>CPU cooler height <button class="info" type="button" popovertarget="i-case-3-z" aria-label="About cpu cooler height">i</button><span id="i-case-3-z" popover class="bubble"><b>The tallest air cooler that fits.</b> The tallest air cooler that fits under the side panel. <span class="eg">Examples: up to 170 mm.</span></span></dt><dd class="val">170 mm</dd></div>
+            <div><dt>Radiator support <button class="info" type="button" popovertarget="i-case-4-z" aria-label="About radiator support">i</button><span id="i-case-4-z" popover class="bubble"><b>Where a liquid cooler's radiator can go.</b> Where a liquid cooler's radiator can go, and how long it can be. <span class="eg">Examples: 360 mm front and top.</span></span></dt><dd class="val">360 mm</dd></div>
+            <div><dt>Power supply <button class="info" type="button" popovertarget="i-case-5-z" aria-label="About power supply">i</button><span id="i-case-5-z" popover class="bubble"><b>Which power supply size fits.</b> Which power supply size it takes. <span class="eg">Examples: ATX or SFX, max length.</span></span></dt><dd class="val">ATX</dd></div>
+            <div><dt>Drive bays <button class="info" type="button" popovertarget="i-case-6-z" aria-label="About drive bays">i</button><span id="i-case-6-z" popover class="bubble"><b>Places for hard drives and SATA SSDs.</b> Places for SATA drives. Many modern cases have few or none, since M.2 drives sit on the board. <span class="eg">Examples: 2 × 2.5 in, 2 × 3.5 in.</span></span></dt><dd class="val">2 + 2</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Motherboard · Case fans · Everything else</p>
+            </article>
+            <button class="zoom-close" type="button" popovertarget="zoom-case" popovertargetaction="hide" aria-label="Close">×</button>
+        </div>
+    </article>
+    <article class="tcard zoomable shape-fan compact" aria-label="Case fans card">
+        <button class="tcard-open" type="button" popovertarget="zoom-fans" aria-label="Enlarge the case fans card"></button>
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-fans.html">Case fans</a></h3>
+            <span class="tcard-hp"><small>Size</small> 120 mm</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-fans"><div class="part shape-fan"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>Fan</span> Exchange the air inside the case: cool air in, heated air out.</p>
+        <dl class="tcard-stats">
+            <div><dt>Size <button class="info" type="button" popovertarget="i-fans-0" aria-label="About size">i</button><span id="i-fans-0" popover class="bubble"><b>Frame width: bigger is usually quieter.</b> The width of the fan's square frame. A bigger fan moves the same air at a lower speed, so it's quieter. The case lists which sizes fit where. <span class="eg">Examples: 120 mm, 140 mm.</span></span></dt><dd class="val">120 mm</dd></div>
+            <div><dt>Airflow <button class="info" type="button" popovertarget="i-fans-1" aria-label="About airflow">i</button><span id="i-fans-1" popover class="bubble"><b>How much air it moves.</b> How much air it moves, in cubic feet per minute, with nothing in its way. Higher moves more. <span class="eg">Examples: 60 CFM.</span></span></dt><dd class="val">60 CFM</dd></div>
+            <div><dt>Static pressure <button class="info" type="button" popovertarget="i-fans-2" aria-label="About static pressure">i</button><span id="i-fans-2" popover class="bubble"><b>How well it pushes through radiators and filters.</b> How hard it can push air through something dense, like a radiator or a dust filter. Fans on a radiator need more of it. <span class="eg">Examples: 2.0 mm H2O.</span></span></dt><dd class="val">2.0 mm H2O</dd></div>
+            <div><dt>Speed <button class="info" type="button" popovertarget="i-fans-3" aria-label="About speed">i</button><span id="i-fans-3" popover class="bubble"><b>Set by the motherboard from temperatures.</b> How fast it spins, in revolutions per minute. The motherboard raises and lowers it with temperature. <span class="eg">Examples: 400–1600 RPM.</span></span></dt><dd class="val">1600 RPM</dd></div>
+            <div><dt>Connector <button class="info" type="button" popovertarget="i-fans-4" aria-label="About connector">i</button><span id="i-fans-4" popover class="bubble"><b>4-pin lets the board control speed precisely.</b> A 4-pin (PWM) fan lets the board set its speed precisely; a 3-pin fan is slowed down by lowering its voltage. Both plug into the board's fan headers. <span class="eg">Examples: 4-pin PWM or 3-pin.</span></span></dt><dd class="val">4-pin PWM</dd></div>
+            <div><dt>Noise <button class="info" type="button" popovertarget="i-fans-5" aria-label="About noise">i</button><span id="i-fans-5" popover class="bubble"><b>Lower is quieter.</b> How loud it is at full speed. About 10 dBA more sounds roughly twice as loud. <span class="eg">Examples: 25 dBA.</span></span></dt><dd class="val">25 dBA</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Fan headers · Case · Radiator</p>
+        <div id="zoom-fans" popover class="card-zoom">
+            <article class="tcard shape-fan" aria-label="Case fans card, enlarged">
+        <header class="tcard-top">
+            <h3 class="tcard-name"><a href="learn-pc-fans.html">Case fans</a></h3>
+            <span class="tcard-hp"><small>Size</small> 120 mm</span>
+        </header>
+        <div class="tcard-art" aria-hidden="true"><div class="tcard-spin fit-fans"><div class="part shape-fan"><i class="f-bottom"></i><i class="f-back"></i><i class="f-right"></i><i class="f-left"></i><i class="f-front"></i><i class="f-top"></i></div></div></div>
+        <p class="tcard-type"><span>Fan</span> Exchange the air inside the case: cool air in, heated air out.</p>
+        <dl class="tcard-stats">
+            <div><dt>Size <button class="info" type="button" popovertarget="i-fans-0-z" aria-label="About size">i</button><span id="i-fans-0-z" popover class="bubble"><b>Frame width: bigger is usually quieter.</b> The width of the fan's square frame. A bigger fan moves the same air at a lower speed, so it's quieter. The case lists which sizes fit where. <span class="eg">Examples: 120 mm, 140 mm.</span></span></dt><dd class="val">120 mm</dd></div>
+            <div><dt>Airflow <button class="info" type="button" popovertarget="i-fans-1-z" aria-label="About airflow">i</button><span id="i-fans-1-z" popover class="bubble"><b>How much air it moves.</b> How much air it moves, in cubic feet per minute, with nothing in its way. Higher moves more. <span class="eg">Examples: 60 CFM.</span></span></dt><dd class="val">60 CFM</dd></div>
+            <div><dt>Static pressure <button class="info" type="button" popovertarget="i-fans-2-z" aria-label="About static pressure">i</button><span id="i-fans-2-z" popover class="bubble"><b>How well it pushes through radiators and filters.</b> How hard it can push air through something dense, like a radiator or a dust filter. Fans on a radiator need more of it. <span class="eg">Examples: 2.0 mm H2O.</span></span></dt><dd class="val">2.0 mm H2O</dd></div>
+            <div><dt>Speed <button class="info" type="button" popovertarget="i-fans-3-z" aria-label="About speed">i</button><span id="i-fans-3-z" popover class="bubble"><b>Set by the motherboard from temperatures.</b> How fast it spins, in revolutions per minute. The motherboard raises and lowers it with temperature. <span class="eg">Examples: 400–1600 RPM.</span></span></dt><dd class="val">1600 RPM</dd></div>
+            <div><dt>Connector <button class="info" type="button" popovertarget="i-fans-4-z" aria-label="About connector">i</button><span id="i-fans-4-z" popover class="bubble"><b>4-pin lets the board control speed precisely.</b> A 4-pin (PWM) fan lets the board set its speed precisely; a 3-pin fan is slowed down by lowering its voltage. Both plug into the board's fan headers. <span class="eg">Examples: 4-pin PWM or 3-pin.</span></span></dt><dd class="val">4-pin PWM</dd></div>
+            <div><dt>Noise <button class="info" type="button" popovertarget="i-fans-5-z" aria-label="About noise">i</button><span id="i-fans-5-z" popover class="bubble"><b>Lower is quieter.</b> How loud it is at full speed. About 10 dBA more sounds roughly twice as loud. <span class="eg">Examples: 25 dBA.</span></span></dt><dd class="val">25 dBA</dd></div>
+        </dl>
+        <p class="tcard-foot"><b>Connects to</b> Fan headers · Case · Radiator</p>
+            </article>
+            <button class="zoom-close" type="button" popovertarget="zoom-fans" popovertargetaction="hide" aria-label="Close">×</button>
+        </div>
+    </article>
+    </div>
+
+    <p><a class="btn" href="pc-builder.html">Build a PC</a> &nbsp; <a class="btn secondary" href="learn-pc-connections.html">How it all connects</a> &nbsp; <a class="btn secondary" href="learn-pc-safety.html">Build safely</a></p>
+</main>
+
+<footer class="site-foot">
+    <div class="container foot-grid">
+        <section><h2>Safety</h2><p>Unplug before opening the case, touch bare metal first, and never open a power supply. <a href="learn-pc-safety.html">Safety guide</a></p></section>
+        <section><h2>Parts</h2><p>Parts shown are generic examples. N8Codes is not affiliated with any hardware maker. Names of standards such as HDMI, DisplayPort, PCIe and Wi-Fi are trademarks of their owners.</p></section>
+        <section><h2>Privacy</h2><p>No cookies, no trackers, no scripts. <a href="privacy-pcbuilder.html">Privacy policy</a></p></section>
+    </div>
+    <div class="container foot-base">© 2026 N. W. Heard. All rights reserved.</div>
+</footer>
+</body>
+</html>

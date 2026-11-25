@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How a computer&#x27;s parts connect · Build a computer | N8Codes</title>
+    <meta name="description" content="How power, data and air move through a desktop computer, and why some slots share lanes.">
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="theme-color" content="#15803d">
+    <link rel="canonical" href="https://n8codes.github.io/learn-pc-connections.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pc/pc.css?v=20261125j">
+</head>
+<body>
+<header class="container">
+    <nav class="nav">
+        <a class="brand" href="index.html">N8Codes</a>
+        <div class="links">
+            <a href="index.html#games">Games</a>
+            <a href="index.html#apps">Apps</a>
+            <a href="learn-pc.html">Learn</a>
+            <a href="pc-builder.html">PC builder</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container prose">
+    <div class="learn-head">
+        <p class="crumbs"><a href="learn-pc.html">Build a computer</a> › How it all connects</p>
+        <h1>How it all connects</h1>
+        <p class="lede">Three things flow through a computer: power, data and air. Here is where each one goes.</p>
+    </div>
+
+    <h2>Power</h2>
+    <p>Everything starts at the power supply. It sends 12 volts out on separate cables, and the motherboard passes power on to the smaller parts.</p>
+    <ol class="flow" aria-label="Power path"><li>Wall</li><li>Power supply</li><li>Motherboard (24-pin)</li><li>Memory, M.2 drives, fans, USB</li></ol>
+    <ol class="flow" aria-label="Power path"><li>Power supply</li><li>Processor (8-pin CPU cable)</li></ol>
+    <ol class="flow" aria-label="Power path"><li>Power supply</li><li>Graphics card (8-pin or 12V-2x6)</li></ol>
+    <ol class="flow" aria-label="Power path"><li>Power supply</li><li>SATA drives (SATA power)</li></ol>
+    <p>The processor and graphics card draw most of the power, which is why each gets its own cables straight from the power supply.</p>
+
+    <h2>Data</h2>
+    <p>Most data travels on <strong>PCIe lanes</strong>: fast, direct links between two parts. Each part gets a set number of lanes, written as x16, x4 or x1.</p>
+    <ol class="flow" aria-label="Data path"><li>Processor</li><li>Memory (directly)</li></ol>
+    <ol class="flow" aria-label="Data path"><li>Processor</li><li>Graphics card (x16)</li></ol>
+    <ol class="flow" aria-label="Data path"><li>Processor</li><li>First M.2 drive (x4)</li></ol>
+    <ol class="flow" aria-label="Data path"><li>Processor</li><li>Chipset</li><li>More M.2 slots, SATA, USB, network, sound</li></ol>
+    <p>Everything behind the chipset shares one link back to the processor. That's why the graphics card and the main drive connect to the processor directly, and why some slots share lanes: on many boards, using one M.2 slot turns off a PCIe slot. The board's manual lists which.</p>
+
+    <h2>Air</h2>
+    <p>Cool air comes in at the front (and often the bottom), passes over the graphics card and the processor's cooler, and leaves at the back and top, where warm air naturally rises.</p>
+    <ol class="flow" aria-label="Air path"><li>Front intake fans</li><li>Graphics card and CPU cooler</li><li>Rear and top exhaust</li></ol>
+    <p>A liquid cooler's radiator is part of this path: mounted at the top, it exhausts the processor's heat straight out; at the front, it takes in cool outside air but warms the air for everything behind it.</p>
+
+    <h2>Starting up</h2>
+    <ol class="flow" aria-label="Start-up"><li>Power button</li><li>Board wakes the power supply</li><li>Firmware checks the parts</li><li>Finds the boot drive</li><li>Operating system starts</li></ol>
+    <p>If a part fails the firmware's check, many boards light a small LED marked CPU, DRAM, VGA or BOOT to show which part to look at.</p>
+
+    <nav class="pager" aria-label="Parts">
+        <a href="learn-pc-case.html">← Case and fans</a>
+        <a href="learn-pc.html">All parts →</a>
+    </nav>
+</main>
+
+<footer class="site-foot">
+    <div class="container foot-grid">
+        <section><h2>Safety</h2><p>Unplug before opening the case, touch bare metal first, and never open a power supply. <a href="learn-pc-safety.html">Safety guide</a></p></section>
+        <section><h2>Parts</h2><p>Parts shown are generic examples. N8Codes is not affiliated with any hardware maker. Names of standards such as HDMI, DisplayPort, PCIe and Wi-Fi are trademarks of their owners.</p></section>
+        <section><h2>Privacy</h2><p>No cookies, no trackers, no scripts. <a href="privacy-pcbuilder.html">Privacy policy</a></p></section>
+    </div>
+    <div class="container foot-base">© 2026 N. W. Heard. All rights reserved.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC builder: build a computer and check it fits | N8Codes</title>
+    <meta name="description" content="Build a desktop computer part by part in 3D, check that everything fits, and learn what each part does as you go. Free, no ads, no tracking.">
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="theme-color" content="#15803d">
+    <link rel="canonical" href="https://n8codes.github.io/pc-builder.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pc/pc.css?v=20261125j">
+    <link rel="stylesheet" href="pc/builder.css?v=20261125j">
+    <script type="module" src="pc/builder/main.js"></script>
+</head>
+<body>
+<header class="container wide">
+    <nav class="nav">
+        <a class="brand" href="index.html">N8Codes</a>
+        <div class="links">
+            <a href="index.html#games">Games</a>
+            <a href="index.html#apps">Apps</a>
+            <a href="learn-pc.html">Learn</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
+    </nav>
+</header>
+
+<main class="container wide">
+    <div class="title-row">
+        <h1>PC builder</h1>
+        <button class="info" type="button" popovertarget="about" aria-label="About the PC builder">i</button>
+        <span id="about" popover class="bubble"><b>Build a computer, one part at a time.</b> Click a dashed outline to see what that part does and choose one, or press Random build for a computer that already fits; the checks tell you whether everything fits. Drag to turn the computer, Shift+drag or right-drag to move it, and scroll to zoom in where you point. Arrow keys turn it, Shift+arrows move it, + and − zoom; ⌂ resets the view. Press Together: when every part fits, the case closes, the computer stands up and your cards appear.</span>
+        <span class="spacer"></span>
+        <button class="btn secondary file-btn" type="button" popovertarget="file-menu">File <span aria-hidden="true">▾</span></button>
+        <div id="file-menu" popover class="menu">
+            <button type="button" id="export">Save as .txt</button>
+            <button type="button" id="import">Load a .txt…</button>
+            <button type="button" id="show-cards">Show my cards</button>
+            <button type="button" id="print-cards">Print my cards</button>
+            <hr>
+            <button type="button" id="start-over">Start over</button>
+        </div>
+        <input type="file" id="import-file" accept=".txt,text/plain" hidden>
+    </div>
+
+    <noscript><p class="import-err">The builder needs JavaScript. It loads nothing from other sites and sends nothing anywhere. <a href="learn-pc.html">The guide</a> works without it.</p></noscript>
+
+    <div class="studio">
+        <div class="stage-wrap exploded" id="stage" tabindex="0" role="img"
+             aria-label="3D view of the computer. Arrow keys turn it, Shift and arrow keys move it, plus and minus zoom. Choose parts from the Parts menu.">
+            <div class="scene" id="scene"><div class="rig" id="rig"></div></div>
+        </div>
+
+        <div class="hud hud-tl">
+            <button type="button" class="chip" id="parts-btn" popovertarget="parts-menu">Parts <span aria-hidden="true">▾</span></button>
+            <div id="parts-menu" popover class="menu start"><nav id="strip" aria-label="Parts"></nav></div>
+            <button type="button" class="chip" id="verdict" aria-controls="panel" aria-expanded="false"></button>
+            <button type="button" class="chip" id="random-build" title="Fill every slot with parts that fit together">Random build</button>
+        </div>
+        <div class="hud hud-top">
+            <div class="seg" role="group" aria-label="View">
+                <button type="button" id="view-apart" aria-pressed="true">Apart</button>
+                <button type="button" id="view-together" aria-pressed="false">Together</button>
+            </div>
+        </div>
+        <div class="hud hud-tr">
+            <div class="seg" role="group" aria-label="Turn and zoom">
+                <button type="button" id="turn-left" aria-label="Turn left" title="Turn left">↺</button>
+                <button type="button" id="turn-right" aria-label="Turn right" title="Turn right">↻</button>
+                <button type="button" id="zoom-out" aria-label="Zoom out" title="Zoom out">−</button>
+                <button type="button" id="zoom-in" aria-label="Zoom in" title="Zoom in">+</button>
+                <button type="button" id="reset-view" aria-label="Reset view" title="Reset view">⌂</button>
+            </div>
+        </div>
+
+        <div class="dim" id="dim" hidden></div>
+        <aside class="panel" id="panel" hidden aria-labelledby="panel-title"></aside>
+    </div>
+
+    <section class="build-cards" id="collection" hidden aria-labelledby="collection-title">
+        <h2 id="collection-title">Your build</h2>
+        <div class="collection" id="collection-cards"></div>
+    </section>
+    <div id="card-zoom" popover class="card-zoom"></div>
+    <p class="toast" id="status" role="status"></p>
+</main>
+
+<footer class="site-foot">
+    <div class="container wide foot-grid">
+        <section><h2>Safety</h2><p>Unplug before opening the case, touch bare metal first, and never open a power supply. <a href="learn-pc-safety.html">Safety guide</a></p></section>
+        <section><h2>Checks</h2><p>A guide, not a guarantee. Confirm with each maker's specs and manuals before you buy or build.</p></section>
+        <section><h2>Parts</h2><p>Real parts' specs come from each maker's own page, on the date shown. Not affiliated with, sponsored or endorsed by any maker.</p>
+            <details><summary>Trademarks</summary>
+                <p>AMD, Ryzen and Radeon are trademarks of Advanced Micro Devices, Inc. Intel and Intel Core are trademarks of Intel Corporation or its subsidiaries. NVIDIA, GeForce and GeForce RTX are trademarks and/or registered trademarks of NVIDIA Corporation in the U.S. and other countries. ASUS, ROG, TUF and PRIME are trademarks of ASUSTeK Computer Inc. CORSAIR is a trademark or registered trademark of Corsair Memory, Inc. in the United States and/or other countries. Names of standards such as HDMI, DisplayPort, PCIe and Wi-Fi, and other product names, are trademarks of their respective owners.</p>
+            </details>
+        </section>
+        <section><h2>Privacy</h2><p>Nothing you enter leaves your browser. <a href="privacy-pcbuilder.html">Privacy policy</a></p></section>
+    </div>
+    <div class="container wide foot-base">© 2026 N. W. Heard. All rights reserved.</div>
+</footer>
+</body>
+</html>
